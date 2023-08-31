@@ -1,8 +1,9 @@
 return {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
-        {"<Leader>sf", "<cmd>Telescope find_files hidden=true<CR>", desc = "Search Files"}
+        { "<Leader>sfh", "<cmd>Telescope find_files hidden=true<cr>", desc = "[s]earch [f]iles [h]idden" },
+        { "<Leader>sfn", "<cmd>Telescope find_files hidden=true<cr>", desc = "[s]earch [f]iles [n]ormal" }
     }
 }
