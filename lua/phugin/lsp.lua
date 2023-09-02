@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -46,41 +47,12 @@ return {
             nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
         end
 
-        -- language server to install
-        local servers = {
-            lua_ls = {
-                Lua = {
-                    workspace = { checkThirdParty = false },
-                    telemetry = { enable = false },
-                },
-            },
-        }
-
         -- Setup neovim lua configuration
         require('neodev').setup()
 
         -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-        -- Ensure the servers above are installed
-        local mason_lspconfig = require('mason-lspconfig')
-
-        -- tell mason to download lsp
-        mason_lspconfig.setup {
-            ensure_installed = vim.tbl_keys(servers),
-        }
-
-        mason_lspconfig.setup_handlers {
-            function(server_name)
-                require('lspconfig')[server_name].setup {
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                    settings = servers[server_name],
-                    filetypes = (servers[server_name] or {}).filetypes,
-                }
-            end
-        }
 
         -- configure auto complete
         local cmp = require 'cmp'
@@ -117,6 +89,29 @@ return {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
             },
+        }
+
+        -- set up mason
+        require("mason").setup()
+        local mason_lspconfig = require('mason-lspconfig')
+        mason_lspconfig.setup()
+        mason_lspconfig.setup_handlers {
+            function(server_name)
+                require('lspconfig')[server_name].setup {
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                }
+            end,
+            ["lua_ls"] = function()
+                require("lspconfig")["lua_ls"].setup {
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                    settings = {
+                        workspace = { checkThirdParty = false },
+                        telemetry = { enable = false }
+                    }
+                }
+            end
         }
     end
 }

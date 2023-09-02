@@ -78,7 +78,7 @@ return {
             require("lualine").setup({
                 options = {
                     component_separators = { left = '|', right = '|' },
-                    section_separators = { left = '', right = '' },
+                    section_separators = { left = '', right = '' },
                     theme = customOneDark
                 },
                 sections = {
@@ -93,7 +93,7 @@ return {
                     }, {
                         "mode",
                         icon_enable = true,
-                    } }
+                    } },
                 }
             })
         end,

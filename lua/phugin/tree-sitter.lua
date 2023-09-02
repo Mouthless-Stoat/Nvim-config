@@ -7,9 +7,7 @@ return {
     build = ':TSUpdate',
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            -- A list of parser names, or "all" (the five listed parsers should always be installed)
             ensure_installed = language,
-            sync_install = true, -- install all parser at once
             auto_install = true, -- auto install if missing
             highlight = {
                 enable = true,

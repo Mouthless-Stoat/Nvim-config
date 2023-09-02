@@ -7,11 +7,16 @@ vim.g.mapleader = " " -- set the leader to a space
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {})       -- set <esc> in terminal mode to quit
 utils.setKey("i", "<c-v>", "<c-r>*", {})            -- set <c-v> in insert mode to paste
-utils.setKey({ "n", "i" }, "<c-V>", "<esc>Vyp", {}) -- set <c-v> in insert mode to paste
 utils.setKey("n", "<s-cr>", "i<cr><esc>", {})       -- set <s-cr> in normal mode to insert a newline
 
+-- short command
+utils.setKey("n", "<leader>r", "<cmd>bro ol<cr>", { desc = "[r]ecent file list" })
+utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
+utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
+utils.setKey("n", "<leader>t", "<cmd>ter<cr>", { desc = "[t]erminal" })
+
 -- Window control keybind
-utils.setKey({ "n", "i" }, "<s-Tab>", "<c-w>w", {}) -- set <s-Tab> to switch wimdow
+utils.setKey({ "n", "i" }, "<c-Tab>", "<c-w>w", {}) -- set <s-Tab> to switch wimdow
 utils.setKey({ "n", "i" }, "<s-Up>", "<c-w>+", {})
 utils.setKey({ "n", "i" }, "<s-Down>", "<c-w>-", {})
 utils.setKey({ "n", "i" }, "<s-Left>", "<c-w><", {})
@@ -49,10 +54,6 @@ utils.setKey({ "n", "i" }, "<leader>w<Right>", function()
     vim.o.splitright = preVal
 end, { desc = "Make new window [right]" })
 
-utils.setKey("n", "<leader>r", "<cmd>bro ol<cr>", { desc = "[r]ecent file list" })
-utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
-utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<leader>t", "<cmd>ter<cr>", { desc = "[t]erminal" })
 
 -- Quit keymap
 utils.setKey("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit all" })

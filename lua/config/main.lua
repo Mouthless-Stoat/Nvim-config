@@ -27,8 +27,6 @@ vim.o.signcolumn = 'yes'                       -- Keep signcolumn on by default
 
 vim.o.showmode = false                         -- hide the `--INSERT--` at the bottom use status line instead
 
-vim.o.clipboard = 'unnamedplus'                -- sync clipboard with vim and os
-
 vim.o.undofile = true                          -- save undo on the file
 
 vim.o.termguicolors = true                     -- color in terminal
