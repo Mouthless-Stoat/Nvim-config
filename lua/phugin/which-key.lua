@@ -5,13 +5,14 @@ return {
         -- create group
         defaults = {
             ["<leader>s"] = { name = "[s]earch" },
-            ["<leader>sf"] = { name = "[s]earch [f]iles" },
+            ["<leader>q"] = { name = "[q]uit" },
+            ["<leader>g"] = { name = "[g]oto" },
+            ["<leader>f"] = { name = "[f]iles" },
+            ["<leader>w"] = { name = "[w]indow" }
         },
 
         icons = {
             breadcrumb = ">>", -- symbol used in the command line area that shows your active key combo
-            separator = ">",   -- symbol used between a key and it's label
-            group = "+",       -- symbol prepended to a group
         },
 
         triggers_blacklist = {
@@ -21,7 +22,10 @@ return {
 
         window = {
             border = "single",
+        },
 
+        layout = {
+            align = "center"
         }
     },
     config = function(_, opts)

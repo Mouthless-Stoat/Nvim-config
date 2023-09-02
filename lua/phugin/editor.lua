@@ -28,12 +28,12 @@ return {
 
             -- color for bracket
 
-            vim.cmd([[highlight bracket1 guifg=]] .. colors.red .. [[ gui=undercurl]])
-            vim.cmd([[highlight bracket2 guifg=]] .. colors.yellow .. [[ gui=undercurl]])
-            vim.cmd([[highlight bracket3 guifg=]] .. colors.green .. [[ gui=undercurl]])
-            vim.cmd([[highlight bracket4 guifg=]] .. colors.cyan .. [[ gui=undercurl]])
-            vim.cmd([[highlight bracket5 guifg=]] .. colors.blue .. [[ gui=undercurl]])
-            vim.cmd([[highlight bracket6 guifg=]] .. colors.purple .. [[ gui=undercurl]])
+            vim.cmd([[highlight bracket1 guifg=]] .. colors.red .. [[ gui=bold]])
+            vim.cmd([[highlight bracket2 guifg=]] .. colors.yellow .. [[ gui=bold]])
+            vim.cmd([[highlight bracket3 guifg=]] .. colors.green .. [[ gui=bold]])
+            vim.cmd([[highlight bracket4 guifg=]] .. colors.cyan .. [[ gui=bold]])
+            vim.cmd([[highlight bracket5 guifg=]] .. colors.blue .. [[ gui=bold]])
+            vim.cmd([[highlight bracket6 guifg=]] .. colors.purple .. [[ gui=bold]])
         end,
     },
 
@@ -87,8 +87,8 @@ return {
                         icon_enable = true,
                         fmt = function()
                             local vimMode = vim.api.nvim_get_mode().mode
-                            return vimMode == "n" and "󰜗" or vimMode == "i" and "" or vimMode == "v" and "󰒉" or
-                                vimMode == "c" and "" or ""
+                            return vimMode == "n" and "" or vimMode == "i" and "" or vimMode == "v" and "󰒉" or
+                                vimMode == "c" and "" or vimMode == "r" and "" or vimMode == "t" and "" or ""
                         end
                     }, {
                         "mode",
@@ -104,7 +104,7 @@ return {
         'lukas-reineke/indent-blankline.nvim',
         opts = {
             char = '|',
-            char_blankline = ".",
+            char_blankline = ":",
             context_char = "|",
             show_current_context = true,
             show_current_context_start = true,
@@ -127,6 +127,7 @@ return {
         },
     },
 
+    -- bracket colorization
     {
         "hiphish/rainbow-delimiters.nvim",
         config = function()

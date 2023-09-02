@@ -16,21 +16,30 @@ vim.o.rnu = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- replace tab with space and set shift width(using the >> command) to use 4 space as well
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
 
-vim.o.updatetime = 250          -- Decrease update time
+vim.o.updatetime = 250                         -- Decrease update time
 
-vim.wo.signcolumn = 'yes'       -- Keep signcolumn on by default
+vim.o.signcolumn = 'yes'                       -- Keep signcolumn on by default
 
-vim.o.showmode = false          -- hide the `--INSERT--` at the bottom use status line instead
+vim.o.showmode = false                         -- hide the `--INSERT--` at the bottom use status line instead
 
-vim.o.clipboard = 'unnamedplus' -- sync clipboard with vim and os
+vim.o.clipboard = 'unnamedplus'                -- sync clipboard with vim and os
 
-vim.o.undofile = true           -- save undo on the file
+vim.o.undofile = true                          -- save undo on the file
 
-vim.o.termguicolors = true      -- color in terminal
+vim.o.termguicolors = true                     -- color in terminal
 
-vim.o.hlsearch = false          -- turn hightlight off after searching
+vim.o.hlsearch = false                         -- turn hightlight off after searching
 
-vim.o.breakindent = true        -- when line wrap around also copy indent
+vim.o.breakindent = true                       -- when line wrap around also copy indent
 
-vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12"
+vim.o.showbreak = ">>>"                        -- wrap indicator
+
+vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
+
+vim.o.shell = "powershell"
+vim.o.shellcmdflag = "-c"
