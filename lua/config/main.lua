@@ -21,22 +21,27 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.updatetime = 250                         -- Decrease update time
+vim.o.updatetime = 250     -- Decrease update time
 
-vim.o.signcolumn = 'yes'                       -- Keep signcolumn on by default
+vim.o.signcolumn = 'yes'   -- Keep signcolumn on by default
 
-vim.o.showmode = false                         -- hide the `--INSERT--` at the bottom use status line instead
+vim.o.showmode = false     -- hide the `--INSERT--` at the bottom use status line instead
 
-vim.o.undofile = true                          -- save undo on the file
+vim.o.termguicolors = true -- color in terminal
 
-vim.o.termguicolors = true                     -- color in terminal
+vim.o.hlsearch = false     -- turn hightlight off after searching
 
-vim.o.hlsearch = false                         -- turn hightlight off after searching
+vim.o.breakindent = true   -- when line wrap around also copy indent
 
-vim.o.breakindent = true                       -- when line wrap around also copy indent
+vim.o.showbreak = "> "     -- wrap indicator
 
-vim.o.showbreak = ">>>"                        -- wrap indicator
+-- persistent undo
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.undodir = "C:\\Users\\nphuy\\AppData\\Local\\nvim-data\\undo"
+vim.o.undofile = true
 
+-- terminal shit
 vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
 
 vim.o.shell = "powershell"

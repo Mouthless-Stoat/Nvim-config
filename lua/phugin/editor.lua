@@ -87,7 +87,8 @@ return {
                         icon_enable = true,
                         fmt = function()
                             local vimMode = vim.api.nvim_get_mode().mode
-                            return vimMode == "n" and "" or vimMode == "i" and "" or vimMode == "v" and "󰒉" or
+                            return vimMode == "n" and "" or (vimMode == "i" or vimMode == "niI") and "" or
+                                vimMode == "v" and "󰒉" or
                                 vimMode == "c" and "" or vimMode == "r" and "" or vimMode == "t" and "" or ""
                         end
                     }, {

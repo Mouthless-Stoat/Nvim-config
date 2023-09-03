@@ -24,6 +24,7 @@ utils.setKey("n", "<leader>t", "<cmd>ter<cr>", { desc = "[t]erminal" })
 
 -- Window control keybind
 utils.setKey({ "n", "i" }, "<c-Tab>", "<c-w>w", { desc = "Switch to next window" }) -- set <s-Tab> to switch wimdow
+utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "Quit all other window" })
 
 -- arrow key version
 utils.setKey({ "n", "i" }, "<s-Up>", "<c-w>+", { desc = "Switch to up window" })
@@ -35,17 +36,6 @@ utils.setKey({ "n", "i" }, "<c-Up>", "<c-w><Up>", {})
 utils.setKey({ "n", "i" }, "<c-Down>", "<c-w><Down>", {})
 utils.setKey({ "n", "i" }, "<c-Left>", "<c-w><Left>", {})
 utils.setKey({ "n", "i" }, "<c-Right>", "<c-w><Right>", {})
-
--- hjkl version
-utils.setKey({ "n", "i" }, "<s-k>", "<c-w>+", { desc = "Switch to up window" })
-utils.setKey({ "n", "i" }, "<s-j>", "<c-w>-", { desc = "Switch to down window" })
-utils.setKey({ "n", "i" }, "<s-h>", "<c-w><", { desc = "Switch to left window" })
-utils.setKey({ "n", "i" }, "<s-l>", "<c-w>>", { desc = "Switch to right window" })
-
-utils.setKey({ "n", "i" }, "<c-k>", "<c-w><Up>", {})
-utils.setKey({ "n", "i" }, "<c-j>", "<c-w><Down>", {})
-utils.setKey({ "n", "i" }, "<c-h>", "<c-w><Left>", {})
-utils.setKey({ "n", "i" }, "<c-l>", "<c-w><Right>", {})
 
 -- make new window
 utils.setKey("n", "<leader>w<Up>", function()
