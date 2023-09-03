@@ -24,24 +24,29 @@ return {
     config = function()
         local on_attach = function(_, bufnr)
             -- function to help remap
-            local nmap = function(keys, func, desc)
+            local nmap = function(keys, func, desc, mode)
+                local modeToPut = { "n" }
                 if desc then
                     desc = 'LSP: ' .. desc
                 end
 
-                vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+                if mode then
+                    table.insert(modeToPut, mode)
+                end
+
+                vim.keymap.set(modeToPut, keys, func, { buffer = bufnr, desc = desc })
             end
             nmap('<leader>c', vim.lsp.buf.code_action, '[c]ode actions')
 
             nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
-            nmap('gr', require('telescope.builtin').lsp_references, '[g]oto [r]eferences')
+            nmap('gr', "<cmd>Telescope lsp_references", '[g]oto [r]eferences')
             nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
             nmap('<leader>d', vim.lsp.buf.type_definition, 'type [D]efinition')
-            nmap('<leader>ss', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[f]ind [s]ymbols')
+            nmap('<leader>ss', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[s]earch [s]ymbols')
 
             -- See `:help K` for why this keymap
             nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-            nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+            nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation', "i")
 
             -- Lesser used LSP functionality
             nmap('gD', vim.lsp.buf.declaration, '[g]oto [D]eclaration')
@@ -91,6 +96,11 @@ return {
             },
         }
 
+        cmp.event:on(
+            "confirm_done",
+            require("nvim-autopairs.completion.cmp").on_confirm_done()
+        )
+
         -- set up mason
         require("mason").setup()
         local mason_lspconfig = require('mason-lspconfig')
@@ -107,8 +117,10 @@ return {
                     capabilities = capabilities,
                     on_attach = on_attach,
                     settings = {
-                        workspace = { checkThirdParty = false },
-                        telemetry = { enable = false }
+                        Lua = {
+                            workspace = { checkThirdParty = false },
+                            telemetry = { enable = false }
+                        }
                     }
                 }
             end
