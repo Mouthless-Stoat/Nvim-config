@@ -70,18 +70,41 @@ utils.setKey("n", "<leader>qq", "<cmd>q!<cr>", { desc = "[q]uit current window" 
 utils.setKey("n", "<leader>qs", vim.cmd.wq, { desc = "[q]uit and [s]ave current window" })
 utils.setKey("n", "<leader>qa", vim.cmd.wqa, { desc = "[q]uit and save [a]ll windows" })
 
--- goto keymap
-utils.setKey("n", "<leader>gc", "<cmd>cd C:\\Users\\nphuy\\OneDrive\\Desktop\\Code<cr>",
-    { desc = "[g]oto [c]ode" })
-utils.setKey("n", "<leader>gm",
-    "<cmd>e C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js<cr><cmd>Here<cr>",
-    { desc = "[g]oto [m]agpie code" })
-utils.setKey("n", "<leader>gd",
-    "<cmd>e C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts<cr><cmd>Here<cr>",
-    { desc = "[g]oto [d]yess code" })
-utils.setKey("n", "<leader>gv",
-    "<cmd>e C:\\Users\\nphuy\\AppData\\Local\\nvim\\init.lua<cr><cmd>Here<cr>",
-    { desc = "[g]oto [v]im init file" })
+local anchors = {
+    {
+        key = "c",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
+        type = "folder",
+        desc = "[c]ode folder"
+    },
+    {
+        key = "m",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
+        type = "file",
+        desc = "[m]agpie code"
+    },
+    {
+        key = "d",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts",
+        type = "file",
+        desc = "[d]yyes code"
+    },
+    {
+        key = "v",
+        path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
+        type = "folder",
+        desc = "[v]im config folder"
+    }
+}
+for _, anchor in ipairs(anchors) do
+    if (anchor.type == "folder") then
+        utils.setKey("", "<leader>g" .. anchor.key, "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>",
+            { desc = anchor.desc })
+    elseif (anchor.type == "file") then
+        utils.setKey("", "<leader>g" .. anchor.key, "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>",
+            { desc = anchor.desc })
+    end
+end
 
 -- file keymap
 utils.setKey("n", "<leader>fr", vim.lsp.buf.rename, { desc = "[f]ile [r]ename" })

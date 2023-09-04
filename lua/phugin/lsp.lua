@@ -96,11 +96,6 @@ return {
             },
         }
 
-        cmp.event:on(
-            "confirm_done",
-            require("nvim-autopairs.completion.cmp").on_confirm_done()
-        )
-
         -- set up mason
         require("mason").setup()
         local mason_lspconfig = require('mason-lspconfig')
