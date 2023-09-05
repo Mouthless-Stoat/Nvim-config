@@ -10,14 +10,19 @@ return {
             },
             {
                 "<leader>gc",
-                vim.ui.input({ prompt = "Enter commit message" },
-                    function(input) vim.cmd([[Git ca "]] .. input .. [["]]) end),
+                function()
+                    vim.ui.input({ prompt = "Enter commit message" },
+                        function(input) vim.cmd([[Git ca "]] .. input .. [["]]) end)
+                end,
                 desc = "[g]it [a]dd all"
             },
             {
                 "<leader>gd",
                 "<cmd>Gvdiffsplit<cr>",
                 desc = "[g]it compare [d]iffence"
+            },
+            {
+                "<leader>gh", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [h]istory"
             }
         }
     },
