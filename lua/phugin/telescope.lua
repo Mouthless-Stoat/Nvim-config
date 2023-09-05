@@ -21,8 +21,8 @@ return {
         defaults = {
             scroll_strategy = "limit",
             file_ignore_patterns = {
-                "^node_modules\\",
-                "^.git\\",
+                "node_modules\\",
+                ".git\\",
                 "%.zip",
                 "%.tar",
                 "%.gz",

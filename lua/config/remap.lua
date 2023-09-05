@@ -73,15 +73,15 @@ end, { desc = "Make new window [right]" })
 -- Quit keymap
 utils.setKey("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit all" })
 utils.setKey("n", "<leader>qq", function()
-    if #vim.api.nvim_list_wins() > 0 then
-        vim.cmd [[q!]]
-    end
-end, { desc = "[q]uit current window" })
-utils.setKey("n", "<leader>qs", function()
-    if #vim.api.nvim_list_wins() > 0 then
+    if #vim.api.nvim_list_wins() > 1 then
         vim.cmd.qw()
     end
 end, { desc = "[q]uit and [s]ave current window" })
+utils.setKey("n", "<leader>qQ", function()
+    if #vim.api.nvim_list_wins() > 1 then
+        vim.cmd [[q!]]
+    end
+end, { desc = "[q]uit current window" })
 utils.setKey("n", "<leader>qa", vim.cmd.wqa, { desc = "[q]uit and save [a]ll windows" })
 
 local anchors = {
