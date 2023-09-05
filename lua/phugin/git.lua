@@ -25,7 +25,7 @@ return {
                 "<leader>gh", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [h]istory"
             },
             {
-                "<leader>gp", "<cmd>Git push", desc = "[g]it [p]ush"
+                "<leader>gp", "<cmd>Git push<cr>", desc = "[g]it [p]ush"
             }
         }
     },
