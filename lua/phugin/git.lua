@@ -11,7 +11,7 @@ return {
             {
                 "<leader>gc",
                 function()
-                    vim.ui.input({ prompt = "Enter commit message" },
+                    vim.ui.input({ prompt = "Enter commit message: " },
                         function(input) vim.cmd([[Git ca "]] .. input .. [["]]) end)
                 end,
                 desc = "[g]it [a]dd all"
@@ -23,6 +23,9 @@ return {
             },
             {
                 "<leader>gh", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [h]istory"
+            },
+            {
+                "<leader>gp", "<cmd>Git push", desc = "[g]it [p]ush"
             }
         }
     },
