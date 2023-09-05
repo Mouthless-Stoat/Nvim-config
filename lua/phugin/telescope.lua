@@ -9,19 +9,20 @@ return {
             -- change command cus powershell is defaults shell
             build =
             "(cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release) -and (cmake --build build --config Release) -and (cmake --install build --prefix build)"
-        }
+        },
     },
     keys = {
         { "<Leader>sf", "<cmd>Telescope find_files no_ignore=true<cr>",             desc = "[s]earch [f]iles" },
-        { "<Leader>sh", "<cmd>Telescope find_files no_ignore=true hidden=true<cr>", desc = "[s]earch [h]idden files" },
-        { "<Leader>st", "<cmd>Telescope live_grep<cr>",                             desc = "[s]earch [t]ext" },
+        { "<Leader>sF", "<cmd>Telescope find_files no_ignore=true hidden=true<cr>", desc = "[s]earch hidden [F]iles" },
+        { "<Leader>st", "<cmd>Telescope live_grep no_ignore=true<cr>",              desc = "[s]earch [t]ext" },
+        { "<Leader>sT", "<cmd>Telescope live_grep no_ignore=true hidden=true<cr>",  desc = "[s]earch hidden [T]ext" },
     },
     opts = {
         defaults = {
             scroll_strategy = "limit",
             file_ignore_patterns = {
-                "node_modules/",
-                ".git/",
+                "^node_modules\\",
+                "^.git\\",
                 "%.zip",
                 "%.tar",
                 "%.gz",

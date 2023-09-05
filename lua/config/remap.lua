@@ -72,8 +72,16 @@ end, { desc = "Make new window [right]" })
 
 -- Quit keymap
 utils.setKey("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit all" })
-utils.setKey("n", "<leader>qq", "<cmd>q!<cr>", { desc = "[q]uit current window" })
-utils.setKey("n", "<leader>qs", vim.cmd.wq, { desc = "[q]uit and [s]ave current window" })
+utils.setKey("n", "<leader>qq", function()
+    if #vim.api.nvim_list_wins() > 0 then
+        vim.cmd [[q!]]
+    end
+end, { desc = "[q]uit current window" })
+utils.setKey("n", "<leader>qs", function()
+    if #vim.api.nvim_list_wins() > 0 then
+        vim.cmd.qw()
+    end
+end, { desc = "[q]uit and [s]ave current window" })
 utils.setKey("n", "<leader>qa", vim.cmd.wqa, { desc = "[q]uit and save [a]ll windows" })
 
 local anchors = {
@@ -96,11 +104,8 @@ local anchors = {
         desc = "[d]yyes code"
     },
     {
-        key = "v",
-        path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
-        type = "folder",
-        desc = "[v]im config folder"
-    }
+        key = "v", path = "C:\\Users\\nphuy\\AppData\\Local\\nvim", type = "folder", desc = "[v]im config folder" },
+    { key = "h", path = "C:\\Users\\nphuy", type = "folder", desc = "[h]ome folder" }
 }
 for _, anchor in ipairs(anchors) do
     if (anchor.type == "folder") then

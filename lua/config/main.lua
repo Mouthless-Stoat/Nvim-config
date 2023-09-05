@@ -34,6 +34,17 @@ vim.o.hlsearch = false     -- turn hightlight off after searching
 vim.o.wrap = false         -- i hate line wrap
 
 vim.o.mouse = nil          -- turn mouse off to get use to vim
+
+-- highlight yanked text
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
+})
+
 -- persistent undo
 vim.o.swapfile = false
 vim.o.backup = false

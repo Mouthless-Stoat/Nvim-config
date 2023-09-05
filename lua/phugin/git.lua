@@ -43,8 +43,12 @@ return {
             },
             numhl = true,
             on_attach = function(bufnr)
-                utils.setKey('n', '<leader>gp', require('gitsigns').preview_hunk,
-                    { buffer = bufnr, desc = '[g]it [p]review hunk' })
+                utils.setKey('n', '<leader>ghp', require('gitsigns').preview_hunk,
+                    { buffer = bufnr, desc = '[g]it [h]unk [p]review' })
+                utils.setKey('n', '<leader>ghn', require('gitsigns').next_hunk,
+                    { buffer = bufnr, desc = '[g]it [h]unk [p]review' })
+                utils.setKey('n', '<leader>ghb', require('gitsigns').prev_hunk,
+                    { buffer = bufnr, desc = '[g]it [h]unk [p]review' })
             end,
         },
     },
