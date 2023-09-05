@@ -6,7 +6,8 @@ return {
         defaults = {
             ["<leader>s"] = { name = "[s]earch" },
             ["<leader>q"] = { name = "[q]uit" },
-            ["<leader>g"] = { name = "[g]oto" },
+            ["<leader>G"] = { name = "[G]oto" },
+            ["<leader>g"] = { name = "[g]it" },
             ["<leader>f"] = { name = "[f]iles" },
             ["<leader>w"] = { name = "[w]indow" }
         },

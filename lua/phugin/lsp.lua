@@ -41,7 +41,7 @@ return {
             nmap('gd', vim.lsp.buf.definition, '[g]oto [d]efinition')
             nmap('gr', "<cmd>Telescope lsp_references", '[g]oto [r]eferences')
             nmap('gi', vim.lsp.buf.implementation, '[g]oto [i]mplementation')
-            nmap('<leader>d', vim.lsp.buf.type_definition, 'type [D]efinition')
+            nmap('gt', vim.lsp.buf.type_definition, '[g]oto [t]ype definition')
             nmap('<leader>ss', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[s]earch [s]ymbols')
 
             -- See `:help K` for why this keymap
@@ -75,11 +75,19 @@ return {
             mapping = cmp.mapping.preset.insert {
                 ['<Down>'] = cmp.mapping.select_next_item(),
                 ['<Up>'] = cmp.mapping.select_prev_item(),
-                ['<C-Space>'] = cmp.mapping.complete {},   -- open auto complete
+                ['<C-Space>'] = cmp.mapping(function(fallback) -- if the menu is not open open it, else close it
+                    if cmp.visible() then
+                        cmp.close()
+                    elseif not cmp.visible() then
+                        cmp.complete {}
+                    else
+                        fallback()
+                    end
+                end),
                 ['<Tab>'] = cmp.mapping(function(fallback) -- if the auto complete menu is open confirm if not snippet time
                     if cmp.visible() then
                         cmp.confirm {
-                            behavior = cmp.ConfirmBehavior.Replace,
+                            behavior = cmp.ConfirmBehavior.Insert,
                             select = true,
                         }
                     elseif luasnip.expand_or_locally_jumpable() then

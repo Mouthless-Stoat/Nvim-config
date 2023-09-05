@@ -27,13 +27,26 @@ return {
             vim.cmd([[highlight contextIndent6 guifg=]] .. colors.purple .. [[ gui=inverse]])
 
             -- color for bracket
-
             vim.cmd([[highlight bracket1 guifg=]] .. colors.red .. [[ gui=bold]])
             vim.cmd([[highlight bracket2 guifg=]] .. colors.yellow .. [[ gui=bold]])
             vim.cmd([[highlight bracket3 guifg=]] .. colors.green .. [[ gui=bold]])
             vim.cmd([[highlight bracket4 guifg=]] .. colors.cyan .. [[ gui=bold]])
             vim.cmd([[highlight bracket5 guifg=]] .. colors.blue .. [[ gui=bold]])
             vim.cmd([[highlight bracket6 guifg=]] .. colors.purple .. [[ gui=bold]])
+
+            -- color for gitsign
+            vim.cmd([[highlight GitSignsAdd guifg=]] .. colors.green .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsAddNr guifg=]] .. colors.green .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsChange guifg=]] .. colors.yellow .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsChangeNr guifg=]] .. colors.yellow .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsDelete guifg=]] .. colors.red .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsDeleteNr guifg=]] .. colors.red .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsTopDelete guifg=]] .. colors.red .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsTopDeleteNr guifg=]] .. colors.red .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsChangeDelete guifg=]] .. colors.orange .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsChangeDeleteNr guifg=]] .. colors.orange .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsUntracked guifg=]] .. colors.purple .. [[ gui=bold]])
+            vim.cmd([[highlight GitSignsUntrackedNr guifg=]] .. colors.purple .. [[ gui=bold]])
         end,
     },
 

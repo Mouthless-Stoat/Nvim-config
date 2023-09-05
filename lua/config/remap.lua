@@ -5,10 +5,15 @@ vim.g.mapleader = " " -- set the leader to a space
 
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
-utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
-utils.setKey("i", "<c-v>", "<c-r>*", {})      -- set <c-v> in insert mode to paste
-utils.setKey("n", "<s-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "Q", "<nop>", {})           -- me and the bois hate Q
+utils.setKey("t", "<esc>", "<C-\\><C-n>", {})                                       -- set <esc> in terminal mode to quit
+utils.setKey("i", "<c-v>", "<c-r>*", {})                                            -- set <c-v> in insert mode to paste
+utils.setKey("n", "<c-`>", "<cmd>tabnew<cr><cmd>ter<cr>i", { desc = "[t]erminal" }) -- open terminal in a new tab
+utils.setKey("n", "<s-cr>", "i<cr><esc>", {})                                       -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "Q", "<nop>", {})                                                 -- me and the bois hate Q
+
+-- make scrolling eaiser to follow
+utils.setKey("n", "<c-d>", "<c-d>zz", {})
+utils.setKey("n", "<c-u>", "<c-u>zz", {})
 
 -- move line command
 utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in normal mode do nothing we can combine the command
@@ -20,22 +25,23 @@ utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 utils.setKey("n", "<leader>r", "<cmd>bro ol<cr>", { desc = "[r]ecent file list" })
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<leader>t", "<cmd>ter<cr>", { desc = "[t]erminal" })
+
+-- tab control
+utils.setKey("n", "<Tab><Left>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
+utils.setKey("n", "<Tab><Right>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
 
 -- Window control keybind
-utils.setKey({ "n", "i" }, "<c-Tab>", "<c-w>w", { desc = "Switch to next window" }) -- set <s-Tab> to switch wimdow
 utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "Quit all other window" })
 
--- arrow key version
-utils.setKey({ "n", "i" }, "<s-Up>", "<c-w>+", { desc = "Switch to up window" })
-utils.setKey({ "n", "i" }, "<s-Down>", "<c-w>-", { desc = "Switch to down window" })
-utils.setKey({ "n", "i" }, "<s-Left>", "<c-w><", { desc = "Switch to left window" })
-utils.setKey({ "n", "i" }, "<s-Right>", "<c-w>>", { desc = "Switch to right window" })
+utils.setKey("n", "<s-Up>", "<c-w>+", { desc = "Switch to up window" })
+utils.setKey("n", "<s-Down>", "<c-w>-", { desc = "Switch to down window" })
+utils.setKey("n", "<s-Left>", "<c-w><", { desc = "Switch to left window" })
+utils.setKey("n", "<s-Right>", "<c-w>>", { desc = "Switch to right window" })
 
-utils.setKey({ "n", "i" }, "<c-Up>", "<c-w><Up>", {})
-utils.setKey({ "n", "i" }, "<c-Down>", "<c-w><Down>", {})
-utils.setKey({ "n", "i" }, "<c-Left>", "<c-w><Left>", {})
-utils.setKey({ "n", "i" }, "<c-Right>", "<c-w><Right>", {})
+utils.setKey("n", "<c-Up>", "<c-w><Up>", {})
+utils.setKey("n", "<c-Down>", "<c-w><Down>", {})
+utils.setKey("n", "<c-Left>", "<c-w><Left>", {})
+utils.setKey("n", "<c-Right>", "<c-w><Right>", {})
 
 -- make new window
 utils.setKey("n", "<leader>w<Up>", function()
@@ -98,11 +104,11 @@ local anchors = {
 }
 for _, anchor in ipairs(anchors) do
     if (anchor.type == "folder") then
-        utils.setKey("", "<leader>g" .. anchor.key, "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>",
-            { desc = anchor.desc })
+        utils.setKey("", "<leader>G" .. anchor.key, "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>",
+            { desc = "[G]oto " .. anchor.desc })
     elseif (anchor.type == "file") then
-        utils.setKey("", "<leader>g" .. anchor.key, "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>",
-            { desc = anchor.desc })
+        utils.setKey("", "<leader>G" .. anchor.key, "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>",
+            { desc = "[G]oto " .. anchor.desc })
     end
 end
 

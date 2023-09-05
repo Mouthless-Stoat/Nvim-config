@@ -31,15 +31,16 @@ vim.o.termguicolors = true -- color in terminal
 
 vim.o.hlsearch = false     -- turn hightlight off after searching
 
-vim.o.breakindent = true   -- when line wrap around also copy indent
+vim.o.wrap = false         -- i hate line wrap
 
-vim.o.showbreak = "> "     -- wrap indicator
-
+vim.o.mouse = nil          -- turn mouse off to get use to vim
 -- persistent undo
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.undodir = "C:\\Users\\nphuy\\AppData\\Local\\nvim-data\\undo"
 vim.o.undofile = true
+
+vim.o.scrolloff = 8
 
 -- terminal shit
 vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
