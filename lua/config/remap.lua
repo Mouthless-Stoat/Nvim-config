@@ -27,8 +27,8 @@ utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
 
 -- tab control
-utils.setKey("n", "<Tab><Left>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
-utils.setKey("n", "<Tab><Right>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
+utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
+utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
 
 -- Window control keybind
 utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "Quit all other window" })
@@ -74,14 +74,10 @@ end, { desc = "Make new window [right]" })
 utils.setKey("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit all" })
 utils.setKey("n", "<leader>qq", function()
     if #vim.api.nvim_list_wins() > 1 then
-        vim.cmd.qw()
+        vim.cmd.wq()
     end
 end, { desc = "[q]uit and [s]ave current window" })
-utils.setKey("n", "<leader>qQ", function()
-    if #vim.api.nvim_list_wins() > 1 then
-        vim.cmd [[q!]]
-    end
-end, { desc = "[q]uit current window" })
+utils.setKey("n", "<leader>qQ", "<cmd>q!<cr>", { desc = "[q]uit current window" })
 utils.setKey("n", "<leader>qa", vim.cmd.wqa, { desc = "[q]uit and save [a]ll windows" })
 
 local anchors = {

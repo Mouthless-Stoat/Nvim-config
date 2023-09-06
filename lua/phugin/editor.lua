@@ -5,7 +5,10 @@ return {
         priority = 1000,
         config = function()
             require("onedark").setup {
-                style = "deep"
+                style = "deep",
+                lualine = {
+                    transparent = false
+                }
             }
             require("onedark").load()
 
@@ -53,6 +56,9 @@ return {
     -- the status line
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
         config = function()
             local c = require('onedark.colors')
             local cfg = vim.g.onedark_config
@@ -102,12 +108,28 @@ return {
                             local vimMode = vim.api.nvim_get_mode().mode
                             return vimMode == "n" and "" or (vimMode == "i" or vimMode == "niI") and "" or
                                 vimMode == "v" and "󰒉" or
-                                vimMode == "c" and "" or vimMode == "r" and "" or vimMode == "t" and "" or ""
+                                vimMode == "c" and "" or vimMode == "R" and "" or vimMode == "t" and "" or ""
                         end
                     }, {
                         "mode",
                         icon_enable = true,
                     } },
+                    lualine_c = {
+                        { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
+                        {
+                            "filename",
+                            color = function()
+                                local vimMode = vim.api.nvim_get_mode().mode
+                                return vimMode == "n" and { fg = colors.blue } or
+                                    vimMode == "i" and { fg = colors.green } or
+                                    vimMode == "v" and { fg = colors.purple } or
+                                    vimMode == "c" and { fg = colors.yellow } or vimMode == "R" and { fg = colors.red } or
+                                    vimMode == "t" and { fg = colors.cyan } or
+                                    { fg = colors.fg }
+                            end
+                        }
+                    },
+                    lualine_x = { "diagnostics" }
                 }
             })
         end,
@@ -145,8 +167,6 @@ return {
     {
         "hiphish/rainbow-delimiters.nvim",
         config = function()
-            local rainbow_delimiters = require 'rainbow-delimiters'
-
             vim.g.rainbow_delimiters = {
                 highlight = {
                     'bracket1',

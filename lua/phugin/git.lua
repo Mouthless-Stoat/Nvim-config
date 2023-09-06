@@ -22,7 +22,7 @@ return {
                 desc = "[g]it compare [d]iffence"
             },
             {
-                "<leader>gh", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [h]istory"
+                "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [l]ogs"
             },
             {
                 "<leader>gp", "<cmd>Git push<cr>", desc = "[g]it [p]ush"
@@ -33,7 +33,6 @@ return {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
         opts = {
-            -- See `:help gitsigns.txt`
             signs = {
                 add = { text = '+' },
                 change = { text = '~' },

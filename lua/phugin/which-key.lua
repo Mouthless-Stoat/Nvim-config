@@ -8,8 +8,9 @@ return {
             ["<leader>q"] = { name = "[q]uit" },
             ["<leader>G"] = { name = "[G]oto" },
             ["<leader>g"] = { name = "[g]it" },
+            ["<leader>gh"] = { name = "[h]unk" },
             ["<leader>f"] = { name = "[f]iles" },
-            ["<leader>w"] = { name = "[w]indow" }
+            ["<leader>w"] = { name = "[w]indow" },
         },
 
         icons = {
