@@ -58,3 +58,7 @@ vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
 
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"
+
+if vim.g.neovide then
+    require("config.neovideConfig")
+end
