@@ -23,6 +23,7 @@ return {
     },
     config = function()
         local on_attach = function(_, bufnr)
+            client.server_capabilities.semanticTokensProvider = nil
             -- function to help remap
             local nmap = function(keys, func, desc, mode)
                 local modeToPut = { "n" }

@@ -5,10 +5,10 @@ return {
         priority = 1000,
         config = function()
             require("onedark").setup {
-                style = "deep",
+                style = "darker",
                 lualine = {
                     transparent = false
-                }
+                },
             }
             require("onedark").load()
 
@@ -178,5 +178,5 @@ return {
                 },
             }
         end
-    }
+    },
 }
