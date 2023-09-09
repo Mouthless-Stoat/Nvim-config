@@ -5,11 +5,12 @@ vim.g.mapleader = " " -- set the leader to a space
 
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
-utils.setKey("t", "<esc>", "<C-\\><C-n>", {})                                       -- set <esc> in terminal mode to quit
-utils.setKey("i", "<c-v>", "<c-r>*", {})                                            -- set <c-v> in insert mode to paste
-utils.setKey("n", "<c-`>", "<cmd>tabnew<cr><cmd>ter<cr>i", { desc = "[t]erminal" }) -- open terminal in a new tab
-utils.setKey("n", "<s-cr>", "i<cr><esc>", {})                                       -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "Q", "<nop>", {})                                                 -- me and the bois hate Q
+utils.setKey("t", "<esc>", "<C-\\><C-n>", {})                                                                            -- set <esc> in terminal mode to quit
+utils.setKey("i", "<c-v>", "<c-r>*", {})                                                                                 -- set <c-v> in insert mode to paste
+utils.setKey("n", "<c-`>", "<cmd>sp<cr><cmd>ter<cr>i", {})                                                               -- open terminal at the bottom
+utils.setKey("n", "<c-cr>", "i<cr><esc>", {})                                                                            -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "Q", "<nop>", {})                                                                                      -- me and the bois hate Q
+utils.setKey("n", "<leader>d", "i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>i<esc>", { desc = "[D]ance" }) -- me and the bois hate Q
 
 -- make scrolling eaiser to follow
 utils.setKey("n", "<c-d>", "<c-d>zz", {})

@@ -2,7 +2,9 @@ require("config.remap")
 require("config.command")
 
 -- auto command
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]] -- format when save
+vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*", callback =function ()
+    vim.lsp.buf.format()
+end  }) -- format when save
 
 -- these config so which-key work correctly
 vim.o.timeout = true
@@ -35,6 +37,9 @@ vim.o.wrap = false         -- i hate line wrap
 
 vim.o.mouse = nil          -- turn mouse off to get use to vim
 
+vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
+
 -- highlight yanked text
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -59,6 +64,8 @@ vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"
 
+
+-- neovide setting
 if vim.g.neovide then
     require("config.neovideConfig")
 end

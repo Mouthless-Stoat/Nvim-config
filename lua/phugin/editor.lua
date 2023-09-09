@@ -1,3 +1,4 @@
+local utils = require "utils"
 return {
     {
         -- editor theme
@@ -9,10 +10,47 @@ return {
                 lualine = {
                     transparent = false
                 },
+                highlights = {
+                    ["@lsp.type.variable"] = { fg = "$red" },
+                    ["@variable"] = { fg = "$red" },
+                    ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
+                    ["@operator"] = { fg = "$cyan" },
+                    ["@lsp.type.property"] = { fg = "$orange" },
+                    ["@property"] = { fg = "$orange" }
+                }
             }
             require("onedark").load()
 
             local colors = require("onedark.colors")
+
+            -- cursor color
+            vim.cmd(string.format("highlight nCursor guibg=%s guifg=%s", colors.blue, colors.bg))
+            vim.cmd(string.format("highlight iCursor guibg=%s guifg=%s", colors.green, colors.bg))
+            vim.cmd(string.format("highlight vCursor guibg=%s guifg=%s", colors.purple, colors.bg))
+            vim.cmd(string.format("highlight cCursor guibg=%s guifg=%s", colors.yellow, colors.bg))
+            vim.cmd(string.format("highlight rCursor guibg=%s guifg=%s", colors.red, colors.bg))
+
+            vim.o.guicursor =
+            "n-o:block-nCursor,i:ver20-iCursor,v-ve:block-vCursor,c-ci-cr:ver25-cCursor,r:hor15-rCursor"
+
+            -- line number color
+            vim.cmd(string.format("highlight CursorLineNr guifg=%s", colors.blue))
+            vim.api.nvim_create_autocmd("ModeChanged", {
+                pattern = "*",
+                callback = function()
+                    if (utils.isNormal()) then
+                        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.blue })
+                    elseif (utils.isInsert()) then
+                        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.green })
+                    elseif (utils.isVisual()) then
+                        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.purple })
+                    elseif (utils.isReplace()) then
+                        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.red })
+                    end
+
+                    -- command mode doesn't have line number
+                end
+            }) -- format when save
 
             -- color for indent
             vim.cmd([[highlight indent1 guifg=]] .. colors.red)
@@ -105,10 +143,11 @@ return {
                         "mode",
                         icon_enable = true,
                         fmt = function()
-                            local vimMode = vim.api.nvim_get_mode().mode
-                            return vimMode == "n" and "" or (vimMode == "i" or vimMode == "niI") and "" or
-                                vimMode == "v" and "󰒉" or
-                                vimMode == "c" and "" or vimMode == "R" and "" or vimMode == "t" and "" or ""
+                            return utils.isNormal() and "" or utils.isInsert() and "" or
+                                utils.isVisual() and "󰒉" or
+                                utils.isCommand() and "" or utils.isReplace() and "" or
+                                vim.api.nvim_get_mode().mode and "" or
+                                ""
                         end
                     }, {
                         "mode",
@@ -119,12 +158,12 @@ return {
                         {
                             "filename",
                             color = function()
-                                local vimMode = vim.api.nvim_get_mode().mode
-                                return vimMode == "n" and { fg = colors.blue } or
-                                    vimMode == "i" and { fg = colors.green } or
-                                    vimMode == "v" and { fg = colors.purple } or
-                                    vimMode == "c" and { fg = colors.yellow } or vimMode == "R" and { fg = colors.red } or
-                                    vimMode == "t" and { fg = colors.cyan } or
+                                return utils.isNormal() and { fg = colors.blue } or
+                                    utils.isInsert() and { fg = colors.green } or
+                                    utils.isVisual() and { fg = colors.purple } or
+                                    utils.isCommand() and { fg = colors.yellow } or
+                                    utils.isReplace() and { fg = colors.red } or
+                                    vim.api.nvim_get_mode().mode and { fg = colors.cyan } or
                                     { fg = colors.fg }
                             end
                         }

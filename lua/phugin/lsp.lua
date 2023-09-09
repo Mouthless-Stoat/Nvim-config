@@ -16,6 +16,7 @@ return {
         -- Auto complete
         'hrsh7th/nvim-cmp',
         'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
 
         -- snippet engine for  autocomplete
         'L3MON4D3/LuaSnip',
@@ -23,7 +24,6 @@ return {
     },
     config = function()
         local on_attach = function(_, bufnr)
-            client.server_capabilities.semanticTokensProvider = nil
             -- function to help remap
             local nmap = function(keys, func, desc, mode)
                 local modeToPut = { "n" }
@@ -101,8 +101,8 @@ return {
             },
             sources = {
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' },
                 { name = 'nvim_lsp_signature_help' },
+                { name = 'luasnip' },
             },
         }
 
