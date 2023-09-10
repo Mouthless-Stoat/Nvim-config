@@ -2,9 +2,12 @@ require("config.remap")
 require("config.command")
 
 -- auto command
-vim.api.nvim_create_autocmd("BufWritePre", { pattern = "*", callback =function ()
-    vim.lsp.buf.format()
-end  }) -- format when save
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format()
+    end
+})      -- format when save
 
 -- these config so which-key work correctly
 vim.o.timeout = true

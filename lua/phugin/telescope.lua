@@ -20,6 +20,13 @@ return {
     opts = {
         defaults = {
             scroll_strategy = "limit",
+            layout_strategy = "horizontal",
+            layout_config = {
+                horizontal = {
+                    width = 0.99,
+                    preview_width = 0.8
+                }
+            },
             file_ignore_patterns = {
                 "node_modules\\",
                 ".git\\",

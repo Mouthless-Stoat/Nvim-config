@@ -15,8 +15,6 @@ return {
                     ["@variable"] = { fg = "$red" },
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
-                    ["@lsp.type.property"] = { fg = "$orange" },
-                    ["@property"] = { fg = "$orange" }
                 }
             }
             require("onedark").load()
