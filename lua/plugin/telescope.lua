@@ -24,9 +24,10 @@ return {
             layout_config = {
                 horizontal = {
                     width = 0.99,
-                    preview_width = 0.8
+                    preview_width = 0.75
                 }
             },
+            path_display = { "truncate", truncate = 5 },
             file_ignore_patterns = {
                 "node_modules\\",
                 ".git\\",
@@ -35,6 +36,11 @@ return {
                 "%.gz",
                 "%.7zip",
                 "%.exe"
+            }
+        },
+        pickers = {
+            live_grep = {
+                layout_config = { preview_width = 0.5 }
             }
         }
     },

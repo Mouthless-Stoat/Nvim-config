@@ -158,7 +158,7 @@ vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"
 
--- Install Lazy.vim for phugin managment https://github.com/folke/lazy.nvim#-installation
+-- Install Lazy.vim for plugin managment https://github.com/folke/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -169,7 +169,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- setup phugin using lazy.vim
+-- setup plugin using lazy.vim
 require("lazy").setup({
     {
         'windwp/nvim-autopairs',
@@ -551,4 +551,3 @@ require("lazy").setup({
         end,
     }
 })
-

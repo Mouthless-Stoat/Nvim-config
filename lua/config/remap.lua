@@ -1,4 +1,4 @@
--- remap key for nvim. For phugin specific remap go to the phugin file
+-- remap key for nvim. For plugin specific remap go to the plugin file
 local utils = require("utils")
 
 vim.g.mapleader = " " -- set the leader to a space
