@@ -1,13 +1,6 @@
 require("config.remap")
 require("config.command")
-
--- auto command
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        vim.lsp.buf.format()
-    end
-})      -- format when save
+require("config.autocmd")
 
 -- these config so which-key work correctly
 vim.o.timeout = true
@@ -37,8 +30,6 @@ vim.o.termguicolors = true -- color in terminal
 vim.o.hlsearch = false     -- turn hightlight off after searching
 
 vim.o.wrap = false         -- i hate line wrap
-
-vim.o.mouse = nil          -- turn mouse off to get use to vim
 
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"

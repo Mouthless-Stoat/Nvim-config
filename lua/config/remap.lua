@@ -5,11 +5,42 @@ vim.g.mapleader = " " -- set the leader to a space
 
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
-utils.setKey("t", "<esc>", "<C-\\><C-n>", {})              -- set <esc> in terminal mode to quit
-utils.setKey("i", "<c-v>", "<c-r>*", {})                   -- set <c-v> in insert mode to paste
-utils.setKey("n", "<c-`>", "<cmd>sp<cr><cmd>ter<cr>i", {}) -- open terminal at the bottom
-utils.setKey("n", "<c-cr>", "i<cr><esc>", {})              -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "Q", "<nop>", {})                        -- me and the bois hate Q
+utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
+utils.setKey("i", "<c-v>", "<c-r>*", {})      -- set <c-v> in insert mode to paste
+
+vim.g.termBufferId = -1
+vim.g.termWindowId = -1
+utils.setKey({ "n", "t" }, "<c-`>", function()
+    if vim.fn.win_gotoid(vim.g.termWindowId) == 0 then
+        if vim.fn.bufexists(vim.g.termBufferId) == 0 then
+            -- make the terminal
+            vim.cmd("bot sp")
+            vim.cmd.terminal()
+
+            -- rename the buffer to use later
+            vim.cmd.file("Terminal")
+
+            -- save the window and buffer id
+            vim.g.termBufferId = vim.api.nvim_get_current_buf()
+            vim.g.termWindowId = vim.api.nvim_get_current_win()
+
+            -- go into insert mode
+            vim.cmd.startinsert()
+        else
+            vim.cmd("bot sp")                                   -- split the screen at the bottom
+            vim.cmd.buffer("Terminal")                          -- reuse the terminal buffer
+            vim.g.termWindowId = vim.api.nvim_get_current_win() -- save the new window info
+            vim.cmd.startinsert()
+        end
+    else
+        vim.fn.win_gotoid(vim.g.termWindowId) -- go to and delete it
+        vim.cmd.hide()
+    end
+end, {})                                        -- open terminal at the bottom
+utils.setKey("n", "<c-cr>", "i<cr><esc>", {})   -- set <s-cr> in normal mode to insert a newline
+utils.setKey({ "n", "i" }, "<c-a>", "ggVG", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "Q", "<nop>", {})             -- me and the bois hate Q
+utils.setKey("i", "<c-k>", "<c-k>", {})         -- me and the bois hate Q
 
 -- make scrolling eaiser to follow
 utils.setKey("n", "<c-d>", "<c-d>zz", {})
@@ -22,7 +53,7 @@ utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 
 -- short command
-utils.setKey("n", "<leader>r", "<cmd>bro ol<cr>", { desc = "[r]ecent file list" })
+utils.setKey("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "[r]ecent file list" })
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
 

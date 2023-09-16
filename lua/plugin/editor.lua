@@ -22,17 +22,17 @@ return {
             local colors = require("onedark.colors")
 
             -- cursor color
-            vim.cmd(string.format("highlight nCursor guibg=%s guifg=%s", colors.blue, colors.bg))
-            vim.cmd(string.format("highlight iCursor guibg=%s guifg=%s", colors.green, colors.bg))
-            vim.cmd(string.format("highlight vCursor guibg=%s guifg=%s", colors.purple, colors.bg))
-            vim.cmd(string.format("highlight cCursor guibg=%s guifg=%s", colors.yellow, colors.bg))
-            vim.cmd(string.format("highlight rCursor guibg=%s guifg=%s", colors.red, colors.bg))
+            vim.api.nvim_set_hl(0, "nCursor", { bg = colors.blue, fg = colors.bg })
+            vim.api.nvim_set_hl(0, "iCursor", { bg = colors.green, fg = colors.bg })
+            vim.api.nvim_set_hl(0, "vCursor", { bg = colors.purple, fg = colors.bg })
+            vim.api.nvim_set_hl(0, "cCursor", { bg = colors.yellow, fg = colors.bg })
+            vim.api.nvim_set_hl(0, "rCursor", { bg = colors.red, fg = colors.bg })
 
             vim.o.guicursor =
             "n-o:block-nCursor,i:ver20-iCursor,v-ve:block-vCursor,c-ci-cr:ver25-cCursor,r:hor15-rCursor"
 
             -- line number color
-            vim.cmd(string.format("highlight CursorLineNr guifg=%s", colors.blue))
+            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.blue })
             vim.api.nvim_create_autocmd("ModeChanged", {
                 pattern = "*",
                 callback = function()
@@ -51,41 +51,68 @@ return {
             }) -- format when save
 
             -- color for indent
-            vim.cmd([[highlight indent1 guifg=]] .. colors.red)
-            vim.cmd([[highlight indent2 guifg=]] .. colors.yellow)
-            vim.cmd([[highlight indent3 guifg=]] .. colors.green)
-            vim.cmd([[highlight indent4 guifg=]] .. colors.cyan)
-            vim.cmd([[highlight indent5 guifg=]] .. colors.blue)
-            vim.cmd([[highlight indent6 guifg=]] .. colors.purple)
+            vim.api.nvim_set_hl(0, "indent1", { fg = colors.red })
+            vim.api.nvim_set_hl(0, "indent2", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "indent3", { fg = colors.green })
+            vim.api.nvim_set_hl(0, "indent4", { fg = colors.cyan })
+            vim.api.nvim_set_hl(0, "indent5", { fg = colors.blue })
+            vim.api.nvim_set_hl(0, "indent6", { fg = colors.purple })
 
-            vim.cmd([[highlight contextIndent1 guifg=]] .. colors.red .. [[ gui=inverse]])
-            vim.cmd([[highlight contextIndent2 guifg=]] .. colors.yellow .. [[ gui=inverse]])
-            vim.cmd([[highlight contextIndent3 guifg=]] .. colors.green .. [[ gui=inverse]])
-            vim.cmd([[highlight contextIndent4 guifg=]] .. colors.cyan .. [[ gui=inverse]])
-            vim.cmd([[highlight contextIndent5 guifg=]] .. colors.blue .. [[ gui=inverse]])
-            vim.cmd([[highlight contextIndent6 guifg=]] .. colors.purple .. [[ gui=inverse]])
+            vim.api.nvim_set_hl(0, "contextIndent1", { fg = colors.red, reverse = true })
+            vim.api.nvim_set_hl(0, "contextIndent2", { fg = colors.yellow, reverse = true })
+            vim.api.nvim_set_hl(0, "contextIndent3", { fg = colors.green, reverse = true })
+            vim.api.nvim_set_hl(0, "contextIndent4", { fg = colors.cyan, reverse = true })
+            vim.api.nvim_set_hl(0, "contextIndent5", { fg = colors.blue, reverse = true })
+            vim.api.nvim_set_hl(0, "contextIndent6", { fg = colors.purple, reverse = true })
 
             -- color for bracket
-            vim.cmd([[highlight bracket1 guifg=]] .. colors.red .. [[ gui=bold]])
-            vim.cmd([[highlight bracket2 guifg=]] .. colors.yellow .. [[ gui=bold]])
-            vim.cmd([[highlight bracket3 guifg=]] .. colors.green .. [[ gui=bold]])
-            vim.cmd([[highlight bracket4 guifg=]] .. colors.cyan .. [[ gui=bold]])
-            vim.cmd([[highlight bracket5 guifg=]] .. colors.blue .. [[ gui=bold]])
-            vim.cmd([[highlight bracket6 guifg=]] .. colors.purple .. [[ gui=bold]])
+            vim.api.nvim_set_hl(0, "bracket1", { fg = colors.red, bold = true })
+            vim.api.nvim_set_hl(0, "bracket2", { fg = colors.yellow, bold = true })
+            vim.api.nvim_set_hl(0, "bracket3", { fg = colors.green, bold = true })
+            vim.api.nvim_set_hl(0, "bracket4", { fg = colors.cyan, bold = true })
+            vim.api.nvim_set_hl(0, "bracket5", { fg = colors.blue, bold = true })
+            vim.api.nvim_set_hl(0, "bracket6", { fg = colors.purple, bold = true })
 
             -- color for gitsign
-            vim.cmd([[highlight GitSignsAdd guifg=]] .. colors.green .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsAddNr guifg=]] .. colors.green .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsChange guifg=]] .. colors.yellow .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsChangeNr guifg=]] .. colors.yellow .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsDelete guifg=]] .. colors.red .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsDeleteNr guifg=]] .. colors.red .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsTopDelete guifg=]] .. colors.red .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsTopDeleteNr guifg=]] .. colors.red .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsChangeDelete guifg=]] .. colors.orange .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsChangeDeleteNr guifg=]] .. colors.orange .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsUntracked guifg=]] .. colors.purple .. [[ gui=bold]])
-            vim.cmd([[highlight GitSignsUntrackedNr guifg=]] .. colors.purple .. [[ gui=bold]])
+            vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.green, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.yellow, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.yellow, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsTopDelete", { fg = colors.red, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsTopDeleteNr", { fg = colors.red, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = colors.orange, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsChangeDeleteNr", { fg = colors.orange, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = colors.purple, bold = true })
+            vim.api.nvim_set_hl(0, "GitSignsUntrackedNr", { fg = colors.purple, bold = true })
+
+
+            vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = colors.green })
+            vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = colors.purple })
+            vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = colors.purple })
+            vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = colors.purple })
+            vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = colors.green })
+            vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = colors.blue })
+            vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = colors.red })
+            vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = colors.blue })
+            vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = colors.green })
+            vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = colors.orange })
+            vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = colors.orange })
+            vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = colors.fg })
+            vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = colors.fg })
+            vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = colors.fg })
+            vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = colors.orange })
+            vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = colors.orange })
+            vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = colors.purple })
+            vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = colors.yellow })
+            vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = colors.cyan })
+            vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = colors.green })
         end,
     },
 
@@ -137,20 +164,26 @@ return {
                     theme = customOneDark
                 },
                 sections = {
-                    lualine_a = { {
-                        "mode",
-                        icon_enable = true,
-                        fmt = function()
-                            return utils.isNormal() and "" or utils.isInsert() and "" or
-                                utils.isVisual() and "󰒉" or
-                                utils.isCommand() and "" or utils.isReplace() and "" or
-                                vim.api.nvim_get_mode().mode and "" or
-                                ""
-                        end
-                    }, {
-                        "mode",
-                        icon_enable = true,
-                    } },
+                    lualine_a = {
+                        {
+                            "mode",
+                            icon_enable = true,
+                            fmt = function()
+                                return utils.isNormal() and "" or utils.isInsert() and "" or
+                                    utils.isVisual() and "󰒉" or
+                                    utils.isCommand() and "" or utils.isReplace() and "" or
+                                    vim.api.nvim_get_mode().mode and "" or
+                                    ""
+                            end
+                        },
+                        {
+                            "mode",
+                            icon_enable = true,
+                        }
+                    },
+                    lualine_b = {
+                        "branch", "diff"
+                    },
                     lualine_c = {
                         { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
                         {
@@ -166,7 +199,7 @@ return {
                             end
                         }
                     },
-                    lualine_x = { "diagnostics" }
+                    lualine_x = { "diagnostics", "filesize" }
                 }
             })
         end,

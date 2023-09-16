@@ -16,6 +16,9 @@ return {
         { "<Leader>sF", "<cmd>Telescope find_files no_ignore=true hidden=true<cr>", desc = "[s]earch hidden [F]iles" },
         { "<Leader>st", "<cmd>Telescope live_grep no_ignore=true<cr>",              desc = "[s]earch [t]ext" },
         { "<Leader>sT", "<cmd>Telescope live_grep no_ignore=true hidden=true<cr>",  desc = "[s]earch hidden [T]ext" },
+        { "<Leader>sj", "<cmd>Telescope jumplist<cr>",                              desc = "[s]earch cursor [j]ump list" },
+        { "<Leader>sr", "<cmd>Telescope registers<cr>",                             desc = "[s]earch [r]egisters" },
+        { "<Leader>sk", "<cmd>Telescope keymaps<cr>",                               desc = "[s]earch [k]eymaps" },
     },
     opts = {
         defaults = {
@@ -23,8 +26,7 @@ return {
             layout_strategy = "horizontal",
             layout_config = {
                 horizontal = {
-                    width = 0.99,
-                    preview_width = 0.75
+                    width = 0.99
                 }
             },
             path_display = { "truncate", truncate = 5 },
@@ -39,9 +41,13 @@ return {
             }
         },
         pickers = {
-            live_grep = {
-                layout_config = { preview_width = 0.5 }
-            }
+            find_files = {
+                layout_config = {
+                    horizontal = {
+                        preview_width = 0.6
+                    }
+                },
+            },
         }
     },
     config = function(_, opts)
