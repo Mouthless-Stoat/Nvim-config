@@ -1,9 +1,9 @@
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function(args)
-        vim.lsp.buf.format()
         require("conform").format({ bufnr = args.buf })
     end
+
 }) -- format when save
 
 -- md formating
