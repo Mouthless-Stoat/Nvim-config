@@ -37,11 +37,11 @@ vim.o.cursorlineopt = "number"
 -- highlight yanked text
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = "*",
 })
 
 -- persistent undo
@@ -60,5 +60,5 @@ vim.o.shellcmdflag = "-c"
 
 -- neovide setting
 if vim.g.neovide then
-	require("config.neovideConfig")
+    require("config.neovideConfig")
 end
