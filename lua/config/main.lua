@@ -19,29 +19,29 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.updatetime = 250     -- Decrease update time
+vim.o.updatetime = 250 -- Decrease update time
 
-vim.o.signcolumn = 'yes'   -- Keep signcolumn on by default
+vim.o.signcolumn = "yes" -- Keep signcolumn on by default
 
-vim.o.showmode = false     -- hide the `--INSERT--` at the bottom use status line instead
+vim.o.showmode = false -- hide the `--INSERT--` at the bottom use status line instead
 
 vim.o.termguicolors = true -- color in terminal
 
-vim.o.hlsearch = false     -- turn hightlight off after searching
+vim.o.hlsearch = false -- turn hightlight off after searching
 
-vim.o.wrap = false         -- i hate line wrap
+vim.o.wrap = false -- i hate line wrap
 
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 
 -- highlight yanked text
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
 })
 
 -- persistent undo
@@ -58,8 +58,7 @@ vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"
 
-
 -- neovide setting
 if vim.g.neovide then
-    require("config.neovideConfig")
+	require("config.neovideConfig")
 end
