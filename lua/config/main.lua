@@ -31,6 +31,8 @@ vim.o.hlsearch = false -- turn hightlight off after searching
 
 vim.o.wrap = false -- i hate line wrap
 
+vim.g.netrw_liststyle = 3 -- default netrw to the tree view
+
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 

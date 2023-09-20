@@ -22,11 +22,11 @@ return {
             local colors = require("onedark.colors")
 
             -- cursor color
-            vim.api.nvim_set_hl(0, "nCursor", { bg = colors.blue, fg = colors.bg })
-            vim.api.nvim_set_hl(0, "iCursor", { bg = colors.green, fg = colors.bg })
-            vim.api.nvim_set_hl(0, "vCursor", { bg = colors.purple, fg = colors.bg })
-            vim.api.nvim_set_hl(0, "cCursor", { bg = colors.yellow, fg = colors.bg })
-            vim.api.nvim_set_hl(0, "rCursor", { bg = colors.red, fg = colors.bg })
+            vim.api.nvim_set_hl(0, "nCursor", { bg = colors.blue, fg = colors.black })
+            vim.api.nvim_set_hl(0, "iCursor", { bg = colors.green, fg = colors.black })
+            vim.api.nvim_set_hl(0, "vCursor", { bg = colors.purple, fg = colors.black })
+            vim.api.nvim_set_hl(0, "cCursor", { bg = colors.yellow, fg = colors.black })
+            vim.api.nvim_set_hl(0, "rCursor", { bg = colors.red, fg = colors.black })
 
             vim.o.guicursor =
                 "n-o:block-nCursor,i:ver20-iCursor,v-ve:block-vCursor,c-ci-cr:ver25-cCursor,r:hor15-rCursor"
@@ -118,12 +118,12 @@ return {
             vim.api.nvim_set_hl(0, "dashHeaderBlue", { fg = colors.blue })
             vim.api.nvim_set_hl(0, "dashHeaderGreen", { fg = colors.green })
 
-            vim.api.nvim_set_hl(0, "dashHeader1", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "dashHeader2", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "dashHeader3", { fg = colors.blue })
+            vim.api.nvim_set_hl(0, "dashHeader1", { fg = colors.red })
+            vim.api.nvim_set_hl(0, "dashHeader2", { fg = colors.orange })
+            vim.api.nvim_set_hl(0, "dashHeader3", { fg = colors.yellow })
             vim.api.nvim_set_hl(0, "dashHeader4", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "dashHeader5", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "dashHeader6", { fg = colors.green })
+            vim.api.nvim_set_hl(0, "dashHeader5", { fg = colors.cyan })
+            vim.api.nvim_set_hl(0, "dashHeader6", { fg = colors.blue })
             vim.api.nvim_set_hl(0, "dashHeader7", { fg = colors.purple })
 
             vim.api.nvim_set_hl(0, "dashButtons", { fg = colors.blue })
@@ -290,7 +290,6 @@ return {
 
             dashboard.section.header.val = logo
             dashboard.section.buttons.val = {
-                dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
                 dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
                 dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
                 dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
@@ -300,105 +299,101 @@ return {
                 button.opts.hl = "dashButtons"
                 button.opts.hl_shortcut = "dashShortcut"
             end
-            local headerHl = {
-                line = {
-                    { { "dashHeaderGreen", 0, -1 } },
-                    { { "dashHeaderGreen", 0, -1 } },
-                    { { "dashHeaderBlue", 0, 3 }, { "dashHeaderGreen", 3, -1 } },
-                    { { "dashHeaderBlue", 0, 4 }, { "dashHeaderGreen", 4, 22 }, { "dashHeader1", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 5 }, { "dashHeaderGreen", 5, 22 }, { "dashHeader2", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 }, { "dashHeader3", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 }, { "dashHeader4", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 }, { "dashHeader5", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 }, { "dashHeader6", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 }, { "dashHeader7", 22, -1 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
+
+            dashboard.section.header.opts.hl = {
+                { { "dashHeaderGreen", 0, 22 } },
+                { { "dashHeaderGreen", 0, 22 } },
+                { { "dashHeaderBlue", 0, 3 }, { "dashHeaderGreen", 3, 22 } },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
                 },
-                letter = {
-                    { { "dashHeaderGreen", 0, 22 } },
-                    { { "dashHeaderGreen", 0, 22 } },
-                    { { "dashHeaderBlue", 0, 3 }, { "dashHeaderGreen", 3, 22 } },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    {
-                        { "dashHeaderBlue", 0, 6 },
-                        { "dashHeaderGreen", 6, 22 },
-                        { "dashHeader1", 25, 36 },
-                        { "dashHeader2", 36, 47 },
-                        { "dashHeader3", 47, 58 },
-                        { "dashHeader4", 58, 70 },
-                        { "dashHeader5", 70, 81 },
-                        { "dashHeader6", 81, -1 },
-                    },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
-                    { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
                 },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
+                },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
+                },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
+                },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
+                },
+                {
+                    { "dashHeaderBlue", 0, 6 },
+                    { "dashHeaderGreen", 6, 22 },
+                    { "dashHeader1", 25, 36 },
+                    { "dashHeader2", 36, 47 },
+                    { "dashHeader3", 47, 58 },
+                    { "dashHeader4", 58, 70 },
+                    { "dashHeader5", 70, 81 },
+                    { "dashHeader6", 81, -1 },
+                },
+                { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
+                { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
+                { { "dashHeaderBlue", 0, 6 }, { "dashHeaderGreen", 6, 22 } },
             }
-            dashboard.section.header.opts.hl = headerHl.letter
             dashboard.section.buttons.opts.hl = "dashButtons"
             dashboard.section.footer.opts.hl = "dashFooter"
-            dashboard.opts.layout[1].val = 8
+            dashboard.opts.layout[1].val = 1
+
+            require("alpha").setup(dashboard.opts)
+            local quote = {
+                "No Brain No Sad",
+                "Now I am become Death, the destroyer of worlds. - Oppenheimer",
+                "Doing your Mom",
+                "Fucking your Dad",
+                "Do one thing, do it well - unix",
+                "No Code no bugs",
+            }
+            dashboard.section.footer.val = math.random(10) == 1 and quote[math.random(#quote)]
+                or require("alpha.fortune")()
+
             return dashboard
         end,
         config = function(_, dashboard)
@@ -412,18 +407,6 @@ return {
                     end,
                 })
             end
-
-            require("alpha").setup(dashboard.opts)
-            local quote = {
-                "No Brain No Sad",
-                "Now I am become Death, the destroyer of worlds. - Oppenheimer",
-                "Doing your Mom",
-                "Fucking your Dad",
-                "Do one thing, do it well - unix",
-                "No Code no bugs",
-            }
-            dashboard.section.footer.val = quote[math.random(#quote)]
-            pcall(vim.cmd.dashRedraw)
         end,
     },
 }

@@ -6,7 +6,7 @@ vim.g.mapleader = " " -- set the leader to a space
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
-utils.setKey("i", "<c-v>", "<c-r>*", {}) -- set <c-v> in insert mode to paste
+utils.setKey("n", "<c-b>", "<cmd>top 40vs<cr><cmd>e .<cr>") -- set <c-b> to open the file tree to the right
 
 vim.g.termBufferId = -1
 vim.g.termWindowId = -1
@@ -74,46 +74,16 @@ utils.setKey("n", "<c-Left>", "<c-w><Left>", {})
 utils.setKey("n", "<c-Right>", "<c-w><Right>", {})
 
 -- make new window
-utils.setKey("n", "<leader>w<Up>", function()
-    local preVal = vim.o.splitbelow
-    vim.o.splitbelow = false
-    vim.cmd.new()
-    vim.o.splitbelow = preVal
-end, { desc = "Make new window [up]" })
-utils.setKey("n", "<leader>w<Down>", function()
-    local preVal = vim.o.splitbelow
-    vim.o.splitbelow = true
-    vim.cmd.new()
-    vim.o.splitbelow = preVal
-end, { desc = "Make new window [down]" })
-utils.setKey("n", "<leader>w<Left>", function()
-    local preVal = vim.o.splitright
-    vim.o.splitright = false
-    vim.cmd.vne()
-    vim.o.splitright = preVal
-end, { desc = "Make new window [left]" })
-utils.setKey("n", "<leader>w<Right>", function()
-    local preVal = vim.o.splitright
-    vim.o.splitright = true
-    vim.cmd.vne()
-    vim.o.splitright = preVal
-end, { desc = "Make new window [right]" })
-
--- Quit keymap
-utils.setKey("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "[Q]uit all" })
-utils.setKey("n", "<leader>qq", function()
-    if #vim.api.nvim_list_wins() > 1 then
-        vim.cmd.wq()
-    end
-end, { desc = "[q]uit and [s]ave current window" })
-utils.setKey("n", "<leader>qQ", "<cmd>q!<cr>", { desc = "[q]uit current window" })
-utils.setKey("n", "<leader>qa", vim.cmd.wqa, { desc = "[q]uit and save [a]ll windows" })
+utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "Make new window [up]" })
+utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "Make new window [down]" })
+utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "Make new window [left]" })
+utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "Make new window [right]" })
 
 local anchors = {
     {
         key = "c",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
-        type = "folder",
+        type = "open",
         desc = "[c]ode folder",
     },
     {
@@ -134,24 +104,24 @@ local anchors = {
         type = "folder",
         desc = "[v]im config folder",
     },
-    { key = "h", path = "C:\\Users\\nphuy", type = "folder", desc = "[h]ome folder" },
+    {
+        key = "n",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
+        type = "folder",
+        desc = "school [n]ote folder",
+    },
+    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
 }
 for _, anchor in ipairs(anchors) do
+    local command = ""
     if anchor.type == "folder" then
-        utils.setKey(
-            "",
-            "<leader>G" .. anchor.key,
-            "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>",
-            { desc = "[G]oto " .. anchor.desc }
-        )
+        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>"
     elseif anchor.type == "file" then
-        utils.setKey(
-            "",
-            "<leader>G" .. anchor.key,
-            "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>",
-            { desc = "[G]oto " .. anchor.desc }
-        )
+        command = "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>"
+    elseif anchor.type == "open" then
+        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>e .<cr>"
     end
+    utils.setKey("n", "<leader>G" .. anchor.key, command, { desc = anchor.desc })
 end
 
 -- file keymap
