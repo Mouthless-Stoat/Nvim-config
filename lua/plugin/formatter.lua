@@ -7,8 +7,10 @@ return {
                 python = { "black" },
                 javascript = { "prettier" },
                 typescript = { "prettier" },
+                json = { "prettier" },
                 markdown = { "prettier" },
             },
         },
+        lazy = true,
     },
 }

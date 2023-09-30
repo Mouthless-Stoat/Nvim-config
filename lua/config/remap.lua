@@ -3,6 +3,9 @@ local utils = require("utils")
 
 vim.g.mapleader = " " -- set the leader to a space
 
+-- unmap stuff
+utils.delKey("n", "Y")
+
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
@@ -31,6 +34,7 @@ utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 
 -- window toggle
+vim.g.termCount = 0
 vim.g.termBufferId = -1
 vim.g.termWindowId = -1
 utils.setKey({ "n", "t" }, "<c-`>", function()
@@ -39,9 +43,10 @@ utils.setKey({ "n", "t" }, "<c-`>", function()
             -- make the terminal
             vim.cmd("bot sp")
             vim.cmd.terminal()
+            vim.g.termCount = vim.g.termCount + 1
 
             -- rename the buffer to use later
-            vim.cmd.file("Terminal")
+            vim.cmd.file("Terminal " .. vim.g.termCount)
 
             -- save the window and buffer id
             vim.g.termBufferId = vim.api.nvim_get_current_buf()
@@ -51,7 +56,7 @@ utils.setKey({ "n", "t" }, "<c-`>", function()
             vim.cmd.startinsert()
         else
             vim.cmd("bot sp") -- split the screen at the bottom
-            vim.cmd.buffer("Terminal") -- reuse the terminal buffer
+            vim.cmd.buffer("Terminal " .. vim.g.termCount) -- reuse the terminal buffer
             vim.g.termWindowId = vim.api.nvim_get_current_win() -- save the new window info
             vim.cmd.startinsert()
         end
@@ -60,6 +65,12 @@ utils.setKey({ "n", "t" }, "<c-`>", function()
         vim.cmd.hide()
     end
 end, {}) -- open terminal at the bottom
+utils.setKey("n", "<leader>t", function()
+    vim.cmd("bot sp") -- split the screen at the bottom
+    vim.cmd.buffer("Terminal " .. vim.g.termCount) -- reuse the terminal buffer
+    vim.cmd.startinsert()
+    vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
+end, { desc = "reset [t]erminal" })
 
 vim.g.treeBufferId = -1
 vim.g.treeWindowId = -1
@@ -82,10 +93,10 @@ utils.setKey("n", "<c-b>", function()
 end) -- set <c-b> to open the file tree to the right
 
 -- leader stuff
--- short command
-utils.setKey("n", "<leader>r", "<cmd>Telescope oldfiles<cr>", { desc = "[r]ecent file list" })
+-- command that I use alot
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
+utils.setKey("n", "<leader>d", "<cmd>Alpha<cr>", { desc = "[d]ashboard" })
 
 -- tab control
 utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
@@ -110,51 +121,5 @@ utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "Make new wind
 utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "Make new window [left]" })
 utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "Make new window [right]" })
 
-local anchors = {
-    {
-        key = "c",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
-        type = "open",
-        desc = "[c]ode folder",
-    },
-    {
-        key = "m",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
-        type = "file",
-        desc = "[m]agpie code",
-    },
-    {
-        key = "d",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts",
-        type = "file",
-        desc = "[d]yyes code",
-    },
-    {
-        key = "v",
-        path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
-        type = "folder",
-        desc = "[v]im config folder",
-    },
-    {
-        key = "n",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
-        type = "folder",
-        desc = "school [n]ote folder",
-    },
-    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
-}
-for _, anchor in ipairs(anchors) do
-    local command = ""
-    if anchor.type == "folder" then
-        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>"
-    elseif anchor.type == "file" then
-        command = "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>"
-    elseif anchor.type == "open" then
-        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>e .<cr>"
-    end
-    utils.setKey("n", "<leader>G" .. anchor.key, command, { desc = anchor.desc })
-end
-
 -- file keymap
-utils.setKey("n", "<leader>fr", vim.lsp.buf.rename, { desc = "[f]ile [r]ename" })
 utils.setKey("n", "<leader>fe", vim.cmd.Ex, { desc = "[f]ile [e]xplorer" })

@@ -7,9 +7,6 @@ return {
         { "williamboman/mason.nvim", config = true },
         "williamboman/mason-lspconfig.nvim",
 
-        -- Spinning bar at the corner to show progress
-        { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
-
         -- Additional lua configuration, makes nvim stuff amazing!
         "folke/neodev.nvim",
 
@@ -21,6 +18,21 @@ return {
         -- snippet engine for  autocomplete
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+        -- loading bar :)
+        {
+
+            "j-hui/fidget.nvim",
+            tag = "legacy",
+            opts = {
+                text = {
+                    done = "",
+                    spinner = "pipe",
+                },
+                window = {
+                    blend = 0,
+                },
+            },
+        },
     },
     config = function()
         local on_attach = function(_, bufnr)
@@ -44,6 +56,7 @@ return {
             nmap("gi", vim.lsp.buf.implementation, "[g]oto [i]mplementation")
             nmap("gt", vim.lsp.buf.type_definition, "[g]oto [t]ype definition")
             nmap("<leader>ss", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[s]earch [s]ymbols")
+            nmap("<F2>", vim.lsp.buf.rename, "[r]ename symbol")
 
             -- See `:help K` for why this keymap
             nmap("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -163,6 +176,8 @@ return {
                     telemetry = { enable = false },
                 },
             },
+            pyright = {},
+            tsserver = {},
         }
         -- set up mason
         require("mason").setup()
@@ -192,4 +207,6 @@ return {
         vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
         vim.fn.sign_define("DiagnosticSignHint", { text = "󰌶", texthl = "DiagnosticSignHint" })
     end,
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 }

@@ -1,6 +1,7 @@
 require("config.remap")
 require("config.command")
 require("config.autocmd")
+require("config.anchor")
 
 -- these config so which-key work correctly
 vim.o.timeout = true
@@ -19,7 +20,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.updatetime = 250 -- Decrease update time
+vim.o.updatetime = 10 -- Decrease update time
 
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default
 
