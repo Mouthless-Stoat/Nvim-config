@@ -2,6 +2,7 @@ require("config.remap")
 require("config.command")
 require("config.autocmd")
 require("config.anchor")
+require("config.codeRunner")
 
 -- these config so which-key work correctly
 vim.o.timeout = true

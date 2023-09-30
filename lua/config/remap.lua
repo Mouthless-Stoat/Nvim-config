@@ -37,40 +37,25 @@ utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 vim.g.termCount = 0
 vim.g.termBufferId = -1
 vim.g.termWindowId = -1
-utils.setKey({ "n", "t" }, "<c-`>", function()
-    if vim.fn.win_gotoid(vim.g.termWindowId) == 0 then
-        if vim.fn.bufexists(vim.g.termBufferId) == 0 then
-            -- make the terminal
-            vim.cmd("bot sp")
-            vim.cmd.terminal()
-            vim.g.termCount = vim.g.termCount + 1
 
-            -- rename the buffer to use later
-            vim.cmd.file("Terminal " .. vim.g.termCount)
-
-            -- save the window and buffer id
-            vim.g.termBufferId = vim.api.nvim_get_current_buf()
-            vim.g.termWindowId = vim.api.nvim_get_current_win()
-
-            -- go into insert mode
-            vim.cmd.startinsert()
-        else
-            vim.cmd("bot sp") -- split the screen at the bottom
-            vim.cmd.buffer("Terminal " .. vim.g.termCount) -- reuse the terminal buffer
-            vim.g.termWindowId = vim.api.nvim_get_current_win() -- save the new window info
-            vim.cmd.startinsert()
-        end
-    else
-        vim.fn.win_gotoid(vim.g.termWindowId) -- go to and delete it
-        vim.cmd.hide()
-    end
-end, {}) -- open terminal at the bottom
-utils.setKey("n", "<leader>t", function()
-    vim.cmd("bot sp") -- split the screen at the bottom
-    vim.cmd.buffer("Terminal " .. vim.g.termCount) -- reuse the terminal buffer
-    vim.cmd.startinsert()
-    vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
-end, { desc = "reset [t]erminal" })
+utils.createToggleWindow(
+    { "n", "t" },
+    "<c-`>",
+    "Toggle Terminal window",
+    "n",
+    "<leader>t",
+    "reset [t]erminal window",
+    "terminal",
+    "Terminal",
+    "bot sp",
+    "ter",
+    "start",
+    function()
+        vim.cmd.startinsert()
+        vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
+    end,
+    "function"
+)
 
 vim.g.treeBufferId = -1
 vim.g.treeWindowId = -1
