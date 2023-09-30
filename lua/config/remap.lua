@@ -32,33 +32,30 @@ utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in no
 utils.setKey({ "n", "i" }, "<a-Down>", "<esc><cmd>m .+1<cr>==")
 utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
+utils.createToggleWindow({
+    name = "terminal",
+    windowName = "Terminal",
+    toggle = {
+        key = "<c-`>",
+        mode = { "n", "t" },
+        description = "Toggle Terminal Window",
+        type = "cmd",
+        splitCmd = "bot sp",
+        cmd = "ter",
+        afterCmd = "start",
+    },
+    reset = {
+        key = "<leader>tt",
+        mode = "n",
+        description = "[t]oggle [t]erminal reset",
+        type = "func",
+        func = function()
+            vim.cmd.startinsert()
+            vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
+        end,
+    },
+})
 
--- window toggle
-vim.g.termCount = 0
-vim.g.termBufferId = -1
-vim.g.termWindowId = -1
-
-utils.createToggleWindow(
-    { "n", "t" },
-    "<c-`>",
-    "Toggle Terminal window",
-    "n",
-    "<leader>t",
-    "reset [t]erminal window",
-    "terminal",
-    "Terminal",
-    "bot sp",
-    "ter",
-    "start",
-    function()
-        vim.cmd.startinsert()
-        vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
-    end,
-    "function"
-)
-
-vim.g.treeBufferId = -1
-vim.g.treeWindowId = -1
 utils.setKey("n", "<c-b>", function()
     if vim.fn.bufexists(vim.g.treeBufferId) == 0 then
         vim.cmd("top 40vs")
@@ -81,7 +78,13 @@ end) -- set <c-b> to open the file tree to the right
 -- command that I use alot
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<leader>d", "<cmd>Alpha<cr>", { desc = "[d]ashboard" })
+utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
+utils.setKey(
+    "n",
+    "<leader>d",
+    "<cmd>lua vim.diagnostics.open_float()<cr>",
+    { desc = "open floating [d]iagnostic window" }
+)
 
 -- tab control
 utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })

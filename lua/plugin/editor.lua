@@ -70,8 +70,6 @@ return {
                     elseif utils.isReplace() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.red })
                     end
-
-                    -- command mode doesn't have line number
                 end,
             }) -- format when save
 
