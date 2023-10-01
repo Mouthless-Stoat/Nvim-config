@@ -25,3 +25,17 @@ utils.createAutocmd("BufLeave", {
         vim.o.linebreak = true
     end,
 })
+
+utils.createAutocmd("InsertEnter", {
+    pattern = "*",
+    callback = function()
+        vim.cmd("TSBufDisable highlight")
+    end,
+})
+
+utils.createAutocmd("InsertLeave", {
+    pattern = "*",
+    callback = function()
+        vim.cmd("TSBufEnable highlight")
+    end,
+})

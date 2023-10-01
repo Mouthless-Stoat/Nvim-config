@@ -40,18 +40,123 @@ return {
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
+
+                    -- cursor color
+                    ["nCursor"] = { bg = "$blue", fg = "$black" },
+                    ["iCursor"] = { bg = "$blue", fg = "$black" },
+                    ["vCursor"] = { bg = "$blue", fg = "$black" },
+                    ["cCursor"] = { bg = "$yellow", fg = "$black" },
+                    ["rCursor"] = { bg = "$red", fg = "$black" },
+
+                    -- lualine progress color
+                    ["progressHl1"] = { fg = "$red" },
+                    ["progressHl2"] = { fg = "$orange" },
+                    ["progressHl3"] = { fg = "$yellow" },
+                    ["progressHl4"] = { fg = "$green" },
+                    ["progressHl5"] = { fg = "$cyan" },
+                    ["progressHl6"] = { fg = "$blue" },
+                    ["progressHl7"] = { fg = "$purple" },
+
+                    -- indent color
+                    ["indent1"] = { fg = "$red" },
+                    ["indent2"] = { fg = "$yellow" },
+                    ["indent3"] = { fg = "$green" },
+                    ["indent4"] = { fg = "$cyan" },
+                    ["indent5"] = { fg = "$blue" },
+                    ["indent6"] = { fg = "$purple" },
+
+                    -- context color
+                    ["contextIndent1"] = { fg = "$red", fmt = "reverse" },
+                    ["contextIndent2"] = { fg = "$yellow", fmt = "reverse" },
+                    ["contextIndent3"] = { fg = "$green", fmt = "reverse" },
+                    ["contextIndent4"] = { fg = "$cyan", fmt = "reverse" },
+                    ["contextIndent5"] = { fg = "$blue", fmt = "reverse" },
+                    ["contextIndent6"] = { fg = "$purple", fmt = "reverse" },
+                    ["contextIndent7"] = { fg = "$purple", fmt = "reverse" },
+
+                    --bracket color
+                    ["bracket1"] = { fg = "$red", fmt = "bold" },
+                    ["bracket2"] = { fg = "$yellow", fmt = "bold" },
+                    ["bracket3"] = { fg = "$green", fmt = "bold" },
+                    ["bracket4"] = { fg = "$cyan", fmt = "bold" },
+                    ["bracket5"] = { fg = "$blue", fmt = "bold" },
+                    ["bracket6"] = { fg = "$purple", fmt = "bold" },
+
+                    -- gitsign gutter color
+                    ["GitSignsAdd"] = { fg = "$green", fmt = "bold" },
+                    ["GitSignsAddNr"] = { fg = "$green", fmt = "bold" },
+                    ["GitSignsChange"] = { fg = "$yellow", fmt = "bold" },
+                    ["GitSignsChangeNr"] = { fg = "$yellow", fmt = "bold" },
+                    ["GitSignsDelete"] = { fg = "$red", fmt = "bold" },
+                    ["GitSignsDeleteNr"] = { fg = "$red", fmt = "bold" },
+                    ["GitSignsTopDelete"] = { fg = "$red", fmt = "bold" },
+                    ["GitSignsTopDeleteNr"] = { fg = "$red", fmt = "bold" },
+                    ["GitSignsChangeDelete"] = { fg = "$orange", fmt = "bold" },
+                    ["GitSignsChangeDeleteNr"] = { fg = "$orange", fmt = "bold" },
+                    ["GitSignsUntracked"] = { fg = "$purple", fmt = "bold" },
+                    ["GitSignsUntrackedNr"] = { fg = "$purple", fmt = "bold" },
+
+                    -- auto complete menu color
+                    ["CmpItemKindText"] = { fg = "$green" },
+                    ["CmpItemKindMethod"] = { fg = "$purple" },
+                    ["CmpItemKindFunction"] = { fg = "$purple" },
+                    ["CmpItemKindConstructor"] = { fg = "$purple" },
+                    ["CmpItemKindField"] = { fg = "$green" },
+                    ["CmpItemKindVariable"] = { fg = "$blue" },
+                    ["CmpItemKindClass"] = { fg = "$yellow" },
+                    ["CmpItemKindInterface"] = { fg = "$yellow" },
+                    ["CmpItemKindModule"] = { fg = "$red" },
+                    ["CmpItemKindProperty"] = { fg = "$blue" },
+                    ["CmpItemKindUnit"] = { fg = "$green" },
+                    ["CmpItemKindValue"] = { fg = "$orange" },
+                    ["CmpItemKindEnum"] = { fg = "$orange" },
+                    ["CmpItemKindKeyword"] = { fg = "$yellow" },
+                    ["CmpItemKindSnippet"] = { fg = "$yellow" },
+                    ["CmpItemKindColor"] = { fg = "$fg" },
+                    ["CmpItemKindFile"] = { fg = "$fg" },
+                    ["CmpItemKindReference"] = { fg = "$fg" },
+                    ["CmpItemKindFolder"] = { fg = "$yellow" },
+                    ["CmpItemKindEnumMember"] = { fg = "$orange" },
+                    ["CmpItemKindConstant"] = { fg = "$orange" },
+                    ["CmpItemKindStruct"] = { fg = "$purple" },
+                    ["CmpItemKindEvent"] = { fg = "$yellow" },
+                    ["CmpItemKindOperator"] = { fg = "$cyan" },
+                    ["CmpItemKindTypeParameter"] = { fg = "$green" },
+
+                    -- dash board header color
+                    ["dashHeaderBlue"] = { fg = "$blue", fmt = "bold,italic" },
+                    ["dashHeaderGreen"] = { fg = "$green", fmt = "bold,italic" },
+                    ["dashHeader1"] = { fg = "$red", fmt = "bold,italic" },
+                    ["dashHeader2"] = { fg = "$orange", fmt = "bold,italic" },
+                    ["dashHeader3"] = { fg = "$yellow", fmt = "bold,italic" },
+                    ["dashHeader4"] = { fg = "$green", fmt = "bold,italic" },
+                    ["dashHeader5"] = { fg = "$cyan", fmt = "bold,italic" },
+                    ["dashHeader6"] = { fg = "$blue", fmt = "bold,italic" },
+                    ["dashHeader7"] = { fg = "$purple", fmt = "bold,italic" },
+
+                    -- dash board button color
+                    ["dashButton1"] = { fg = "$red", fmt = "bold" },
+                    ["dashButton2"] = { fg = "$orange", fmt = "bold" },
+                    ["dashButton3"] = { fg = "$yellow", fmt = "bold" },
+                    ["dashButton4"] = { fg = "$green", fmt = "bold" },
+                    ["dashButton5"] = { fg = "$cyan", fmt = "bold" },
+                    ["dashButton6"] = { fg = "$blue", fmt = "bold" },
+
+                    -- other dash color
+                    ["dashMoto"] = { fg = "$grey", fmt = "bold,italic" },
+                    ["dashInfo"] = { fg = "$blue", fmt = "bold" },
+                    ["dashInfoSec"] = { fg = "$yellow", fmt = "bold" },
+                    ["dashButton"] = { fg = "$blue", fmt = "bold" },
+                    ["dashIcon"] = { fg = "$blue", fmt = "bold" },
+                    ["dashShortcutSec"] = { fg = "$green", fmt = "bold" },
+                    ["dashShortcutTer"] = { fg = "$blue", fmt = "bold" },
+                    ["dashShortcut"] = { fg = "$yellow", fmt = "bold,italic" },
+                    ["dashFooter"] = { fg = "$purple", fmt = "bold" },
                 },
             })
             require("onedark").load()
 
             local colors = require("onedark.colors")
-
-            -- cursor color
-            vim.api.nvim_set_hl(0, "nCursor", { bg = colors.blue, fg = colors.black })
-            vim.api.nvim_set_hl(0, "iCursor", { bg = colors.green, fg = colors.black })
-            vim.api.nvim_set_hl(0, "vCursor", { bg = colors.purple, fg = colors.black })
-            vim.api.nvim_set_hl(0, "cCursor", { bg = colors.yellow, fg = colors.black })
-            vim.api.nvim_set_hl(0, "rCursor", { bg = colors.red, fg = colors.black })
 
             vim.o.guicursor =
                 "n-o:block-nCursor,i:ver20-iCursor,v-ve:block-vCursor,c-ci-cr:ver25-cCursor,r:hor15-rCursor"
@@ -72,112 +177,6 @@ return {
                     end
                 end,
             }) -- format when save
-
-            -- color for lualine
-            vim.api.nvim_set_hl(0, "progressHl1", { fg = colors.red })
-            vim.api.nvim_set_hl(0, "progressHl2", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "progressHl3", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "progressHl4", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "progressHl5", { fg = colors.cyan })
-            vim.api.nvim_set_hl(0, "progressHl6", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "progressHl7", { fg = colors.purple })
-
-            -- color for indent
-            vim.api.nvim_set_hl(0, "indent1", { fg = colors.red })
-            vim.api.nvim_set_hl(0, "indent2", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "indent3", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "indent4", { fg = colors.cyan })
-            vim.api.nvim_set_hl(0, "indent5", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "indent6", { fg = colors.purple })
-
-            vim.api.nvim_set_hl(0, "contextIndent1", { fg = colors.red, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent2", { fg = colors.yellow, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent3", { fg = colors.green, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent4", { fg = colors.cyan, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent5", { fg = colors.blue, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent6", { fg = colors.purple, reverse = true })
-            vim.api.nvim_set_hl(0, "contextIndent7", { fg = colors.purple, reverse = true })
-
-            -- color for bracket
-            vim.api.nvim_set_hl(0, "bracket1", { fg = colors.red, bold = true })
-            vim.api.nvim_set_hl(0, "bracket2", { fg = colors.yellow, bold = true })
-            vim.api.nvim_set_hl(0, "bracket3", { fg = colors.green, bold = true })
-            vim.api.nvim_set_hl(0, "bracket4", { fg = colors.cyan, bold = true })
-            vim.api.nvim_set_hl(0, "bracket5", { fg = colors.blue, bold = true })
-            vim.api.nvim_set_hl(0, "bracket6", { fg = colors.purple, bold = true })
-
-            -- color for gitsign
-            vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = colors.green, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsAddNr", { fg = colors.green, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsChange", { fg = colors.yellow, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsChangeNr", { fg = colors.yellow, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = colors.red, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsDeleteNr", { fg = colors.red, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsTopDelete", { fg = colors.red, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsTopDeleteNr", { fg = colors.red, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = colors.orange, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsChangeDeleteNr", { fg = colors.orange, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsUntracked", { fg = colors.purple, bold = true })
-            vim.api.nvim_set_hl(0, "GitSignsUntrackedNr", { fg = colors.purple, bold = true })
-
-            -- color for cmp
-            vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = colors.purple })
-            vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = colors.purple })
-            vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = colors.purple })
-            vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = colors.red })
-            vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = colors.fg })
-            vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = colors.fg })
-            vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = colors.fg })
-            vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = colors.purple })
-            vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = colors.cyan })
-            vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = colors.green })
-
-            -- dashboard color
-            vim.api.nvim_set_hl(0, "dashHeaderBlue", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "dashHeaderGreen", { fg = colors.green })
-
-            vim.api.nvim_set_hl(0, "dashHeader1", { fg = colors.red })
-            vim.api.nvim_set_hl(0, "dashHeader2", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "dashHeader3", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "dashHeader4", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "dashHeader5", { fg = colors.cyan })
-            vim.api.nvim_set_hl(0, "dashHeader6", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "dashHeader7", { fg = colors.purple })
-
-            vim.api.nvim_set_hl(0, "dashButton1", { fg = colors.red, reverse = true })
-            vim.api.nvim_set_hl(0, "dashButton2", { fg = colors.orange })
-            vim.api.nvim_set_hl(0, "dashButton3", { fg = colors.yellow })
-            vim.api.nvim_set_hl(0, "dashButton4", { fg = colors.green })
-            vim.api.nvim_set_hl(0, "dashButton5", { fg = colors.cyan })
-            vim.api.nvim_set_hl(0, "dashButton6", { fg = colors.blue })
-            vim.api.nvim_set_hl(0, "dashButton7", { fg = colors.purple })
-
-            vim.api.nvim_set_hl(0, "dashMoto", { fg = colors.grey, bold = true, italic = true })
-            vim.api.nvim_set_hl(0, "dashInfo", { fg = colors.blue, bold = true })
-            vim.api.nvim_set_hl(0, "dashInfoSec", { fg = colors.yellow, bold = true })
-
-            vim.api.nvim_set_hl(0, "dashButton", { fg = colors.blue, bold = true })
-            vim.api.nvim_set_hl(0, "dashIcon", { fg = colors.blue, bold = true })
-            vim.api.nvim_set_hl(0, "dashShortcutSec", { fg = colors.green, bold = true })
-            vim.api.nvim_set_hl(0, "dashShortcutTer", { fg = colors.blue, bold = true })
-            vim.api.nvim_set_hl(0, "dashShortcut", { fg = colors.yellow, bold = true, italic = true })
-
-            vim.api.nvim_set_hl(0, "dashFooter", { fg = colors.purple, bold = true })
         end,
     },
 

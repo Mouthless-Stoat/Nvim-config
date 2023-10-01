@@ -9,8 +9,12 @@ utils.delKey("n", "Y")
 -- lone keymao
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
+utils.setKey("n", "x", '"_x') -- but x content into void cus why?????
+utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "Q", "<nop>", {}) -- me and the bois hate Q
+utils.setKey("v", "/", "/\\%V")
 
--- insert mode c-arrow key make more sense
+-- insert mode c-arrow key to make more sense
 utils.setKey("i", "<c-Right>", "<esc>ea", {})
 utils.setKey("i", "<c-Left>", "<esc>gea", {})
 utils.setKey("i", "<s-c-Right>", "<esc>Ea", {})
@@ -18,10 +22,11 @@ utils.setKey("i", "<s-c-Left>", "<esc>gE", {})
 
 -- word wrap movement
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "Q", "<nop>", {}) -- me and the bois hate Q
+-- arrow key wrap movement
+vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- make scrolling eaiser to follow
 utils.setKey("n", "<c-d>", "<c-d>zz", {})
@@ -32,6 +37,8 @@ utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in no
 utils.setKey({ "n", "i" }, "<a-Down>", "<esc><cmd>m .+1<cr>==")
 utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
+
+-- make a terminal toggle window
 utils.createToggleWindow({
     name = "terminal",
     windowName = "Terminal",

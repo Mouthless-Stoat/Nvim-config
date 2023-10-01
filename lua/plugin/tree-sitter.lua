@@ -17,6 +17,15 @@ return {
                 -- Instead of true it can also be a list of languages
                 additional_vim_regex_highlighting = false,
             },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "gs", -- set to `false` to disable one of the mappings
+                    node_incremental = "gs",
+                    node_decremental = "gS",
+                    scope_incremental = false,
+                },
+            },
         })
     end,
     lazy = true,
