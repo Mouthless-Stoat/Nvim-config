@@ -1,5 +1,6 @@
 -- remap key for nvim. For plugin specific remap go to the plugin file
-local utils = require("utils")
+local utils = require("helper.utils")
+local window = require("helper.window")
 
 vim.g.mapleader = " " -- set the leader to a space
 
@@ -13,19 +14,45 @@ utils.setKey("n", "x", '"_x') -- but x content into void cus why?????
 utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
 utils.setKey("n", "Q", "<nop>", {}) -- me and the bois hate Q
 utils.setKey("v", "/", "/\\%V")
+utils.setKey("v", "\\", "/")
+utils.setKey("n", "<c-a>", "<c-^>", {})
 
+utils.setKey("n", "<leader>]", function()
+    local width = 20
+    local height = 10
+    local buf = vim.api.nvim_create_buf(false, true)
+    local ui = vim.api.nvim_list_uis()[1]
+
+    vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, { vim.fn.getreg("a") })
+
+    local opts = {
+        relative = "editor",
+        width = width,
+        height = height,
+        col = (ui.width / 2) - (width / 2),
+        row = (ui.height / 2) - (height / 2),
+        style = "minimal",
+        border = "single",
+    }
+    local win = vim.api.nvim_open_win(buf, true, opts)
+    opts.title = "" .. vim.fn.winnr()
+    vim.keymap.set("n", "<s-Left>", function()
+        opts.col = opts.col - 1
+        vim.api.nvim_win_set_config(win, opts)
+    end, { buffer = buf })
+end)
 -- insert mode c-arrow key to make more sense
 utils.setKey("i", "<c-Right>", "<esc>ea", {})
-utils.setKey("i", "<c-Left>", "<esc>gea", {})
+utils.setKey("i", "<c-Left>", "<esc>ba", {})
 utils.setKey("i", "<s-c-Right>", "<esc>Ea", {})
-utils.setKey("i", "<s-c-Left>", "<esc>gE", {})
+utils.setKey("i", "<s-c-Left>", "<esc>Ba", {})
 
 -- word wrap movement
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- arrow key wrap movement
-vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- make scrolling eaiser to follow
@@ -39,7 +66,7 @@ utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 
 -- make a terminal toggle window
-utils.createToggleWindow({
+window.createToggleWindow({
     name = "terminal",
     windowName = "Terminal",
     toggle = {
@@ -89,7 +116,7 @@ utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
 utils.setKey(
     "n",
     "<leader>d",
-    "<cmd>lua vim.diagnostics.open_float()<cr>",
+    "<cmd>lua vim.diagnostic.open_float()<cr>",
     { desc = "open floating [d]iagnostic window" }
 )
 

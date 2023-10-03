@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("helper.utils")
 
 -- remap
 utils.setKey("n", "<c-=>", function()

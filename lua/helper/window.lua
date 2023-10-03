@@ -1,5 +1,7 @@
+local M = {}
 vim.g.toggleWinId = {}
-local function createToggleWindow(config)
+
+function M.createToggleWindow(config)
     local temp = vim.g.toggleWinId
     temp[config.name] = vim.tbl_extend("error", {
         bufferId = -1,
@@ -8,7 +10,7 @@ local function createToggleWindow(config)
     vim.g.toggleWinId = temp
 end
 
-local function toggleWindow(name)
+function M.toggleWindow(name)
     local temp = vim.g.toggleWinId
     local data = temp[name]
 
@@ -47,7 +49,7 @@ local function toggleWindow(name)
     vim.g.toggleWinId = temp
 end
 
-local function resetToggleWindow(name)
+function M.resetToggleWindow(name)
     local temp = vim.g.toggleWinId
     local data = temp[name]
 
@@ -67,33 +69,15 @@ local function resetToggleWindow(name)
     data.windowId = vim.api.nvim_get_current_win() -- save the new window info
     vim.g.toggleWinId = temp
 end
-return {
-    setKey = vim.keymap.set,
-    delKey = vim.keymap.del,
-    addCommand = vim.api.nvim_create_user_command,
-    createAutocmd = vim.api.nvim_create_autocmd,
-    isNormal = function()
-        return vim.tbl_contains({ "n", "niI", "niR", "niV", "nt", "ntT" }, vim.api.nvim_get_mode().mode)
-    end,
-    isInsert = function()
-        return vim.tbl_contains({ "i", "ic", "ix" }, vim.api.nvim_get_mode().mode)
-    end,
-    isVisual = function()
-        return vim.tbl_contains({ "v", "vs", "V", "Vs", "\22", "\22s", "s", "S", "\19" }, vim.api.nvim_get_mode().mode)
-    end,
-    isCommand = function()
-        return vim.tbl_contains({ "c", "cv", "ce", "rm", "r?" }, vim.api.nvim_get_mode().mode)
-    end,
-    isReplace = function()
-        return vim.tbl_contains({ "R", "Rc", "Rx", "Rv", "Rvc", "Rvx", "r" }, vim.api.nvim_get_mode().mode)
-    end,
-    createToggleWindow = function(config)
-        createToggleWindow(config)
-        vim.keymap.set(config.toggle.mode, config.toggle.key, function()
-            toggleWindow(config.name)
-        end, { desc = config.toggle.description })
-        vim.keymap.set(config.reset.mode, config.reset.key, function()
-            resetToggleWindow(config.name)
-        end, { desc = config.reset.description })
-    end,
-}
+
+function M.createToggleWindowBind(config)
+    M.createToggleWindow(config)
+    vim.keymap.set(config.toggle.mode, config.toggle.key, function()
+        M.toggleWindow(config.name)
+    end, { desc = config.toggle.description })
+    vim.keymap.set(config.reset.mode, config.reset.key, function()
+        M.resetToggleWindow(config.name)
+    end, { desc = config.reset.description })
+end
+
+return M

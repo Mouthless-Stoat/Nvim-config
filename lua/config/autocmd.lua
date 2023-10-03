@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("helper.utils")
 
 utils.createAutocmd("BufWritePre", {
     pattern = "*",
@@ -29,6 +29,9 @@ utils.createAutocmd("BufLeave", {
 utils.createAutocmd("InsertEnter", {
     pattern = "*",
     callback = function()
+        if vim.fn.line("$") <= 2000 then
+            return
+        end
         vim.cmd("TSBufDisable highlight")
     end,
 })
@@ -36,6 +39,9 @@ utils.createAutocmd("InsertEnter", {
 utils.createAutocmd("InsertLeave", {
     pattern = "*",
     callback = function()
+        if vim.fn.line("$") <= 2000 then
+            return
+        end
         vim.cmd("TSBufEnable highlight")
     end,
 })

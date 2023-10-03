@@ -74,6 +74,7 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
         -- configure auto complete
+        vim.o.pumheight = 15
         local cmp = require("cmp")
         local luasnip = require("luasnip")
         require("luasnip.loaders.from_vscode").lazy_load()

@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("helper.utils")
 return {
     {
         "tpope/vim-fugitive",
@@ -15,7 +15,6 @@ return {
             { "<leader>gp", "<cmd>Git push<cr>", desc = "[g]it [p]ush" },
             { "<leader>ga", "<cmd>Git add *<cr>", desc = "[g]it [a]dd" },
         },
-        lazy = true,
     },
     {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -30,24 +29,17 @@ return {
             },
             numhl = true,
             on_attach = function(bufnr)
+                local gitsign = require("gitsigns")
                 utils.setKey(
                     "n",
                     "<leader>ghp",
-                    require("gitsigns").preview_hunk,
+                    gitsign.preview_hunk,
                     { buffer = bufnr, desc = "[g]it [h]unk [p]review" }
                 )
-                utils.setKey(
-                    "n",
-                    "<leader>ghn",
-                    require("gitsigns").next_hunk,
-                    { buffer = bufnr, desc = "[g]it [h]unk [n]ext" }
-                )
-                utils.setKey(
-                    "n",
-                    "<leader>ghb",
-                    require("gitsigns").prev_hunk,
-                    { buffer = bufnr, desc = "[g]it [h]unk [b]ack" }
-                )
+                utils.setKey("n", "<leader>ghn", gitsign.next_hunk, { buffer = bufnr, desc = "[g]it [h]unk [n]ext" })
+                utils.setKey("n", "<leader>ghb", gitsign.prev_hunk, { buffer = bufnr, desc = "[g]it [h]unk [b]ack" })
+                utils.setKey({ "n", "v" }, "<leader>ghs", gitsign.stage_hunk)
+                utils.setKey({ "n", "v" }, "<leader>ghr", gitsign.reset_hunk)
             end,
         },
         event = { "BufReadPost", "BufNewFile" },

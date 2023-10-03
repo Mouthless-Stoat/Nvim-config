@@ -21,7 +21,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.updatetime = 10 -- Decrease update time
+vim.o.updatetime = 1000 -- Decrease update time
 
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default
 
@@ -57,7 +57,7 @@ vim.o.undofile = true
 vim.o.scrolloff = 8
 
 -- terminal shit
-vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h12" --set font and size
+vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h11" --set font and size
 
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"

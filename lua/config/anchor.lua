@@ -1,4 +1,4 @@
-local utils = require("utils")
+local utils = require("helper.utils")
 
 local anchors = {
     {
@@ -33,7 +33,7 @@ local anchors = {
     },
     { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
 }
-function genAnchorCommand(anchor)
+local function genAnchorCommand(anchor)
     local command = ""
     if anchor.type == "folder" then
         command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>"

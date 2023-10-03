@@ -1,4 +1,4 @@
-local utils = require("utils")
+local mode = require("helper.mode")
 return {
     {
         -- editor theme
@@ -43,8 +43,8 @@ return {
 
                     -- cursor color
                     ["nCursor"] = { bg = "$blue", fg = "$black" },
-                    ["iCursor"] = { bg = "$blue", fg = "$black" },
-                    ["vCursor"] = { bg = "$blue", fg = "$black" },
+                    ["iCursor"] = { bg = "$green", fg = "$black" },
+                    ["vCursor"] = { bg = "$purple", fg = "$black" },
                     ["cCursor"] = { bg = "$yellow", fg = "$black" },
                     ["rCursor"] = { bg = "$red", fg = "$black" },
 
@@ -166,13 +166,13 @@ return {
             vim.api.nvim_create_autocmd("ModeChanged", {
                 pattern = "*",
                 callback = function()
-                    if utils.isNormal() then
+                    if mode.isNormal() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.blue })
-                    elseif utils.isInsert() then
+                    elseif mode.isInsert() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.green })
-                    elseif utils.isVisual() then
+                    elseif mode.isVisual() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.purple })
-                    elseif utils.isReplace() then
+                    elseif mode.isReplace() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.red })
                     end
                 end,
@@ -223,6 +223,84 @@ return {
                 terminal = { a = { fg = colors.bg0, bg = colors.cyan, gui = "bold" } },
             }
 
+            local hideWidth = 90
+            local function hide(width)
+                width = width or 90
+                return function(str)
+                    return vim.api.nvim_win_get_width(0) <= width and "" or str
+                end
+            end
+
+            local function isCramp()
+                return vim.api.nvim_win_get_width(0) <= hideWidth
+            end
+
+            local function winNum()
+                return vim.api.nvim_win_get_width(0) <= 90 and vim.fn.winnr() .. " / " .. vim.api.nvim_get_current_buf()
+                    or "W: " .. vim.fn.winnr() .. " / B: " .. vim.api.nvim_get_current_buf()
+            end
+
+            local function winSize()
+                return (vim.api.nvim_win_get_width(0) <= 90)
+                        and (vim.api.nvim_win_get_height(0) .. " x " .. vim.api.nvim_win_get_width(0))
+                    or ("H: " .. vim.api.nvim_win_get_height(0) .. " x W: " .. vim.api.nvim_win_get_width(0))
+            end
+
+            local function lineLength()
+                return "Length: " .. #vim.fn.getline("."):gsub("^%s*(.-)%s*$", "%1") .. "/" .. #vim.fn.getline(".")
+            end
+
+            local function modeIcon()
+                return mode.isNormal() and ""
+                    or mode.isInsert() and ""
+                    or mode.isVisual() and "󰒉"
+                    or mode.isCommand() and ""
+                    or mode.isReplace() and ""
+                    or vim.api.nvim_get_mode().mode == "t" and ""
+                    or ""
+            end
+
+            local function countLoc()
+                return "LOC: " .. vim.fn.line("$")
+            end
+
+            local function nvimVer()
+                local version = vim.version()
+                return "NVIM v" .. version.major .. "." .. version.minor .. "." .. version.patch
+            end
+
+            local function bufferCount()
+                return "Buffers: " .. #vim.fn.getbufinfo({ buflisted = true })
+            end
+
+            local function cwd()
+                local shortern = {
+                    { path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code", short = "<Code>" },
+                    { path = "C:\\Users\\nphuy\\OneDrive\\Desktop", short = "Desktop" },
+                    { path = "C:\\Users\\nphuy\\AppData\\Local\\nvim", short = "Neovim Config" },
+                    { path = "C:\\Users\\nphuy", short = "HOME" },
+                }
+                local path = vim.fn.getcwd()
+                for _, p in ipairs(shortern) do
+                    path = path:gsub(p.path, p.short)
+                end
+                return "Cwd: " .. (#path >= 40 and "..." or "") .. path:sub(-80)
+            end
+
+            local function altFile()
+                local file = vim.fn.expand("#:t")
+                return "Alt: " .. (file == "" and "[No name]" or file)
+            end
+
+            local function operator()
+                return vim.v.operator == "" and vim.v.operator or "Op: " .. vim.v.operator
+            end
+
+            local fancyFileName = {
+                { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
+                "filename",
+            }
+
             require("lualine").setup({
                 options = {
                     component_separators = { left = "\\", right = "/" },
@@ -230,37 +308,12 @@ return {
                     theme = customOneDark,
                 },
                 sections = {
-                    lualine_a = {
-                        {
-                            "mode",
-                            icon_enable = true,
-                            fmt = function()
-                                return utils.isNormal() and ""
-                                    or utils.isInsert() and ""
-                                    or utils.isVisual() and "󰒉"
-                                    or utils.isCommand() and ""
-                                    or utils.isReplace() and ""
-                                    or vim.api.nvim_get_mode().mode == "t" and ""
-                                    or ""
-                            end,
-                        },
-                        "mode",
-                    },
-                    lualine_b = {
-                        "branch",
-                        "diff",
-                        {
-                            function()
-                                return vim.api.nvim_get_current_win() .. ":" .. vim.api.nvim_get_current_buf()
-                            end,
-                        },
-                    },
-                    lualine_c = {
-                        { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
-                        "filename",
-                    },
-                    lualine_x = { "diagnostics", "filesize" },
+                    lualine_a = { modeIcon, "mode" },
+                    lualine_b = fancyFileName,
+                    lualine_c = { { lineLength, icon = "", fmt = hide() } },
+                    lualine_x = { "diagnostics", { "filesize", icon = "" } },
                     lualine_y = {
+                        { countLoc, icon = "", fmt = hide() },
                         {
                             "progress",
                             color = function()
@@ -283,32 +336,128 @@ return {
                         {
                             "selectioncount",
                             fmt = function(count)
-                                if count == "" then
-                                    return ""
-                                end
-                                return "[" .. count .. "]"
+                                return "[" .. (count == "" and 0 or count) .. "]"
                             end,
                         },
-                        {
-                            "location",
-                        },
+                        "location",
                     },
                 },
                 inactive_sections = {
-                    lualine_a = {
-                        { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
-                        "filename",
-                    },
-                    lualine_b = {
-                        {
-                            function()
-                                return vim.api.nvim_get_current_win() .. ":" .. vim.api.nvim_get_current_buf()
-                            end,
-                        },
-                    },
+                    lualine_a = fancyFileName,
+                    lualine_b = {},
                     lualine_c = {},
                     lualine_x = {},
                     lualine_z = { "location" },
+                },
+                tabline = {
+                    lualine_a = { { nvimVer, icon = "", separator = { right = "" } } },
+                    lualine_b = { { bufferCount, icon = "󰌨", separator = { right = "" } } },
+                    lualine_c = {
+                        {
+                            cwd,
+                            icon = "",
+                            on_click = function()
+                                vim.api.nvim_feedkeys(
+                                    vim.api.nvim_replace_termcodes("<leader>sf", true, false, true),
+                                    "t",
+                                    false
+                                )
+                            end,
+                        },
+                    },
+                    lualine_x = {
+                        {
+                            '"Count: " .. vim.v.count1',
+                            icon = "󰑖",
+                            function(text)
+                                return isCramp() and vim.v.count or text
+                            end,
+                        },
+                        {
+                            operator,
+                            icon = "",
+                            function(text)
+                                return isCramp() and vim.v.count or text
+                            end,
+                        },
+                        {
+                            '"Reg: " .. vim.v.register',
+                            icon = "󱓥",
+                            function(text)
+                                return isCramp() and vim.v.count or text
+                            end,
+                        },
+                        {
+                            '"Zoom: " .. vim.g.neovide_scale_factor',
+                            icon = "󰍉",
+                            function(text)
+                                return isCramp() and vim.v.count or text
+                            end,
+                        },
+                    },
+                    lualine_y = {
+                        {
+                            function()
+                                local stats = require("lazy").stats()
+                                return isCramp() and stats.count .. "/" .. stats.loaded
+                                    or stats.count .. "/" .. stats.loaded .. " Plugins loaded"
+                            end,
+                            icon = "",
+                            separator = { left = "" },
+                        },
+                    },
+                    lualine_z = {
+                        {
+                            "datetime",
+                            icon = "󰃮",
+                            style = "%a, %b %d | %I:%M:%S %p",
+                            separator = { left = "" },
+                            fmt = function(text)
+                                return isCramp() and "T" or text
+                            end,
+                        },
+                    },
+                },
+                winbar = {
+                    lualine_a = {
+                        {
+                            "branch",
+                            fmt = function(branch)
+                                return (branch == "master" or branch == "main") and "<MAIN>" or "<NONE>"
+                            end,
+                        },
+                    },
+                    lualine_b = {
+                        "diff",
+                        {
+                            "fileformat",
+                            icons_enabled = true,
+                            symbols = {
+                                unix = "LF",
+                                dos = "CRLF",
+                                mac = "CR",
+                            },
+                            fmt = hide(),
+                        },
+                    },
+                    lualine_x = { { altFile, icon = "" } },
+                    lualine_y = { { winSize, icon = "󰗆" } },
+                    lualine_z = { { winNum, icon = "󰻾" } },
+                },
+                inactive_winbar = {
+                    lualine_a = {
+                        {
+                            "fileformat",
+                            icons_enabled = true,
+                            symbols = {
+                                unix = "LF",
+                                dos = "CRLF",
+                                mac = "CR",
+                            },
+                        },
+                    },
+                    lualine_z = { { winNum, icon = "󰻾" } },
+                    lualine_y = { { winSize, icon = "󰗆" } },
                 },
             })
         end,
