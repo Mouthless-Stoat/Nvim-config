@@ -7,8 +7,9 @@ window.createToggleWindowBind({
     name = "codeOutput",
     windowName = "out",
     toggle = {
-        key = "<leader>o",
+        key = "<leader>tc",
         mode = "n",
+        description = "Open [c]ode runner output window",
         type = "cmd",
         splitCmd = "bot sp",
         cmd = "ter",

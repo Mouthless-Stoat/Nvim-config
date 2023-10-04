@@ -12,6 +12,10 @@ return {
                     bg1 = "#000f34",
                     bg2 = "#001a3e",
                     bg3 = "#072349",
+
+                    brown = "#85441c",
+                    pink = "#de52c0",
+
                     -- lualine in normal
                     lualineNB = "#0c1b59",
                     lualineNC = "#030d36",
@@ -40,6 +44,7 @@ return {
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
+                    winhl = { fg = "$orange", bg = "$yellow" },
 
                     -- cursor color
                     ["nCursor"] = { bg = "$blue", fg = "$black" },
@@ -366,20 +371,6 @@ return {
                         },
                     },
                     lualine_x = {
-                        {
-                            '"Count: " .. vim.v.count1',
-                            icon = "󰑖",
-                            function(text)
-                                return isCramp() and vim.v.count or text
-                            end,
-                        },
-                        {
-                            operator,
-                            icon = "",
-                            function(text)
-                                return isCramp() and vim.v.count or text
-                            end,
-                        },
                         {
                             '"Reg: " .. vim.v.register',
                             icon = "󱓥",

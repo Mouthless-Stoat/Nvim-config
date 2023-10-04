@@ -1,6 +1,7 @@
 -- remap key for nvim. For plugin specific remap go to the plugin file
 local utils = require("helper.utils")
 local window = require("helper.window")
+local float = require("helper.float")
 
 vim.g.mapleader = " " -- set the leader to a space
 
@@ -20,32 +21,23 @@ utils.setKey("n", "<c-a>", "<c-^>", {})
 utils.setKey("n", "<leader>]", function()
     local width = 20
     local height = 10
-    local buf = vim.api.nvim_create_buf(false, true)
-    local ui = vim.api.nvim_list_uis()[1]
-
-    vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, { vim.fn.getreg("a") })
 
     local opts = {
         relative = "editor",
+        position = "center",
+        title = "Sticky",
         width = width,
         height = height,
-        col = (ui.width / 2) - (width / 2),
-        row = (ui.height / 2) - (height / 2),
         style = "minimal",
         border = "single",
     }
-    local win = vim.api.nvim_open_win(buf, true, opts)
-    opts.title = "" .. vim.fn.winnr()
-    vim.keymap.set("n", "<s-Left>", function()
-        opts.col = opts.col - 1
-        vim.api.nvim_win_set_config(win, opts)
-    end, { buffer = buf })
+    float.createFloat(opts)
 end)
 -- insert mode c-arrow key to make more sense
-utils.setKey("i", "<c-Right>", "<esc>ea", {})
-utils.setKey("i", "<c-Left>", "<esc>ba", {})
-utils.setKey("i", "<s-c-Right>", "<esc>Ea", {})
-utils.setKey("i", "<s-c-Left>", "<esc>Ba", {})
+utils.setKey("i", "<C-Right>", "<esc>ea", {})
+utils.setKey("i", "<C-Left>", "<esc>ba", {})
+utils.setKey("i", "<S-C-Right>", "<esc>Ea", {})
+utils.setKey("i", "<S-C-Left>", "<esc>Ba", {})
 
 -- word wrap movement
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -108,18 +100,6 @@ utils.setKey("n", "<c-b>", function()
     end
 end) -- set <c-b> to open the file tree to the right
 
--- leader stuff
--- command that I use alot
-utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
-utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
-utils.setKey(
-    "n",
-    "<leader>d",
-    "<cmd>lua vim.diagnostic.open_float()<cr>",
-    { desc = "open floating [d]iagnostic window" }
-)
-
 -- tab control
 utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
 utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
@@ -142,6 +122,18 @@ utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "Make new window
 utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "Make new window [down]" })
 utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "Make new window [left]" })
 utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "Make new window [right]" })
+
+-- leader stuff
+-- command that I use alot
+utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
+utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
+utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
+utils.setKey(
+    "n",
+    "<leader>d",
+    "<cmd>lua vim.diagnostic.open_float()<cr>",
+    { desc = "open floating [d]iagnostic window" }
+)
 
 -- file keymap
 utils.setKey("n", "<leader>fe", vim.cmd.Ex, { desc = "[f]ile [e]xplorer" })

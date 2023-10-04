@@ -1,5 +1,5 @@
 local M = {}
-vim.g.toggleWinId = {}
+WinId = {}
 
 --[[
 {
@@ -40,17 +40,17 @@ vim.g.toggleWinId = {}
 }
 --]]
 function M.createToggleWindow(config)
-    local temp = vim.g.toggleWinId
+    local temp = WinId
     temp[config.name] = vim.tbl_extend("error", {
         bufferId = -1,
         windowId = -1,
     }, config)
-    vim.g.toggleWinId = temp
+    WinId = temp
 end
 
 function M.toggleWindow(name, show)
     show = show or false
-    local temp = vim.g.toggleWinId
+    local temp = WinId
     local data = temp[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
@@ -87,11 +87,11 @@ function M.toggleWindow(name, show)
             vim.cmd.hide()
         end
     end
-    vim.g.toggleWinId = temp
+    WinId = temp
 end
 
 function M.resetToggleWindow(name)
-    local temp = vim.g.toggleWinId
+    local temp = WinId
     local data = temp[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
@@ -108,7 +108,6 @@ function M.resetToggleWindow(name)
         data.reset.func()
     end
     data.windowId = vim.api.nvim_get_current_win() -- save the new window info
-    vim.g.toggleWinId = temp
 end
 
 function M.createToggleWindowBind(config)
@@ -116,7 +115,7 @@ function M.createToggleWindowBind(config)
     if config.toggle.mode ~= nil or config.toggle.mode ~= "" or config.toggle.key ~= nil or config.toggle.key ~= "" then
         vim.keymap.set(config.toggle.mode, config.toggle.key, function()
             -- jank fix for local mapping
-            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= vim.g.toggleWinId[config.name].bufferId then
+            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= WinId[config.name].bufferId then
                 return
             end
             M.toggleWindow(config.name)
@@ -127,7 +126,7 @@ function M.createToggleWindowBind(config)
     end
     if config.reset.mode ~= nil or config.reset.mode ~= "" or config.reset.key ~= nil or config.reset.key ~= "" then
         vim.keymap.set(config.reset.mode, config.reset.key, function()
-            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= vim.g.toggleWinId[config.name].bufferId then
+            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= WinId[config.name].bufferId then
                 return
             end
             M.resetToggleWindow(config.name)
