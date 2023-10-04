@@ -66,7 +66,7 @@ utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
 
 -- make a terminal toggle window
-window.createToggleWindow({
+window.createToggleWindowBind({
     name = "terminal",
     windowName = "Terminal",
     toggle = {
