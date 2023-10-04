@@ -297,10 +297,6 @@ return {
                 return "Alt: " .. (file == "" and "[No name]" or file)
             end
 
-            local function operator()
-                return vim.v.operator == "" and vim.v.operator or "Op: " .. vim.v.operator
-            end
-
             local fancyFileName = {
                 { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
                 "filename",
@@ -375,14 +371,14 @@ return {
                             '"Reg: " .. vim.v.register',
                             icon = "󱓥",
                             function(text)
-                                return isCramp() and vim.v.count or text
+                                return isCramp() and vim.v.register or text
                             end,
                         },
                         {
                             '"Zoom: " .. vim.g.neovide_scale_factor',
                             icon = "󰍉",
                             function(text)
-                                return isCramp() and vim.v.count or text
+                                return isCramp() and vim.g.neovide_scale_factor or text
                             end,
                         },
                     },
