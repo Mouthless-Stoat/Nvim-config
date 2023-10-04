@@ -12,8 +12,19 @@ return {
                 end,
                 desc = "[g]it [c]ommit all",
             },
+            {
+                "<leader>gC",
+                function()
+                    vim.ui.input({ prompt = "Enter commit message: " }, function(input)
+                        vim.cmd([[Git commit -m "]] .. input .. [["]])
+                    end)
+                end,
+                desc = "[g]it [c]ommit added",
+            },
             { "<leader>gp", "<cmd>Git push<cr>", desc = "[g]it [p]ush" },
-            { "<leader>ga", "<cmd>Git add *<cr>", desc = "[g]it [a]dd" },
+            { "<leader>ga", "<cmd>Git add *<cr>", desc = "[g]it [a]dd all" },
+            { "<leader>g.", "<cmd>Gwrite<cr>", desc = "[g]it [a]dd current file" },
+            { "<leader>gs", "<cmd>Git<cr>", desc = "[g]it [s]tatus" },
         },
     },
     {
@@ -38,8 +49,18 @@ return {
                 )
                 utils.setKey("n", "<leader>ghn", gitsign.next_hunk, { buffer = bufnr, desc = "[g]it [h]unk [n]ext" })
                 utils.setKey("n", "<leader>ghb", gitsign.prev_hunk, { buffer = bufnr, desc = "[g]it [h]unk [b]ack" })
-                utils.setKey({ "n", "v" }, "<leader>ghs", gitsign.stage_hunk)
-                utils.setKey({ "n", "v" }, "<leader>ghr", gitsign.reset_hunk)
+                utils.setKey(
+                    { "n", "v" },
+                    "<leader>gha",
+                    gitsign.stage_hunk,
+                    { buffer = bufnr, desc = "[g]it [h]unk [a]dd" }
+                )
+                utils.setKey(
+                    { "n", "v" },
+                    "<leader>ghr",
+                    gitsign.reset_hunk,
+                    { buffer = bufnr, desc = "[g]it [h]unk [r]eset" }
+                )
             end,
         },
         event = { "BufReadPost", "BufNewFile" },

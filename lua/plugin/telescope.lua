@@ -28,7 +28,7 @@ return {
         { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[m]arks list" },
 
         -- git stuff
-        { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
+        { "<leader>gS", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
         { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [l]ogs" },
     },
     opts = {
