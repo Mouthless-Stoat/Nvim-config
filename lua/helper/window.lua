@@ -39,7 +39,7 @@ WinId = {}
     }
 }
 --]]
-function M.createToggleWindow(config)
+function M.createWindowData(config)
     local temp = WinId
     temp[config.name] = vim.tbl_extend("error", {
         bufferId = -1,
@@ -48,59 +48,63 @@ function M.createToggleWindow(config)
     WinId = temp
 end
 
-function M.toggleWindow(name, show)
-    show = show or false
-    local temp = WinId
-    local data = temp[name]
+function M.showWindow(name)
+    local data = WinId[name]
+    if data.toggle.type == "cmd" then
+        vim.cmd(data.toggle.splitCmd) -- open the window
+        vim.cmd.buffer(data.bufferId) -- reuse the buffer
+        data.windowId = vim.api.nvim_get_current_win() -- save the new window info
+        vim.cmd(data.toggle.afterCmd)
+    elseif data.toggle.type == "func" then
+        data.toggle.openFunc()
+    end
+end
+
+function M.hideWindow(name)
+    local data = WinId[name]
+    vim.fn.win_gotoid(data.windowId)
+    vim.cmd.hide()
+end
+
+function M.createWindow(name)
+    local data = WinId[name]
+    if data.toggle.type == "cmd" then
+        -- make the window by spliting
+        vim.cmd(data.toggle.splitCmd)
+        vim.cmd(data.toggle.cmd)
+
+        -- rename the buffer to reuse later instead of using buffer id
+        vim.cmd.file(data.windowName)
+
+        -- save the window and buffer id to use
+        data.bufferId = vim.api.nvim_get_current_buf()
+        data.windowId = vim.api.nvim_get_current_win()
+
+        vim.cmd(data.toggle.afterCmd)
+    elseif data.toggle.type == "func" then
+        data.toggle.createFunc()
+    end
+end
+
+function M.toggleWindow(name)
+    local data = WinId[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
         if vim.fn.bufexists(data.bufferId) == 0 then
-            if data.toggle.type == "cmd" then
-                -- make the terminal
-                vim.cmd(data.toggle.splitCmd)
-                vim.cmd(data.toggle.cmd)
-
-                -- rename the buffer to use later
-                vim.cmd.file(data.windowName)
-
-                -- save the window and buffer id
-                data.bufferId = vim.api.nvim_get_current_buf()
-                data.windowId = vim.api.nvim_get_current_win()
-
-                vim.cmd(data.toggle.afterCmd)
-            elseif data.toggle.type == "func" then
-                data.toggle.createFunc()
-            end
+            M.createWindow(name)
         else
-            if data.toggle.type == "cmd" then
-                vim.cmd(data.toggle.splitCmd) -- open the window
-                vim.cmd.buffer(data.windowName) -- reuse the buffer
-                data.windowId = vim.api.nvim_get_current_win() -- save the new window info
-                vim.cmd(data.toggle.afterCmd)
-            elseif data.toggle.type == "func" then
-                data.toggle.openFunc()
-            end
+            M.showWindow(name)
         end
     else
-        if not show then
-            vim.fn.win_gotoid(data.windowId)
-            vim.cmd.hide()
-        end
+        M.hideWindow(name)
     end
-    WinId = temp
 end
 
-function M.resetToggleWindow(name)
-    local temp = WinId
-    local data = temp[name]
+function M.resetWindow(name)
+    local data = WinId[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
-        if data.toggle.type == "cmd" then
-            vim.cmd(data.toggle.splitCmd) -- open the window
-            vim.cmd.buffer(data.name) -- reuse the buffer
-        elseif data.toggle.type == "func" then
-            data.toggle.openFunc()
-        end
+        M.showWindow(name)
     end
     if data.reset.type == "cmd" then
         vim.cmd(data.reset.cmd)
@@ -110,8 +114,8 @@ function M.resetToggleWindow(name)
     data.windowId = vim.api.nvim_get_current_win() -- save the new window info
 end
 
-function M.createToggleWindowBind(config)
-    M.createToggleWindow(config)
+function M.createWindowBind(config)
+    M.createWindowData(config)
     if config.toggle.mode ~= nil or config.toggle.mode ~= "" or config.toggle.key ~= nil or config.toggle.key ~= "" then
         vim.keymap.set(config.toggle.mode, config.toggle.key, function()
             -- jank fix for local mapping
@@ -129,7 +133,7 @@ function M.createToggleWindowBind(config)
             if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= WinId[config.name].bufferId then
                 return
             end
-            M.resetToggleWindow(config.name)
+            M.resetWindow(config.name)
         end, { desc = config.reset.description })
     end
 end

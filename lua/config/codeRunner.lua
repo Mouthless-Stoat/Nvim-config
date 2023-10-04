@@ -3,7 +3,7 @@ local window = require("helper.window")
 local fileTypeConfig = {
     python = "py ",
 }
-window.createToggleWindowBind({
+window.createWindowBind({
     name = "codeOutput",
     windowName = "out",
     toggle = {
