@@ -8,7 +8,7 @@ plugin config and setting is in `lua/plugin`
 
 Todo:
 
--   Finish Code Runner
--   Finish Register Edit and Manager
--   Finish Floating window floating function
--   Add in a file tree
+-   [x] Finish Code Runner
+-   [ ] Finish Register Edit and Manager
+-   [ ] Finish Floating window floating function
+-   [ ] Add in a file tree
