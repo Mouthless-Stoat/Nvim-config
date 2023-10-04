@@ -10,7 +10,7 @@ return {
                         vim.cmd([[Git ca "]] .. input .. [["]])
                     end)
                 end,
-                desc = "[g]it [a]dd all",
+                desc = "[g]it [c]ommit all",
             },
             { "<leader>gp", "<cmd>Git push<cr>", desc = "[g]it [p]ush" },
             { "<leader>ga", "<cmd>Git add *<cr>", desc = "[g]it [a]dd" },
