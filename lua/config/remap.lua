@@ -106,16 +106,16 @@ utils.setKey("n", "<c-b>", function()
 end) -- set <c-b> to open the file tree to the right
 
 -- tab control
-utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "Switch to next tab" })
-utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "Switch to previous tab" })
+utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "switch to next tab" })
+utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "switch to previous tab" })
 
 -- Window control keybind
-utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "Quit all other window" })
+utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "quit all other window" })
 
-utils.setKey("n", "<s-Up>", "<c-w>+", { desc = "Switch to up window" })
-utils.setKey("n", "<s-Down>", "<c-w>-", { desc = "Switch to down window" })
-utils.setKey("n", "<s-Left>", "<c-w><", { desc = "Switch to left window" })
-utils.setKey("n", "<s-Right>", "<c-w>>", { desc = "Switch to right window" })
+utils.setKey("n", "<s-Up>", "<c-w>+", { desc = "switch to up window" })
+utils.setKey("n", "<s-Down>", "<c-w>-", { desc = "switch to down window" })
+utils.setKey("n", "<s-Left>", "<c-w><", { desc = "switch to left window" })
+utils.setKey("n", "<s-Right>", "<c-w>>", { desc = "switch to right window" })
 
 utils.setKey("n", "<c-Up>", "<c-w><Up>", {})
 utils.setKey("n", "<c-Down>", "<c-w><Down>", {})
@@ -123,12 +123,13 @@ utils.setKey("n", "<c-Left>", "<c-w><Left>", {})
 utils.setKey("n", "<c-Right>", "<c-w><Right>", {})
 
 -- make new window
-utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "Make new window [up]" })
-utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "Make new window [down]" })
-utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "Make new window [left]" })
-utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "Make new window [right]" })
+utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new window [up]" })
+utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new window [down]" })
+utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new window [left]" })
+utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new window [right]" })
 
--- leader stuff
+utils.setKey("n", "<leader>ww", "<c-w><c-w>", { desc = "switch [w]indow" })
+
 -- command that I use alot
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
