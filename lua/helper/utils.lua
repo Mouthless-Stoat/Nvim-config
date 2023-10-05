@@ -1,3 +1,6 @@
+function math.clamp(val, min, max)
+    return math.min(math.max(val, min), max)
+end
 return {
     setKey = vim.keymap.set,
     delKey = vim.keymap.del,

@@ -11,18 +11,9 @@ utils.createAutocmd("BufWritePre", {
 utils.createAutocmd("BufEnter", {
     pattern = "*.md",
     callback = function()
-        vim.o.syntax = "markdown"
-        vim.o.wrap = true
-        vim.o.linebreak = true
-    end,
-})
-
-utils.createAutocmd("BufLeave", {
-    pattern = "*.md",
-    callback = function()
-        vim.o.syntax = nil
-        vim.o.wrap = false
-        vim.o.linebreak = true
+        vim.bo.syntax = "markdown"
+        vim.bo.wrap = true
+        vim.bo.linebreak = true
     end,
 })
 

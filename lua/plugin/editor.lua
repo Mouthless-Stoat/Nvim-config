@@ -667,7 +667,7 @@ return {
                 val = {
                     button("l", "Lazy Config", "󰒲", "<cmd>Lazy<cr>", "dashButton1"),
                     button("m", "Mason Config", "󱌢", "<cmd>Mason<cr>", "dashButton2"),
-                    button("n", "New File", "", "<cmd>enew<cr>", "dashButton3"),
+                    button("n", "New Scratch", "", "<cmd>Scratch<cr>", "dashButton3"),
                     button("r", "Recently Open", "󱦻", "<cmd>Telescope oldfiles<cr>", "dashButton4"),
                     button(
                         "c",

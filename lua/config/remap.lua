@@ -33,6 +33,8 @@ utils.setKey("n", "<leader>]", function()
     }
     float.createFloat(opts)
 end)
+
+-- remap base command to be more useful
 -- insert mode c-arrow key to make more sense
 utils.setKey("i", "<C-Right>", "<esc>ea", {})
 utils.setKey("i", "<C-Left>", "<esc>ba", {})
@@ -50,6 +52,9 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 -- make scrolling eaiser to follow
 utils.setKey("n", "<c-d>", "<c-d>zz", {})
 utils.setKey("n", "<c-u>", "<c-u>zz", {})
+
+utils.setKey("n", ">>", ">>gv", {})
+utils.setKey("n", "<<", "<<gv", {})
 
 -- move line command
 utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in normal mode do nothing we can combine the command
