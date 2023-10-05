@@ -10,6 +10,8 @@ Todo:
 
 -   [x] Finish Code Runner
 -   [ ] Finish Register Edit and Manager
--   [ ] Finish Floating window floating function
+-   [x] Finish Floating window floating function
 -   [ ] Add in a file tree
 -   [ ] Clean some config code up (separate them into module)
+-   [ ] Pin alt file so it don't get replace
+-   [ ] Better move line
