@@ -12,3 +12,4 @@ Todo:
 -   [ ] Finish Register Edit and Manager
 -   [ ] Finish Floating window floating function
 -   [ ] Add in a file tree
+-   [ ] Clean some config code up (separate them into module)
