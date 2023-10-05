@@ -251,10 +251,6 @@ return {
                     or ("H: " .. vim.api.nvim_win_get_height(0) .. " x W: " .. vim.api.nvim_win_get_width(0))
             end
 
-            local function lineLength()
-                return "Length: " .. #vim.fn.getline("."):gsub("^%s*(.-)%s*$", "%1") .. "/" .. #vim.fn.getline(".")
-            end
-
             local function modeIcon()
                 return mode.isNormal() and ""
                     or mode.isInsert() and ""
@@ -310,8 +306,19 @@ return {
                 },
                 sections = {
                     lualine_a = { modeIcon, "mode" },
-                    lualine_b = fancyFileName,
-                    lualine_c = { { lineLength, icon = "", fmt = hide() } },
+                    lualine_b = {
+                        {
+                            "branch",
+                            fmt = function(branch)
+                                return (branch == "master" or branch == "main") and "<MAIN>" or branch
+                            end,
+                        },
+                        {
+                            "diff",
+                            fmt = hide(),
+                        },
+                    },
+                    lualine_c = fancyFileName,
                     lualine_x = { "diagnostics", { "filesize", icon = "" } },
                     lualine_y = {
                         { countLoc, icon = "", fmt = hide() },
@@ -337,7 +344,7 @@ return {
                         {
                             "selectioncount",
                             fmt = function(count)
-                                return "[" .. (count == "" and 0 or count) .. "]"
+                                return isCramp() and "" or "[" .. (count == "" and 0 or count) .. "]"
                             end,
                         },
                         "location",
@@ -406,27 +413,6 @@ return {
                     },
                 },
                 winbar = {
-                    lualine_a = {
-                        {
-                            "branch",
-                            fmt = function(branch)
-                                return (branch == "master" or branch == "main") and "<MAIN>" or "<NONE>"
-                            end,
-                        },
-                    },
-                    lualine_b = {
-                        "diff",
-                        {
-                            "fileformat",
-                            icons_enabled = true,
-                            symbols = {
-                                unix = "LF",
-                                dos = "CRLF",
-                                mac = "CR",
-                            },
-                            fmt = hide(),
-                        },
-                    },
                     lualine_x = { { altFile, icon = "" } },
                     lualine_y = { { winSize, icon = "󰗆" } },
                     lualine_z = { { winNum, icon = "󰻾" } },
