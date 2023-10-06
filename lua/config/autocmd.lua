@@ -12,8 +12,8 @@ utils.createAutocmd("BufEnter", {
     pattern = "*.md",
     callback = function()
         vim.bo.syntax = "markdown"
-        vim.bo.wrap = true
-        vim.bo.linebreak = true
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
     end,
 })
 

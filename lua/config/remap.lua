@@ -53,8 +53,8 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 utils.setKey("n", "<c-d>", "<c-d>zz", {})
 utils.setKey("n", "<c-u>", "<c-u>zz", {})
 
-utils.setKey("n", ">>", ">>gv", {})
-utils.setKey("n", "<<", "<<gv", {})
+utils.setKey("v", ">", ">gv", {})
+utils.setKey("v", "<", "<gv", {})
 
 -- move line command
 utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in normal mode do nothing we can combine the command
@@ -112,15 +112,15 @@ utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "switch to previous tab" })
 -- Window control keybind
 utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "quit all other window" })
 
-utils.setKey("n", "<s-Up>", "<c-w>+", { desc = "switch to up window" })
-utils.setKey("n", "<s-Down>", "<c-w>-", { desc = "switch to down window" })
-utils.setKey("n", "<s-Left>", "<c-w><", { desc = "switch to left window" })
-utils.setKey("n", "<s-Right>", "<c-w>>", { desc = "switch to right window" })
+utils.setKey("n", "<s-Up>", "<c-w>-")
+utils.setKey("n", "<s-Down>", "<c-w>+")
+utils.setKey("n", "<s-Left>", "<c-w><")
+utils.setKey("n", "<s-Right>", "<c-w>>")
 
-utils.setKey("n", "<c-Up>", "<c-w><Up>", {})
-utils.setKey("n", "<c-Down>", "<c-w><Down>", {})
-utils.setKey("n", "<c-Left>", "<c-w><Left>", {})
-utils.setKey("n", "<c-Right>", "<c-w><Right>", {})
+utils.setKey("n", "<c-Up>", "<c-w><Up>", { desc = "switch to up window" })
+utils.setKey("n", "<c-Down>", "<c-w><Down>", { desc = "switch to down window" })
+utils.setKey("n", "<c-Left>", "<c-w><Left>", { desc = "switch to left window" })
+utils.setKey("n", "<c-Right>", "<c-w><Right>", { desc = "switch to right window" })
 
 -- make new window
 utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new window [up]" })

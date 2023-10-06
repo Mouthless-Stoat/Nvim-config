@@ -8,10 +8,10 @@ return {
             require("onedark").setup({
                 style = "deep",
                 colors = {
-                    bg0 = "#000000",
-                    bg1 = "#000f34",
-                    bg2 = "#001a3e",
-                    bg3 = "#072349",
+                    bg0 = "#141414",
+                    bg1 = "#131621",
+                    bg2 = "#0f192f",
+                    bg3 = "#031b3d",
 
                     brown = "#85441c",
                     pink = "#de52c0",
@@ -228,9 +228,9 @@ return {
                 terminal = { a = { fg = colors.bg0, bg = colors.cyan, gui = "bold" } },
             }
 
-            local hideWidth = 90
+            local hideWidth = 110
             local function hide(width)
-                width = width or 90
+                width = width or hideWidth
                 return function(str)
                     return vim.api.nvim_win_get_width(0) <= width and "" or str
                 end
@@ -418,17 +418,6 @@ return {
                     lualine_z = { { winNum, icon = "󰻾" } },
                 },
                 inactive_winbar = {
-                    lualine_a = {
-                        {
-                            "fileformat",
-                            icons_enabled = true,
-                            symbols = {
-                                unix = "LF",
-                                dos = "CRLF",
-                                mac = "CR",
-                            },
-                        },
-                    },
                     lualine_z = { { winNum, icon = "󰻾" } },
                     lualine_y = { { winSize, icon = "󰗆" } },
                 },

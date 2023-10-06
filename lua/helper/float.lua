@@ -2,7 +2,27 @@ local utils = require("helper.utils")
 local M = {}
 
 --[[
-
+config is just normal vim.api.nvim_open_win() opts with a few extra
+{
+    position = "center" -- auto center when create
+    highlight = { -- window hl key is hl name and value is hl to
+        "Normal" = "",
+        "FloatBorder" = "",
+        "FloatTitle" = "",
+        -- etc
+    }
+    titleFunc = function() end -- function to generate title
+    keymap = {
+        moveUp = "",
+        moveDown = "",
+        moveLeft = "",
+        moveRight = "",
+        decHeight = "<S-Up>",
+        incHeight = "<S-Down>",
+        decWidth = "<S-Left>",
+        incWidth = "<S-Right>",
+    }
+}
 
 --]]
 function M.createFloat(config)

@@ -15,3 +15,5 @@ Todo:
 -   [ ] Clean some config code up (separate them into module)
 -   [ ] Pin alt file so it don't get replace
 -   [ ] Better move line
+-   [ ] Sticky note
+-   [ ] Submode with hydra
