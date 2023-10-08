@@ -28,5 +28,6 @@ return {
             },
         })
     end,
-    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = { "TSInstall" },
 }

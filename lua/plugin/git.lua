@@ -64,6 +64,5 @@ return {
             end,
         },
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     },
 }
