@@ -38,6 +38,8 @@ vim.g.netrw_liststyle = 3 -- default netrw to the tree view
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 
+vim.o.conceallevel = 2
+
 -- highlight yanked text
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -57,7 +59,7 @@ vim.o.undofile = true
 vim.o.scrolloff = 8
 
 -- terminal shit
-vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h10:#h-none" --set font and size
+vim.o.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
 
 vim.o.shell = "powershell"
 vim.o.shellcmdflag = "-c"
