@@ -16,21 +16,18 @@ return {
                     brown = "#85441c",
                     pink = "#de52c0",
 
-                    -- lualine in normal
-                    lualineNB = "#0c1b59",
-                    lualineNC = "#030d36",
-                    -- insert
-                    lualineIB = "#192c02",
-                    lualineIC = "#0e1a00",
-                    -- visual
-                    lualineVB = "#2f044d",
-                    lualineVC = "#190129",
-                    -- command
-                    lualineCB = "#472d04",
-                    lualineCC = "#1c0f01",
-                    -- replace
-                    lualineRB = "#3e0309",
-                    lualineRC = "#260105",
+                    -- extra dark color
+                    darkBlue = "#0c1b59",
+                    darkerBlue = "#030d36",
+                    darkGreen = "#192c02",
+                    darkerGreen = "#0e1a00",
+                    darkPurple = "#2f044d",
+                    darkerPurple = "#190129",
+                    darkYellow = "#472d04",
+                    darkerYellow = "#1c0f01",
+                    darkRed = "#3e0309",
+                    darkerRed = "#260105",
+
                     -- lualine inactive
                     lualineInA = "#1e1e1e",
                     lualineInB = "#171717",
@@ -45,6 +42,7 @@ return {
                     ["@operator"] = { fg = "$cyan" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
+                    ColorColumn = { fg = "$red", bg = "$darkRed" },
 
                     -- cursor color
                     ["nCursor"] = { bg = "$blue", fg = "$black" },
@@ -52,6 +50,11 @@ return {
                     ["vCursor"] = { bg = "$purple", fg = "$black" },
                     ["cCursor"] = { bg = "$yellow", fg = "$black" },
                     ["rCursor"] = { bg = "$red", fg = "$black" },
+
+                    -- sticky note color
+                    ["notepadNormal"] = { fg = "$bg0", bg = "$yellow" },
+                    ["notepadBorder"] = { fg = "$orange" },
+                    ["notepadTitle"] = { fg = "$orange" },
 
                     -- lualine progress color
                     ["progressHl1"] = { fg = "$red" },
@@ -202,28 +205,28 @@ return {
                 },
                 normal = {
                     a = { fg = colors.bg0, bg = colors.blue, gui = "bold" },
-                    b = { fg = colors.blue, bg = colors.lualineNB },
-                    c = { fg = colors.blue, bg = colors.lualineNC },
+                    b = { fg = colors.blue, bg = colors.darkBlue },
+                    c = { fg = colors.blue, bg = colors.darkerBlue },
                 },
                 visual = {
                     a = { fg = colors.bg0, bg = colors.purple, gui = "bold" },
-                    b = { fg = colors.purple, bg = colors.lualineVB },
-                    c = { fg = colors.purple, bg = colors.lualineVC },
+                    b = { fg = colors.purple, bg = colors.darkPurple },
+                    c = { fg = colors.purple, bg = colors.darkerPurple },
                 },
                 replace = {
                     a = { fg = colors.bg0, bg = colors.red, gui = "bold" },
-                    b = { fg = colors.red, bg = colors.lualineRB },
-                    c = { fg = colors.red, bg = colors.lualineRC },
+                    b = { fg = colors.red, bg = colors.darkRed },
+                    c = { fg = colors.red, bg = colors.darkerRed },
                 },
                 insert = {
                     a = { fg = colors.bg0, bg = colors.green, gui = "bold" },
-                    b = { fg = colors.green, bg = colors.lualineIB },
-                    c = { fg = colors.green, bg = colors.lualineIC },
+                    b = { fg = colors.green, bg = colors.darkGreen },
+                    c = { fg = colors.green, bg = colors.darkerGreen },
                 },
                 command = {
                     a = { fg = colors.bg0, bg = colors.yellow, gui = "bold" },
-                    b = { fg = colors.yellow, bg = colors.lualineCB },
-                    c = { fg = colors.yellow, bg = colors.lualineCC },
+                    b = { fg = colors.yellow, bg = colors.darkYellow },
+                    c = { fg = colors.yellow, bg = colors.darkerYellow },
                 },
                 terminal = { a = { fg = colors.bg0, bg = colors.cyan, gui = "bold" } },
             }
@@ -453,7 +456,6 @@ return {
             },
         },
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     },
 
     -- bracket colorization
@@ -472,7 +474,6 @@ return {
             }
         end,
         event = { "BufReadPost", "BufNewFile" },
-        cmd = { "LspInfo", "LspInstall", "LspUninstall" },
     },
     {
         "goolord/alpha-nvim",
