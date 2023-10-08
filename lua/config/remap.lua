@@ -40,30 +40,6 @@ vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent =
 vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- new remap
-utils.setKey("n", "<leader>]", function()
-    local width = 30
-    local height = 20
-
-    local opts = {
-        relative = "editor",
-        position = "center",
-        title = "Sticky",
-        width = width,
-        height = height,
-        style = "minimal",
-        border = "single",
-        highlight = {
-            Normal = "notepadNormal",
-            FloatTitle = "notepadTitle",
-            FloatBorder = "notepadBorder",
-        },
-        moveCount = 5,
-        shiftCount = 2,
-    }
-    float.createFloat(opts)
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-end)
 
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
@@ -120,6 +96,27 @@ utils.setKey("n", "<c-b>", function()
 end) -- set <c-b> to open the file tree to the right
 
 -- Window control keybind
+utils.setKey("n", "<leader>ws", function()
+    float.createFloat({
+        relative = "editor",
+        position = "center",
+        title = "Sticky",
+        width = 20,
+        height = 10,
+        style = "minimal",
+        border = "single",
+        highlight = {
+            Normal = "notepadNormal",
+            FloatTitle = "notepadTitle",
+            FloatBorder = "notepadBorder",
+        },
+        moveCount = 5,
+        shiftCount = 2,
+    })
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.cmd.startinsert()
+end, { desc = "new [w]indow [s]ticky note" })
 
 -- make new window
 utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })

@@ -433,9 +433,7 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         version = "2.20.8",
         opts = {
-            char = "|",
-            char_blankline = ":",
-            context_char = "|",
+            char_blankline = "·",
             show_current_context = true,
             show_current_context_start = true,
             char_highlight_list = {
@@ -507,7 +505,7 @@ return {
             local headerConfig = {
                 type = "text",
                 val = (
-                    math.random(100) == 1 and altHeader[math.random(#altHeader)]
+                    math.random(5) == 1 and altHeader[math.random(#altHeader)]
                     or {
                         [[     .          .                                                                               ]],
                         [[   ';;,.        ::'                                                                             ]],

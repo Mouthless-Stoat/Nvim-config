@@ -23,6 +23,7 @@ utils.setKey("n", "<leader>z", function()
 end, { desc = "change [z]oom" })
 
 -- config
+vim.g.neovide_refresh_rate = 120
 vim.g.neovide_scale_factor = 1
 vim.g.neovide_cursor_animation_length = 0.08
 vim.g.neovide_cursor_trail_size = 0.5
