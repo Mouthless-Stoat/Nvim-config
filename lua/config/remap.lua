@@ -8,33 +8,23 @@ vim.g.mapleader = " " -- set the leader to a space
 -- unmap stuff
 utils.delKey("n", "Y")
 
--- lone keymao
-utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
+-- remap default funtion
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
 utils.setKey("n", "x", '"_x') -- but x content into void cus why?????
-utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
 utils.setKey("n", "Q", "<nop>", {}) -- me and the bois hate Q
+
+-- remap so easier search in v mode
 utils.setKey("v", "/", "/\\%V")
 utils.setKey("v", "\\", "/")
-utils.setKey("n", "<c-a>", "<c-^>", {})
 
-utils.setKey("n", "<leader>]", function()
-    local width = 20
-    local height = 10
+-- make scrolling eaiser to follow
+utils.setKey("n", "<c-d>", "<c-d>zz", {})
+utils.setKey("n", "<c-u>", "<c-u>zz", {})
 
-    local opts = {
-        relative = "editor",
-        position = "center",
-        title = "Sticky",
-        width = width,
-        height = height,
-        style = "minimal",
-        border = "single",
-    }
-    float.createFloat(opts)
-end)
+-- keep current group selected when shifting
+utils.setKey("v", ">", ">gv", {})
+utils.setKey("v", "<", "<gv", {})
 
--- remap base command to be more useful
 -- insert mode c-arrow key to make more sense
 utils.setKey("i", "<C-Right>", "<esc>ea", {})
 utils.setKey("i", "<C-Left>", "<esc>ba", {})
@@ -49,18 +39,42 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- make scrolling eaiser to follow
-utils.setKey("n", "<c-d>", "<c-d>zz", {})
-utils.setKey("n", "<c-u>", "<c-u>zz", {})
+-- new remap
+utils.setKey("n", "<leader>]", function()
+    local width = 30
+    local height = 20
 
-utils.setKey("v", ">", ">gv", {})
-utils.setKey("v", "<", "<gv", {})
+    local opts = {
+        relative = "editor",
+        position = "center",
+        title = "Sticky",
+        width = width,
+        height = height,
+        style = "minimal",
+        border = "single",
+        highlight = {
+            Normal = "notepadNormal",
+            FloatTitle = "notepadTitle",
+            FloatBorder = "notepadBorder",
+        },
+        moveCount = 5,
+        shiftCount = 2,
+    }
+    float.createFloat(opts)
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+end)
+
+utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
 -- move line command
 utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in normal mode do nothing we can combine the command
 utils.setKey({ "n", "i" }, "<a-Down>", "<esc><cmd>m .+1<cr>==")
 utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
 utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
+
+utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "<c-a>", "<c-^>", {})
 
 -- make a terminal toggle window
 window.createWindowBind({
@@ -105,32 +119,104 @@ utils.setKey("n", "<c-b>", function()
     end
 end) -- set <c-b> to open the file tree to the right
 
--- tab control
-utils.setKey("n", "<k6>", "<cmd>tabn<cr>", { desc = "switch to next tab" })
-utils.setKey("n", "<k4>", "<cmd>tabp<cr>", { desc = "switch to previous tab" })
-
 -- Window control keybind
-utils.setKey("n", "<leader>wx", "<c-w>o", { desc = "quit all other window" })
-
-utils.setKey("n", "<s-Up>", "<c-w>-")
-utils.setKey("n", "<s-Down>", "<c-w>+")
-utils.setKey("n", "<s-Left>", "<c-w><")
-utils.setKey("n", "<s-Right>", "<c-w>>")
-
-utils.setKey("n", "<c-Up>", "<c-w><Up>", { desc = "switch to up window" })
-utils.setKey("n", "<c-Down>", "<c-w><Down>", { desc = "switch to down window" })
-utils.setKey("n", "<c-Left>", "<c-w><Left>", { desc = "switch to left window" })
-utils.setKey("n", "<c-Right>", "<c-w><Right>", { desc = "switch to right window" })
 
 -- make new window
-utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new window [up]" })
-utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new window [down]" })
-utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new window [left]" })
-utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new window [right]" })
+utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
+utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
+utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
+utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
 
-utils.setKey("n", "<leader>ww", "<c-w><c-w>", { desc = "switch [w]indow" })
+-- move between window
+utils.setKey("n", "<leader>ww", "<c-w>w", { desc = "switch [[w]]indow" })
 
--- command that I use alot
+-- faster switching
+utils.setKey("n", "<c-1>", "1<c-w>w", { desc = "go to [w]indow [1]" })
+utils.setKey("n", "<c-2>", "2<c-w>w", { desc = "go to [w]indow [2]" })
+utils.setKey("n", "<c-3>", "3<c-w>w", { desc = "go to [w]indow [3]" })
+utils.setKey("n", "<c-4>", "4<c-w>w", { desc = "go to [w]indow [4]" })
+utils.setKey("n", "<c-5>", "5<c-w>w", { desc = "go to [w]indow [5]" })
+utils.setKey("n", "<c-6>", "6<c-w>w", { desc = "go to [w]indow [6]" })
+utils.setKey("n", "<c-7>", "7<c-w>w", { desc = "go to [w]indow [7]" })
+utils.setKey("n", "<c-8>", "8<c-w>w", { desc = "go to [w]indow [8]" })
+utils.setKey("n", "<c-9>", "9<c-w>w", { desc = "go to [w]indow [9]" })
+
+-- manipulating window
+utils.setKey("n", "<s-Up>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>-", true, false, true), "t", false)
+    else
+        float.resizeFloat(win, { direction = "up" })
+    end
+end)
+utils.setKey("n", "<s-Down>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>+", true, false, true), "t", false)
+    else
+        float.resizeFloat(win, { direction = "down" })
+    end
+end)
+utils.setKey("n", "<s-Left>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>>", true, false, true), "t", false)
+    else
+        float.resizeFloat(win, { direction = "left" })
+    end
+end)
+utils.setKey("n", "<s-Right>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><", true, false, true), "t", false)
+    else
+        float.resizeFloat(win, { direction = "right" })
+    end
+end)
+
+utils.setKey("n", "<c-Up>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Up>", true, false, true), "t", false)
+    else
+        float.moveFloat(win, "up")
+    end
+end, { desc = "switch to up window" })
+utils.setKey("n", "<c-Down>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Down>", true, false, true), "t", false)
+    else
+        float.moveFloat(win, "down")
+    end
+end, { desc = "switch to down window" })
+utils.setKey("n", "<c-Left>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Left>", true, false, true), "t", false)
+    else
+        float.moveFloat(win, "left")
+    end
+end, { desc = "switch to left window" })
+utils.setKey("n", "<c-Right>", function()
+    local config = vim.api.nvim_win_get_config(0)
+    local win = vim.api.nvim_get_current_win()
+    if config.relative == "" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Right>", true, false, true), "t", false)
+    else
+        float.moveFloat(win, "right")
+    end
+end, { desc = "switch to right window" })
+
+-- common command
 utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
 utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })

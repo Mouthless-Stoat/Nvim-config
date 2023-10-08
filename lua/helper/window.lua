@@ -1,5 +1,5 @@
 local M = {}
-WinId = {}
+M.winId = {}
 
 --[[
 {
@@ -40,16 +40,16 @@ WinId = {}
 }
 --]]
 function M.createWindowData(config)
-    local temp = WinId
+    local temp = M.winId
     temp[config.name] = vim.tbl_extend("error", {
         bufferId = -1,
         windowId = -1,
     }, config)
-    WinId = temp
+    M.winId = temp
 end
 
 function M.showWindow(name)
-    local data = WinId[name]
+    local data = M.winId[name]
     if data.toggle.type == "cmd" then
         vim.cmd(data.toggle.splitCmd) -- open the window
         vim.cmd.buffer(data.bufferId) -- reuse the buffer
@@ -61,13 +61,13 @@ function M.showWindow(name)
 end
 
 function M.hideWindow(name)
-    local data = WinId[name]
+    local data = M.winId[name]
     vim.fn.win_gotoid(data.windowId)
     vim.cmd.hide()
 end
 
 function M.createWindow(name)
-    local data = WinId[name]
+    local data = M.winId[name]
     if data.toggle.type == "cmd" then
         -- make the window by spliting
         vim.cmd(data.toggle.splitCmd)
@@ -87,7 +87,7 @@ function M.createWindow(name)
 end
 
 function M.toggleWindow(name)
-    local data = WinId[name]
+    local data = M.winId[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
         if vim.fn.bufexists(data.bufferId) == 0 then
@@ -101,7 +101,7 @@ function M.toggleWindow(name)
 end
 
 function M.resetWindow(name)
-    local data = WinId[name]
+    local data = M.winId[name]
 
     if vim.fn.win_gotoid(data.windowId) == 0 then
         M.showWindow(name)
@@ -119,7 +119,7 @@ function M.createWindowBind(config)
     if config.toggle.mode ~= nil or config.toggle.mode ~= "" or config.toggle.key ~= nil or config.toggle.key ~= "" then
         vim.keymap.set(config.toggle.mode, config.toggle.key, function()
             -- jank fix for local mapping
-            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= WinId[config.name].bufferId then
+            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= M.winId[config.name].bufferId then
                 return
             end
             M.toggleWindow(config.name)
@@ -130,7 +130,7 @@ function M.createWindowBind(config)
     end
     if config.reset.mode ~= nil or config.reset.mode ~= "" or config.reset.key ~= nil or config.reset.key ~= "" then
         vim.keymap.set(config.reset.mode, config.reset.key, function()
-            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= WinId[config.name].bufferId then
+            if config.toggle.bufLocal and vim.api.nvim_get_current_buf() ~= M.winId[config.name].bufferId then
                 return
             end
             M.resetWindow(config.name)

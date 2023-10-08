@@ -1,5 +1,41 @@
 local utils = require("helper.utils")
 local M = {}
+M.floatData = {}
+
+function M.cleanConfig(config)
+    return {
+        relative = config.relative,
+        win = config.win,
+        anchor = config.anchor,
+        width = config.width,
+        height = config.height,
+        bufpos = config.bufpos,
+        row = config.row,
+        col = config.col,
+        focusable = config.focusable,
+        external = config.external,
+        zindex = config.zindex,
+        style = config.style,
+        border = config.border,
+        title = config.title,
+        title_pos = config.title_pos,
+    }
+end
+
+function M.changeWinHl(win, hl)
+    -- change the window hl
+    if hl ~= nil then
+        local temp = {}
+        for hn, hs in pairs(hl) do
+            table.insert(temp, hn .. ":" .. hs)
+        end
+        vim.api.nvim_win_set_option(win, "winhl", table.concat(temp, ","))
+    end
+end
+
+function M.updateFloat(win, config)
+    vim.api.nvim_win_set_config(win, M.cleanConfig(config))
+end
 
 --[[
 config is just normal vim.api.nvim_open_win() opts with a few extra
@@ -12,34 +48,11 @@ config is just normal vim.api.nvim_open_win() opts with a few extra
         -- etc
     }
     titleFunc = function() end -- function to generate title
-    keymap = {
-        moveUp = "",
-        moveDown = "",
-        moveLeft = "",
-        moveRight = "",
-        decHeight = "<S-Up>",
-        incHeight = "<S-Down>",
-        decWidth = "<S-Left>",
-        incWidth = "<S-Right>",
-    }
 }
-
 --]]
 function M.createFloat(config)
     local col = 0
     local row = 0
-
-    -- clean non window base option
-    local highlight = config.highlights or nil
-    local position = config.position or nil
-    local titleFunc = config.titleFunc or nil
-    local keymap = config.keymap or nil
-    local title = config.title
-
-    config.highlights = nil
-    config.position = nil
-    config.titleFunc = nil
-    config.keymap = nil
 
     local container = config.relative == "editor" and vim.api.nvim_list_uis()[1]
         or config.relative == "win"
@@ -49,96 +62,95 @@ function M.createFloat(config)
             }
 
     -- postion it if a postion is set
-    if position == "center" then
+    if config.position == "center" then
         col = (container.width / 2) - (config.width / 2)
         row = (container.height / 2) - (config.height / 2)
     end
 
     config.col = col
     config.row = row
+    config.container = container
 
     -- make the window and buffer
     local buf = vim.api.nvim_create_buf(false, true)
-    local win = vim.api.nvim_open_win(buf, true, config)
+    -- pass in all the relevant info cus i can't be bother to clean it
+    local win = vim.api.nvim_open_win(buf, true, M.cleanConfig(config))
 
-    -- change the window hl
-    if highlight ~= nil then
-        for hn, hs in pairs(highlight) do
-            vim.api.nvim_win_set_option(win, "winhl", hn .. ":" .. hs)
-        end
-    end
-
-    -- function to help reset the float window
-    local update = function()
-        vim.api.nvim_win_set_config(win, config)
-    end
+    -- change window hl group
+    M.changeWinHl(win, config.highlight)
 
     -- set the title and id so it easier to go to
     ---@diagnostic disable-next-line: need-check-nil
-    config.title = titleFunc == nil and "" .. title .. " / " .. vim.api.nvim_win_get_number(win) or titleFunc
-    update()
+    config.ogTitle = config.title
+    config.title = config.titleFunc == nil and vim.api.nvim_win_get_number(win) .. ": " .. config.ogTitle
+        or config.titleFunc
+    M.updateFloat(win, config)
 
-    if keymap == nil then
-        keymap = {
-            moveUp = "<C-Up>",
-            moveDown = "<C-Down>",
-            moveLeft = "<C-Left>",
-            moveRight = "<C-Right>",
-            decHeight = "<S-Up>",
-            incHeight = "<S-Down>",
-            decWidth = "<S-Left>",
-            incWidth = "<S-Right>",
-        }
-    end
-
-    -- keymap to move float window
-    utils.setKey("n", keymap.moveUp or "<C-Up>", function()
-        config.row = math.clamp(config.row - 1, 0, container.height)
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.moveDown or "<C-Down>", function()
-        config.row = math.clamp(config.row + 1, 0, container.height)
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.moveLeft or "<C-Left>", function()
-        config.col = math.clamp(config.col - 1, 0, container.width)
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.moveRight or "<C-Right>", function()
-        config.col = math.clamp(config.col + 1, 0, container.width)
-        update()
-    end, { buffer = buf, remap = true })
-
-    -- keymap to scale float window
-    utils.setKey("n", keymap.decHeight or "<S-Up>", function()
-        config.height = config.height - 1
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.incHeight or "<S-Down>", function()
-        config.height = config.height + 1
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.decWidth or "<S-Left>", function()
-        config.width = config.width - 1
-        update()
-    end, { buffer = buf, remap = true })
-    utils.setKey("n", keymap.incWidth or "<S-Right>", function()
-        config.width = config.width + 1
-        update()
-    end, { buffer = buf, remap = true })
-
-    -- auto cmd to update window id
-    utils.createAutocmd("WinEnter", {
-        buffer = buf,
-        callback = function()
-            config.title = titleFunc == nil and "" .. title .. " / " .. vim.api.nvim_win_get_number(win)
-                ---@diagnostic disable-next-line: need-check-nil
-                or titleFunc()
-            update()
-        end,
-    })
+    M.floatData[vim.fn.win_getid()] = config
 
     return { win = win, buf = buf }
 end
 
+function M.moveFloat(win, direction, amount)
+    local config = M.floatData[win]
+    -- calculate the amount base on which direction and moveCount
+    amount = (amount or config.moveCount or 1)
+        * (
+            (direction == "up" or direction == "left") and -1
+            or (direction == "down" or direction == "right") and 1
+            or 0
+        )
+    -- helper function instead of typing ternary hell
+    local function checkDir(ifX, ifY)
+        return (direction == "left" or direction == "right") and ifX
+            or (direction == "up" or direction == "down") and ifY
+            or ""
+    end
+    config[checkDir("col", "row")] = math.clamp(
+        config[checkDir("col", "row")] + amount,
+        0,
+        config.container[checkDir("width", "height")] - config[checkDir("width", "height")]
+    )
+    M.updateFloat(win, config)
+end
+
+function M.resizeFloat(win, opt)
+    local config = M.floatData[win]
+    if opt.width and opt.height then
+        config.width = opt.width
+        config.height = opt.height
+    else
+        local amount = (opt.amount or config.shiftCount or 1)
+            * (
+                (opt.direction == "up" or opt.direction == "left") and -1
+                or (opt.direction == "down" or opt.direction == "right") and 1
+                or 0
+            )
+        local temp = (
+            (opt.direction == "left" or opt.direction == "right") and "width"
+            or (opt.direction == "up" or opt.direction == "down") and "height"
+            or ""
+        )
+
+        config[temp] = math.clamp(config[temp] + amount, 1, config.container[temp] - 2)
+    end
+    M.updateFloat(win, config)
+end
+
+M.augroup = utils.createAugroup("stickyNote", {})
+
+utils.createAutocmd({ "WinNew", "WinEnter", "WinClosed" }, {
+    pattern = "*",
+    group = M.augroup,
+    callback = function(data)
+        if data.event == "WinClosed" then
+            M.floatData[tonumber(data.match)] = nil
+        end
+        for win, config in pairs(M.floatData) do
+            config.title = config.titleFunc == nil and vim.api.nvim_win_get_number(win) .. ": " .. config.ogTitle
+                or config.titleFunc
+            M.updateFloat(win, config)
+        end
+    end,
+})
 return M
