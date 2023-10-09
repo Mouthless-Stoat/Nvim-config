@@ -40,6 +40,9 @@ vim.o.cursorlineopt = "number"
 
 vim.o.conceallevel = 2
 
+vim.o.list = true
+vim.o.listchars = "multispace:·"
+
 -- highlight yanked text
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
