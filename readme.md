@@ -14,6 +14,6 @@ Todo:
 -   [ ] Add in a file tree
 -   [ ] Clean some config code up (separate them into module)
 -   [ ] Pin alt file so it don't get replace
--   [ ] Better move line
--   [ ] Sticky note
+-   [x] Better move line
+-   [x] Sticky note
 -   [ ] Submode with hydra
