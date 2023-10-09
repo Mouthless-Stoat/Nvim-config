@@ -10,10 +10,12 @@ return {
         -- Additional lua configuration, makes nvim stuff amazing!
         "folke/neodev.nvim",
 
-        -- Auto complete
+        -- Auto complete and source
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lsp-signature-help",
+        "hrsh7th/cmp-cmdline",
+        "FelipeLema/cmp-async-path",
 
         -- snippet engine for  autocomplete
         "L3MON4D3/LuaSnip",
@@ -122,10 +124,15 @@ return {
                 ["<Down>"] = cmp.mapping.select_next_item(),
                 ["<Up>"] = cmp.mapping.select_prev_item(),
                 ["<C-Space>"] = cmp.mapping(function(fallback) -- if the menu is not open open it, else close it
+                    if not cmp.visible() then
+                        cmp.complete({})
+                    else
+                        fallback()
+                    end
+                end),
+                ["<esc>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.close()
-                    elseif not cmp.visible() then
-                        cmp.complete({})
                     else
                         fallback()
                     end
@@ -167,6 +174,18 @@ return {
                     })[entry.source.name]
                     return vim_item
                 end,
+            },
+        })
+
+        cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline({
+                ["<Tab>"] = {
+                    c = cmp.mapping.confirm({ select = true }),
+                },
+            }),
+            sources = {
+                { name = "async_path" },
+                { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } },
             },
         })
 
