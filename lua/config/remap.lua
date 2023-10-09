@@ -43,12 +43,6 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
--- move line command
-utils.setKey({ "n", "i" }, "<a-Up>", "<esc><cmd>m .-2<cr>==") -- cus <esc> in normal mode do nothing we can combine the command
-utils.setKey({ "n", "i" }, "<a-Down>", "<esc><cmd>m .+1<cr>==")
-utils.setKey("v", "<a-Up>", ":m '<-2<cr>gv=gv")
-utils.setKey("v", "<a-Down>", ":m '>+1<cr>gv=gv")
-
 utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
 utils.setKey("n", "<c-a>", "<c-^>", {})
 
