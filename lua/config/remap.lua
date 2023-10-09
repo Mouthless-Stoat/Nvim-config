@@ -18,8 +18,8 @@ utils.setKey("v", "/", "/\\%V")
 utils.setKey("v", "\\", "/")
 
 -- make scrolling eaiser to follow
-utils.setKey("n", "<c-d>", "<c-d>zz", {})
-utils.setKey("n", "<c-u>", "<c-u>zz", {})
+utils.setKey("n", "<C-d>", "<C-d>zz", {})
+utils.setKey("n", "<C-u>", "<C-u>zz", {})
 
 -- keep current group selected when shifting
 utils.setKey("v", ">", ">gv", {})
@@ -43,15 +43,15 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
-utils.setKey("n", "<c-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "<c-a>", "<c-^>", {})
+utils.setKey("n", "<C-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "<C-a>", "<C-^>", {})
 
 -- make a terminal toggle window
 window.createWindowBind({
     name = "terminal",
     windowName = "Terminal",
     toggle = {
-        key = "<c-`>",
+        key = "<C-`>",
         mode = { "n", "t" },
         description = "Toggle Terminal Window",
         type = "cmd",
@@ -71,7 +71,7 @@ window.createWindowBind({
     },
 })
 
-utils.setKey("n", "<c-b>", function()
+utils.setKey("n", "<C-b>", function()
     if vim.fn.bufexists(vim.g.treeBufferId) == 0 then
         vim.cmd("top 40vs")
         vim.cmd.e(".")
@@ -87,7 +87,7 @@ utils.setKey("n", "<c-b>", function()
         end
         vim.cmd.close()
     end
-end) -- set <c-b> to open the file tree to the right
+end) -- set <C-b> to open the file tree to the right
 
 -- Window control keybind
 utils.setKey("n", "<leader>ws", function()
@@ -119,25 +119,25 @@ utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new [w]
 utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
 
 -- move between window
-utils.setKey("n", "<leader>ww", "<c-w>w", { desc = "switch [[w]]indow" })
+utils.setKey("n", "<leader>ww", "<C-w>w", { desc = "switch [[w]]indow" })
 
 -- faster switching
-utils.setKey("n", "<c-1>", "1<c-w>w", { desc = "go to [w]indow [1]" })
-utils.setKey("n", "<c-2>", "2<c-w>w", { desc = "go to [w]indow [2]" })
-utils.setKey("n", "<c-3>", "3<c-w>w", { desc = "go to [w]indow [3]" })
-utils.setKey("n", "<c-4>", "4<c-w>w", { desc = "go to [w]indow [4]" })
-utils.setKey("n", "<c-5>", "5<c-w>w", { desc = "go to [w]indow [5]" })
-utils.setKey("n", "<c-6>", "6<c-w>w", { desc = "go to [w]indow [6]" })
-utils.setKey("n", "<c-7>", "7<c-w>w", { desc = "go to [w]indow [7]" })
-utils.setKey("n", "<c-8>", "8<c-w>w", { desc = "go to [w]indow [8]" })
-utils.setKey("n", "<c-9>", "9<c-w>w", { desc = "go to [w]indow [9]" })
+utils.setKey("n", "<C-1>", "1<C-w>w", { desc = "go to [w]indow [1]" })
+utils.setKey("n", "<C-2>", "2<C-w>w", { desc = "go to [w]indow [2]" })
+utils.setKey("n", "<C-3>", "3<C-w>w", { desc = "go to [w]indow [3]" })
+utils.setKey("n", "<C-4>", "4<C-w>w", { desc = "go to [w]indow [4]" })
+utils.setKey("n", "<C-5>", "5<C-w>w", { desc = "go to [w]indow [5]" })
+utils.setKey("n", "<C-6>", "6<C-w>w", { desc = "go to [w]indow [6]" })
+utils.setKey("n", "<C-7>", "7<C-w>w", { desc = "go to [w]indow [7]" })
+utils.setKey("n", "<C-8>", "8<C-w>w", { desc = "go to [w]indow [8]" })
+utils.setKey("n", "<C-9>", "9<C-w>w", { desc = "go to [w]indow [9]" })
 
 -- manipulating window
 utils.setKey("n", "<s-Up>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>-", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>-", true, false, true), "t", false)
     else
         float.resizeFloat(win, { direction = "up" })
     end
@@ -146,7 +146,7 @@ utils.setKey("n", "<s-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>+", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>+", true, false, true), "t", false)
     else
         float.resizeFloat(win, { direction = "down" })
     end
@@ -155,7 +155,7 @@ utils.setKey("n", "<s-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w>>", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>>", true, false, true), "t", false)
     else
         float.resizeFloat(win, { direction = "left" })
     end
@@ -164,44 +164,44 @@ utils.setKey("n", "<s-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><", true, false, true), "t", false)
     else
         float.resizeFloat(win, { direction = "right" })
     end
 end)
 
-utils.setKey("n", "<c-Up>", function()
+utils.setKey("n", "<C-Up>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Up>", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Up>", true, false, true), "t", false)
     else
         float.moveFloat(win, "up")
     end
 end, { desc = "switch to up window" })
-utils.setKey("n", "<c-Down>", function()
+utils.setKey("n", "<C-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Down>", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Down>", true, false, true), "t", false)
     else
         float.moveFloat(win, "down")
     end
 end, { desc = "switch to down window" })
-utils.setKey("n", "<c-Left>", function()
+utils.setKey("n", "<C-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Left>", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Left>", true, false, true), "t", false)
     else
         float.moveFloat(win, "left")
     end
 end, { desc = "switch to left window" })
-utils.setKey("n", "<c-Right>", function()
+utils.setKey("n", "<C-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<c-w><Right>", true, false, true), "t", false)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Right>", true, false, true), "t", false)
     else
         float.moveFloat(win, "right")
     end

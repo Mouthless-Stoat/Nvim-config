@@ -1,11 +1,11 @@
 local utils = require("helper.utils")
 
 -- remap
-utils.setKey("n", "<c-=>", function()
+utils.setKey("n", "<C-=>", function()
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
     print(vim.g.neovide_scale_factor)
 end)
-utils.setKey("n", "<c-->", function()
+utils.setKey("n", "<C-->", function()
     if vim.g.neovide_scale_factor > 0.5 then
         vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
     end

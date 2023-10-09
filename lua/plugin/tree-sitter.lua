@@ -21,8 +21,8 @@ return {
                 enable = true,
                 keymaps = {
                     init_selection = "gs", -- set to `false` to disable one of the mappings
-                    node_incremental = "<c-=>",
-                    node_decremental = "<c-->",
+                    node_incremental = "<C-=>",
+                    node_decremental = "<C-->",
                     scope_incremental = false,
                 },
             },
