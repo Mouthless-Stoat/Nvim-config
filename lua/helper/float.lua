@@ -54,12 +54,14 @@ function M.createFloat(config)
     local col = 0
     local row = 0
 
-    local container = config.relative == "editor" and vim.api.nvim_list_uis()[1]
-        or config.relative == "win"
-            and {
-                width = vim.api.nvim_win_get_width(config.win or 0),
-                height = vim.api.nvim_win_get_height(config.win or 0),
-            }
+    local container = (
+        config.relative == "editor" and vim.api.nvim_list_uis()[1]
+        or config.relative == "win" and {
+            width = vim.api.nvim_win_get_width(config.win or 0),
+            height = vim.api.nvim_win_get_height(config.win or 0),
+        }
+        or {}
+    )
 
     -- postion it if a postion is set
     if config.position == "center" then
