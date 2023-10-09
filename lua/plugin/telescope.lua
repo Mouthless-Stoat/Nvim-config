@@ -20,12 +20,11 @@ return {
             "<cmd>Telescope jumplist<cr>",
             desc = "[s]earch cursor [j]ump list",
         },
-        { "<Leader>sR", "<cmd>Telescope registers<cr>", desc = "[s]earch [R]egisters" },
+        { "<Leader>sR", "<cmd>Telescope registers<cr>", desc = "[s]earch [r]egisters" },
         { "<Leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[s]earch [k]eymaps" },
         { "<Leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[s]earch [d]iagnostics" },
-        { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "[r]ecent file list" },
-        { "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "[b]uffers list" },
-        { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[m]arks list" },
+        { "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "[s]earch [b]uffers list" },
+        { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[s]earch [m]arks list" },
 
         -- git stuff
         { "<leader>gS", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
