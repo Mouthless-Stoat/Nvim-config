@@ -110,7 +110,6 @@ return {
             TypeParameter = "",
         }
         cmp.setup({
-            completion = { completeopt = "menu,menuone,noinsert" },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
@@ -178,10 +177,18 @@ return {
         })
 
         cmp.setup.cmdline(":", {
+            completion = { autocomplete = false },
             mapping = cmp.mapping.preset.cmdline({
-                ["<Tab>"] = {
-                    c = cmp.mapping.confirm({ select = true }),
-                },
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    vim.print(cmp.visible())
+                    if cmp.visible() then
+                        cmp.confirm()
+                    elseif not cmp.visible() then
+                        cmp.complete({})
+                    else
+                        fallback()
+                    end
+                end),
             }),
             sources = {
                 { name = "async_path" },
