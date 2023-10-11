@@ -243,6 +243,11 @@ return {
                 return vim.api.nvim_win_get_width(0) <= hideWidth
             end
 
+            local function editorIsCramp(width)
+                width = width or hideWidth
+                return vim.api.nvim_list_uis()[1].width <= width
+            end
+
             local function winNum()
                 return vim.api.nvim_win_get_width(0) <= 90 and vim.fn.winnr() .. " / " .. vim.api.nvim_get_current_buf()
                     or "W: " .. vim.fn.winnr() .. " / B: " .. vim.api.nvim_get_current_buf()
@@ -369,7 +374,7 @@ return {
                             icon = "",
                             on_click = function()
                                 vim.api.nvim_feedkeys(
-                                    vim.api.nvim_replace_termcodes("<leader>sf", true, false, true),
+                                    vim.api.nvim_replace_termcodes("<Leader>sf", true, false, true),
                                     "t",
                                     false
                                 )
@@ -381,14 +386,14 @@ return {
                             '"Reg: " .. vim.v.register',
                             icon = "󱓥",
                             function(text)
-                                return isCramp() and vim.v.register or text
+                                return editorIsCramp() and vim.v.register or text
                             end,
                         },
                         {
                             '"Zoom: " .. vim.g.neovide_scale_factor',
                             icon = "󰍉",
                             function(text)
-                                return isCramp() and vim.g.neovide_scale_factor or text
+                                return editorIsCramp() and vim.g.neovide_scale_factor or text
                             end,
                         },
                     },
@@ -396,7 +401,7 @@ return {
                         {
                             function()
                                 local stats = require("lazy").stats()
-                                return isCramp() and stats.count .. "/" .. stats.loaded
+                                return editorIsCramp() and stats.count .. "/" .. stats.loaded
                                     or stats.count .. "/" .. stats.loaded .. " Plugins loaded"
                             end,
                             icon = "",
@@ -410,7 +415,7 @@ return {
                             style = "%a, %b %d | %I:%M:%S %p",
                             separator = { left = "" },
                             fmt = function(text)
-                                return isCramp() and "T" or text
+                                return editorIsCramp() and "T" or text
                             end,
                         },
                     },
@@ -433,6 +438,7 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         version = "2.20.8",
         opts = {
+            max_indent_increase = 1,
             char_blankline = "·",
             show_current_context = true,
             show_current_context_start = true,

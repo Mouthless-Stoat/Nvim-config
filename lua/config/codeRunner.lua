@@ -7,7 +7,7 @@ window.createWindowBind({
     name = "codeOutput",
     windowName = "out",
     toggle = {
-        key = "<leader>tc",
+        key = "<Leader>tc",
         mode = "n",
         description = "Open [c]ode runner output window",
         type = "cmd",

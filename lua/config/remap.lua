@@ -60,7 +60,7 @@ window.createWindowBind({
         afterCmd = "start",
     },
     reset = {
-        key = "<leader>tt",
+        key = "<Leader>tt",
         mode = "n",
         description = "[t]oggle [t]erminal reset",
         type = "func",
@@ -90,7 +90,7 @@ utils.setKey("n", "<C-b>", function()
 end) -- set <C-b> to open the file tree to the right
 
 -- Window control keybind
-utils.setKey("n", "<leader>ws", function()
+utils.setKey("n", "<Leader>ws", function()
     float.createFloat({
         relative = "editor",
         position = "center",
@@ -113,13 +113,13 @@ utils.setKey("n", "<leader>ws", function()
 end, { desc = "new [w]indow [s]ticky note" })
 
 -- make new window
-utils.setKey("n", "<leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
-utils.setKey("n", "<leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
-utils.setKey("n", "<leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
-utils.setKey("n", "<leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
+utils.setKey("n", "<Leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
+utils.setKey("n", "<Leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
+utils.setKey("n", "<Leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
+utils.setKey("n", "<Leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
 
 -- move between window
-utils.setKey("n", "<leader>ww", "<C-w>w", { desc = "switch [[w]]indow" })
+utils.setKey("n", "<Leader>ww", "<C-w>w", { desc = "switch [[w]]indow" })
 
 -- faster switching
 utils.setKey("n", "<C-1>", "1<C-w>w", { desc = "go to [w]indow [1]" })
@@ -133,7 +133,7 @@ utils.setKey("n", "<C-8>", "8<C-w>w", { desc = "go to [w]indow [8]" })
 utils.setKey("n", "<C-9>", "9<C-w>w", { desc = "go to [w]indow [9]" })
 
 -- manipulating window
-utils.setKey("n", "<s-Up>", function()
+utils.setKey("n", "<S-Up>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -142,7 +142,7 @@ utils.setKey("n", "<s-Up>", function()
         float.resizeFloat(win, { direction = "up" })
     end
 end)
-utils.setKey("n", "<s-Down>", function()
+utils.setKey("n", "<S-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -151,7 +151,7 @@ utils.setKey("n", "<s-Down>", function()
         float.resizeFloat(win, { direction = "down" })
     end
 end)
-utils.setKey("n", "<s-Left>", function()
+utils.setKey("n", "<S-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -160,7 +160,7 @@ utils.setKey("n", "<s-Left>", function()
         float.resizeFloat(win, { direction = "left" })
     end
 end)
-utils.setKey("n", "<s-Right>", function()
+utils.setKey("n", "<S-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -208,15 +208,15 @@ utils.setKey("n", "<C-Right>", function()
 end, { desc = "switch to right window" })
 
 -- common command
-utils.setKey("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
-utils.setKey("n", "<leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
+utils.setKey("n", "<Leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
+utils.setKey("n", "<Leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
+utils.setKey("n", "<Leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
 utils.setKey(
     "n",
-    "<leader>d",
+    "<Leader>d",
     "<cmd>lua vim.diagnostic.open_float()<cr>",
     { desc = "open floating [d]iagnostic window" }
 )
 
 -- file keymap
-utils.setKey("n", "<leader>fe", vim.cmd.Ex, { desc = "[f]ile [e]xplorer" })
+utils.setKey("n", "<Leader>fe", vim.cmd.Ex, { desc = "[f]ile [e]xplorer" })

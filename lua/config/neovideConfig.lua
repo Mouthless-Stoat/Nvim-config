@@ -11,7 +11,7 @@ utils.setKey("n", "<C-->", function()
     end
     print(vim.g.neovide_scale_factor)
 end)
-utils.setKey("n", "<leader>z", function()
+utils.setKey("n", "<Leader>z", function()
     vim.ui.input({ prompt = "Enter new size: " }, function(input)
         local num = tonumber(input)
         if num < 0.5 then

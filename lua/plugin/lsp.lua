@@ -51,13 +51,13 @@ return {
 
                 vim.keymap.set(modeToPut, keys, func, { buffer = bufnr, desc = desc })
             end
-            nmap("<leader>c", vim.lsp.buf.code_action, "[c]ode actions")
+            nmap("<Leader>c", vim.lsp.buf.code_action, "[c]ode actions")
 
             nmap("gd", vim.lsp.buf.definition, "[g]oto [d]efinition")
             nmap("gr", "<cmd>Telescope lsp_references<cr>", "[g]oto [r]eferences")
             nmap("gi", vim.lsp.buf.implementation, "[g]oto [i]mplementation")
             nmap("gt", vim.lsp.buf.type_definition, "[g]oto [t]ype definition")
-            nmap("<leader>ss", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[s]earch [s]ymbols")
+            nmap("<Leader>ss", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[s]earch [s]ymbols")
             nmap("<F2>", vim.lsp.buf.rename, "[r]ename symbol")
 
             -- See `:help K` for why this keymap

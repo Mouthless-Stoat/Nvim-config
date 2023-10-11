@@ -10,17 +10,17 @@ return {
             replace_cmd = { map = "<Nop>" },
             send_to_qf = { map = "<Nop>" },
             show_option_menu = {
-                map = "<leader>So",
+                map = "<Leader>So",
                 cmd = "<cmd>lua require('spectre').show_options()<CR>",
                 desc = "[S]pectre [o]ptions",
             },
             run_current_replace = {
-                map = "<leader>Sr",
+                map = "<Leader>Sr",
                 cmd = "<cmd>lua require('spectre.actions').run_current_replace()<CR>",
                 desc = "[S]pectre [r]eplace current line",
             },
             run_replace = {
-                map = "<leader>SR",
+                map = "<Leader>SR",
                 cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>",
                 desc = "[S]pectre [R]eplace all",
             },
@@ -28,34 +28,35 @@ return {
             change_replace_sed = { map = "<Nop>" },
             change_replace_oxi = { map = "<Nop>" },
             toggle_ignore_case = {
-                map = "<leader>Sc",
+                map = "<Leader>Sc",
                 cmd = "<cmd>lua require('spectre').change_options('ignore-case')<CR>",
                 desc = "[S]pectre toggle ignore [c]ase",
             },
             toggle_live_update = {
-                map = "<leader>Su",
+                map = "<Leader>Su",
                 cmd = "<cmd>lua require('spectre').toggle_live_update()<CR>",
                 desc = "[S]pectre toggle live [u]pdate",
             },
             resume_last_search = {
-                map = "<leader>Sl",
+                map = "<Leader>Sl",
                 cmd = "<cmd>lua require('spectre').resume_last_search()<CR>",
                 desc = "[S]pectre resume [l]ast search",
             },
 
             toggleSpectre = {
-                map = "<leader>SS",
+                map = "<C-s>",
                 cmd = "<cmd>lua require('spectre').toggle()<CR>",
+                desc = "Toggle Spectre",
             },
         },
     },
     keys = {
         {
-            "<leader>S",
+            "<Leader>S",
             function()
                 require("spectre").toggle()
             end,
-            desc = "Replace in files (Spectre)",
+            desc = "Toggle [S]pectre",
         },
     },
 }

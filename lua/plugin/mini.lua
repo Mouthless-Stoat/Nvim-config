@@ -26,5 +26,6 @@ return {
                 reindent_lineise = true,
             },
         },
+        event = { "BufReadPost", "BufNewFile" },
     },
 }

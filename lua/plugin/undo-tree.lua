@@ -2,7 +2,7 @@ return {
     "mbbill/undotree",
     keys = {
         {
-            "<leader>u",
+            "<Leader>u",
             function()
                 vim.cmd.UndotreeToggle()
                 vim.o.number = true

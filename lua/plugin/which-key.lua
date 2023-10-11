@@ -4,14 +4,14 @@ return {
     opts = {
         -- create group
         defaults = {
-            ["<leader>s"] = { name = "[s]earch" },
-            ["<leader>q"] = { name = "[q]uit" },
-            ["<leader>G"] = { name = "[G]oto" },
-            ["<leader>g"] = { name = "[g]it" },
-            ["<leader>gh"] = { name = "[h]unk" },
-            ["<leader>f"] = { name = "[f]iles" },
-            ["<leader>w"] = { name = "[w]indow" },
-            ["<leader>t"] = { name = "[t]oggle window" },
+            ["<Leader>s"] = { name = "[s]earch" },
+            ["<Leader>q"] = { name = "[q]uit" },
+            ["<Leader>G"] = { name = "[G]oto" },
+            ["<Leader>g"] = { name = "[g]it" },
+            ["<Leader>f"] = { name = "[f]iles" },
+            ["<Leader>w"] = { name = "[w]indow" },
+            ["<Leader>t"] = { name = "[t]oggle window" },
+            ["<Leader>gh"] = { name = "[h]unk" },
         },
 
         icons = {

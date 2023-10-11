@@ -16,7 +16,7 @@ vim.o.rnu = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- replace tab with space and set shift width(using the >> command) to use 4 space as well
+-- replace tab with space and set shift width(using the > command) to use 4 space as well
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
@@ -37,8 +37,6 @@ vim.g.netrw_liststyle = 3 -- default netrw to the tree view
 
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
-
-vim.o.conceallevel = 2
 
 vim.o.list = true
 vim.o.listchars = "multispace:·"

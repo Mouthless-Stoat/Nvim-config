@@ -46,7 +46,7 @@ local function genAnchorCommand(anchor)
 end
 for _, anchor in ipairs(anchors) do
     local command = genAnchorCommand(anchor)
-    utils.setKey("n", "<leader>G" .. anchor.key, command, { desc = anchor.desc })
+    utils.setKey("n", "<Leader>G" .. anchor.key, command, { desc = anchor.desc })
 end
 
 return {

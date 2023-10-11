@@ -23,12 +23,13 @@ return {
         { "<Leader>sR", "<cmd>Telescope registers<cr>", desc = "[s]earch [r]egisters" },
         { "<Leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[s]earch [k]eymaps" },
         { "<Leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[s]earch [d]iagnostics" },
-        { "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "[s]earch [b]uffers list" },
-        { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[s]earch [m]arks list" },
+        { "<Leader>sb", "<cmd>Telescope buffers<cr>", desc = "[s]earch [b]uffers list" },
+        { "<Leader>sb", "<cmd>Telescope oldfiles<cr>", desc = "[s]earch [b]uffers list" },
+        { "<Leader>sm", "<cmd>Telescope marks<cr>", desc = "[s]earch [m]arks list" },
 
         -- git stuff
-        { "<leader>gS", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
-        { "<leader>gl", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [l]ogs" },
+        { "<Leader>gS", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
+        { "<Leader>gl", "<cmd>Telescope git_commits<cr>", desc = "[g]it commit [l]ogs" },
     },
     opts = {
         defaults = {
