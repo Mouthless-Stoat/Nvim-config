@@ -273,6 +273,10 @@ return {
                 return "LOC: " .. vim.fn.line("$")
             end
 
+            local function lineLength()
+                return "LEN: " .. #vim.fn.getline("."):gsub("^%s*(.-)%s*$", "%1") .. "/" .. #vim.fn.getline(".")
+            end
+
             local function nvimVer()
                 local version = vim.version()
                 return "NVIM v" .. version.major .. "." .. version.minor .. "." .. version.patch
@@ -326,7 +330,11 @@ return {
                             fmt = hide(),
                         },
                     },
-                    lualine_c = fancyFileName,
+                    lualine_c = {
+                        { lineLength, icon = "", fmt = hide() },
+                        { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
+                        "filename",
+                    },
                     lualine_x = { "diagnostics", { "filesize", icon = "" } },
                     lualine_y = {
                         { countLoc, icon = "", fmt = hide() },
@@ -751,7 +759,7 @@ return {
             require("alpha").setup(dashboard.config)
 
             vim.api.nvim_create_autocmd("User", {
-                pattern = "LazyVimStarted",
+                pattern = "VeryLazy",
                 callback = function()
                     local stats = require("lazy").stats()
                     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
