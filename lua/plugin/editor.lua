@@ -160,6 +160,20 @@ return {
                     ["dashShortcutTer"] = { fg = "$blue", fmt = "bold" },
                     ["dashShortcut"] = { fg = "$yellow", fmt = "bold,italic" },
                     ["dashFooter"] = { fg = "$purple", fmt = "bold" },
+
+                    -- telescope color
+                    ["TelescopeTitle"] = { fg = "$red", fmt = "inverse" },
+                    ["TelescopePromptTitle"] = { fg = "$purple", fmt = "inverse" },
+                    ["TelescopePromptBorder"] = { fg = "$bg3", bg = "$bg3" },
+                    ["TelescopePromptNormal"] = { fg = "$blue", bg = "$bg3" },
+
+                    ["TelescopeResultsTitle"] = { fg = "$yellow", fmt = "inverse" },
+                    ["TelescopeResultsBorder"] = { fg = "$bg2", bg = "$bg2" },
+                    ["TelescopeResultsNormal"] = { fg = "$fg", bg = "$bg2" },
+
+                    ["TelescopePreviewTitle"] = { fg = "$green", fmt = "inverse" },
+                    ["TelescopePreviewBorder"] = { fg = "$bg1", bg = "$bg1" },
+                    ["TelescopePreviewNormal"] = { fg = "$fg", bg = "$bg1" },
                 },
             })
             require("onedark").load()
@@ -315,6 +329,7 @@ return {
                     component_separators = { left = "\\", right = "/" },
                     section_separators = { left = "", right = "" },
                     theme = customOneDark,
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_a = { modeIcon, "mode" },
@@ -365,13 +380,6 @@ return {
                         },
                         "location",
                     },
-                },
-                inactive_sections = {
-                    lualine_a = fancyFileName,
-                    lualine_b = {},
-                    lualine_c = {},
-                    lualine_x = {},
-                    lualine_z = { "location" },
                 },
                 tabline = {
                     lualine_a = { { nvimVer, icon = "", separator = { right = "" } } },
@@ -434,6 +442,7 @@ return {
                     lualine_z = { { winNum, icon = "󰻾" } },
                 },
                 inactive_winbar = {
+                    lualine_a = fancyFileName,
                     lualine_z = { { winNum, icon = "󰻾" } },
                     lualine_y = { { winSize, icon = "󰗆" } },
                 },

@@ -26,6 +26,7 @@ return {
         { "<Leader>sb", "<cmd>Telescope buffers<cr>", desc = "[s]earch [b]uffers list" },
         { "<Leader>sb", "<cmd>Telescope oldfiles<cr>", desc = "[s]earch [b]uffers list" },
         { "<Leader>sm", "<cmd>Telescope marks<cr>", desc = "[s]earch [m]arks list" },
+        { "<Leader>sh", "<cmd>Telescope highlights<cr>", desc = "[s]earch [h]ighlight list" },
 
         -- git stuff
         { "<Leader>gS", "<cmd>Telescope git_status<cr>", desc = "[g]it status" },
@@ -37,7 +38,7 @@ return {
             layout_strategy = "horizontal",
             layout_config = {
                 horizontal = {
-                    width = 0.99,
+                    width = 0.8,
                 },
             },
             path_display = { "truncate", truncate = 5 },
@@ -52,6 +53,8 @@ return {
                 "%.exe",
                 "%.pyc",
             },
+            prompt_prefix = "  ",
+            selection_caret = "▷ ",
         },
         pickers = {
             find_files = {
