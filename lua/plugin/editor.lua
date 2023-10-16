@@ -15,6 +15,8 @@ return {
 
                     brown = "#85441c",
                     pink = "#de52c0",
+                    darkPink = "#8c1974",
+                    darkerPink = "#3b0c31",
 
                     -- extra dark color
                     darkBlue = "#0c1b59",
@@ -55,6 +57,8 @@ return {
                     ["notepadNormal"] = { fg = "$bg0", bg = "$yellow" },
                     ["notepadBorder"] = { fg = "$orange" },
                     ["notepadTitle"] = { fg = "$orange" },
+
+                    ["WinSeparator"] = { fg = "$blue", fmt = "bold" }, -- win sep color
 
                     -- lualine progress color
                     ["progressHl1"] = { fg = "$red" },
@@ -162,7 +166,8 @@ return {
                     ["dashFooter"] = { fg = "$purple", fmt = "bold" },
 
                     -- telescope color
-                    ["TelescopeTitle"] = { fg = "$red", fmt = "inverse" },
+                    ["TelescopeSelection"] = { fg = "$blue", bg = "$bg3" },
+
                     ["TelescopePromptTitle"] = { fg = "$purple", fmt = "inverse" },
                     ["TelescopePromptBorder"] = { fg = "$bg3", bg = "$bg3" },
                     ["TelescopePromptNormal"] = { fg = "$blue", bg = "$bg3" },
@@ -190,12 +195,16 @@ return {
                 callback = function()
                     if mode.isNormal() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.blue })
+                        vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.blue, bold = true })
                     elseif mode.isInsert() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.green })
+                        vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.green, bold = true })
                     elseif mode.isVisual() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.purple })
+                        vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.purple, bold = true })
                     elseif mode.isReplace() then
                         vim.api.nvim_set_hl(0, "CursorLineNr", { fg = colors.red })
+                        vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.red, bold = true })
                     end
                 end,
             }) -- format when save
@@ -347,7 +356,7 @@ return {
                     },
                     lualine_c = {
                         { lineLength, icon = "", fmt = hide() },
-                        { "filetype", colored = true, icon_only = true, icon = { align = "right" } },
+                        { "filetype", colored = true, icon_only = true, icon = { align = "right" }, separator = "" },
                         "filename",
                     },
                     lualine_x = { "diagnostics", { "filesize", icon = "" } },
@@ -456,7 +465,7 @@ return {
         version = "2.20.8",
         opts = {
             max_indent_increase = 1,
-            char_blankline = "·",
+            char_blankline = "∙",
             show_current_context = true,
             show_current_context_start = true,
             char_highlight_list = {
