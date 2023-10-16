@@ -11,15 +11,14 @@ return {
         },
     },
     keys = {
+        -- commonly used command
         { "<Leader>sf", "<cmd>Telescope find_files no_ignore=true<cr>", desc = "[s]earch [f]iles" },
         { "<Leader>sF", "<cmd>Telescope find_files no_ignore=true hidden=true<cr>", desc = "[s]earch hidden [F]iles" },
         { "<Leader>st", "<cmd>Telescope live_grep no_ignore=true<cr>", desc = "[s]earch [t]ext" },
         { "<Leader>sT", "<cmd>Telescope live_grep no_ignore=true hidden=true<cr>", desc = "[s]earch hidden [T]ext" },
-        {
-            "<Leader>sj",
-            "<cmd>Telescope jumplist<cr>",
-            desc = "[s]earch cursor [j]ump list",
-        },
+
+        -- other less use command
+        { "<Leader>sj", "<cmd>Telescope jumplist<cr>", desc = "[s]earch cursor [j]ump list" },
         { "<Leader>sR", "<cmd>Telescope registers<cr>", desc = "[s]earch [r]egisters" },
         { "<Leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[s]earch [k]eymaps" },
         { "<Leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[s]earch [d]iagnostics" },
