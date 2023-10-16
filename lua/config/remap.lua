@@ -10,7 +10,7 @@ utils.delKey("n", "Y")
 
 -- remap default funtion
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
-utils.setKey("n", "x", '"_x') -- but x content into void cus why?????
+utils.setKey("n", "x", '"_x') -- put x content into void cus why?????
 utils.setKey("n", "Q", "<nop>", {}) -- me and the bois hate Q
 
 -- remap so easier search in v mode
@@ -44,7 +44,7 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
 utils.setKey("n", "<C-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
-utils.setKey("n", "<C-a>", "<C-^>", {})
+utils.setKey("n", "<C-Tab>", "<C-^>", {})
 
 -- make a terminal toggle window
 window.createWindowBind({
