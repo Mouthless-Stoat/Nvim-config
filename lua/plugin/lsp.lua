@@ -110,6 +110,7 @@ return {
             TypeParameter = "",
         }
         cmp.setup({
+            completion = { completeopt = "menu,menuone,noinsert" },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
@@ -178,7 +179,7 @@ return {
         })
 
         cmp.setup.cmdline(":", {
-            completion = { autocomplete = false },
+            completion = { autocomplete = false, completeopt = "menu,menuone,noinsert" },
             mapping = cmp.mapping.preset.cmdline({
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     vim.print(cmp.visible())
