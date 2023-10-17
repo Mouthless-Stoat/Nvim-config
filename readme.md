@@ -17,3 +17,5 @@ Todo:
 -   [x] Better move line
 -   [x] Sticky note
 -   [ ] Submode with hydra
+-   [ ] Configure hop
+-   [ ] Make my own version of eyeliner to have more control
