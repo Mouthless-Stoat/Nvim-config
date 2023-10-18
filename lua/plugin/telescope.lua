@@ -23,7 +23,7 @@ return {
         { "<Leader>sk", "<cmd>Telescope keymaps<cr>", desc = "[s]earch [k]eymaps" },
         { "<Leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[s]earch [d]iagnostics" },
         { "<Leader>sb", "<cmd>Telescope buffers<cr>", desc = "[s]earch [b]uffers list" },
-        { "<Leader>sb", "<cmd>Telescope oldfiles<cr>", desc = "[s]earch [b]uffers list" },
+        { "<Leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "[s]earch [r]ecent file" },
         { "<Leader>sm", "<cmd>Telescope marks<cr>", desc = "[s]earch [m]arks list" },
         { "<Leader>sh", "<cmd>Telescope highlights<cr>", desc = "[s]earch [h]ighlight list" },
 
