@@ -5,7 +5,7 @@ return {
             mappings = { comment_line = "gcc" },
             options = { ignore_blank_line = true },
         },
-        keys = { "gc" },
+        keys = { { "gc", mode = "" } },
     },
     {
         "echasnovski/mini.move",
