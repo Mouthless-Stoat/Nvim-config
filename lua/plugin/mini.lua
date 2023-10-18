@@ -5,7 +5,7 @@ return {
             mappings = { comment_line = "gcc" },
             options = { ignore_blank_line = true },
         },
-        event = { "BufReadPost", "BufNewFile" },
+        keys = { "gc" },
     },
     {
         "echasnovski/mini.move",
@@ -26,6 +26,6 @@ return {
                 reindent_lineise = true,
             },
         },
-        event = { "BufReadPost", "BufNewFile" },
+        keys = { "<M-Up>", "<M-Down>", "<M-Left>", "<M-Right>" },
     },
 }
