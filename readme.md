@@ -1,10 +1,10 @@
 # Stoat's Nvim config
 
-My nvim config
+`lua/config` contain default nvim config (those define with `vim.o` and `vim.opt`). Autocmd and User command are also define in there.
 
-Nvim default config is in `lua/config`<br>
-`lazyMain` is where `lazy.nvim` is init<br>
-plugin config and setting is in `lua/plugin`
+`lua/helper` contain helper and utils function. Some of my own "plugin" are in here
+
+`lua/plugin` contain all plugin config and spec.
 
 Todo:
 
