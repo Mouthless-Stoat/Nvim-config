@@ -39,7 +39,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
 vim.opt.list = true
-vim.opt.listchars = { multispace = "·", tab = " " }
+vim.opt.listchars = { multispace = "·", tab = ">-" }
 
 -- highlight yanked text
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
