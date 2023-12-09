@@ -17,7 +17,6 @@ return {
                     ---@diagnostic disable-next-line: missing-parameter
                     require("hop").hint_words()
                 end,
-                desc = "[h]op [w]ord",
             },
             {
                 "<leader>h1",

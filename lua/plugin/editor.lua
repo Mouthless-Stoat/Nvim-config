@@ -38,10 +38,11 @@ return {
                     matchParen = "#003390",
                 },
                 highlights = {
-                    ["@lsp.type.variable"] = { fg = "$red" },
+                    ["@lsp.type.variable"] = { fg = "$red" }, -- variable
                     ["@variable"] = { fg = "$red" },
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
+                    ["@parameter"] = { fg = "$red", fmt = "italic" }, -- param
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
                     ColorColumn = { fg = "$red", bg = "$darkRed" },
@@ -179,6 +180,9 @@ return {
                     ["TelescopePreviewTitle"] = { fg = "$green", fmt = "inverse" },
                     ["TelescopePreviewBorder"] = { fg = "$bg1", bg = "$bg1" },
                     ["TelescopePreviewNormal"] = { fg = "$fg", bg = "$bg1" },
+                },
+                diagnostics = {
+                    darker = false,
                 },
             })
             require("onedark").load()
@@ -426,8 +430,8 @@ return {
                         {
                             function()
                                 local stats = require("lazy").stats()
-                                return editorIsCramp() and stats.count .. "/" .. stats.loaded
-                                    or stats.count .. "/" .. stats.loaded .. " Plugins loaded"
+                                return editorIsCramp() and stats.loaded .. "/" .. stats.count
+                                    or stats.loaded .. "/" .. stats.count .. " Plugins loaded"
                             end,
                             icon = "",
                             separator = { left = "" },
@@ -672,9 +676,15 @@ return {
                 type = "group",
                 val = {
                     button("l", "Lazy Config", "󰒲", "<cmd>Lazy<cr>", "dashButton1"),
-                    button("m", "Mason Config", "󱌢", "<cmd>Mason<cr>", "dashButton2"),
+                    button("r", "Recently Open", "󱦻", "<cmd>Telescope oldfiles<cr>", "dashButton2"),
                     button("n", "New Scratch", "", "<cmd>Scratch<cr>", "dashButton3"),
-                    button("r", "Recently Open", "󱦻", "<cmd>Telescope oldfiles<cr>", "dashButton4"),
+                    button(
+                        "s",
+                        "School Note",
+                        "",
+                        "<cmd>cd C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note<cr><cmd>Telescope find_files<cr>",
+                        "dashButton4"
+                    ),
                     button(
                         "c",
                         "Open Config file",
@@ -800,4 +810,5 @@ return {
             })
         end,
     },
+    "winston0410/range-highlight.nvim",
 }

@@ -5,7 +5,7 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             -- Mason
-            { "williamboman/mason.nvim", config = true },
+            { "williamboman/mason.nvim", config = true, cmd = "Mason" },
             "williamboman/mason-lspconfig.nvim",
 
             -- Additional lua configuration, makes nvim stuff amazing!
@@ -69,9 +69,32 @@ return {
                 },
                 pyright = {},
                 tsserver = {},
+                ["rust_analyzer"] = {
+                    ["rust-analyzer"] = {
+                        imports = {
+                            granularity = {
+                                group = "module",
+                            },
+                            prefix = "self",
+                        },
+                        cargo = {
+                            buildScripts = {
+                                enable = true,
+                            },
+                        },
+                        procMacro = {
+                            enable = true,
+                        },
+                    },
+                },
             }
             -- set up mason
             require("mason").setup()
+
+            -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
             local mason_lspconfig = require("mason-lspconfig")
             mason_lspconfig.setup({
                 ensure_installed = vim.tbl_keys(servers),
@@ -110,7 +133,7 @@ return {
             "FelipeLema/cmp-async-path",
 
             -- snippet engine for  autocomplete
-            "L3MON4D3/LuaSnip",
+            { "L3MON4D3/LuaSnip", version = "v1.*" },
             "saadparwaiz1/cmp_luasnip",
         },
         config = function()
@@ -222,7 +245,7 @@ return {
             })
 
             cmp.setup.cmdline(":", {
-                completion = { autocomplete = false, completeopt = "menu,menuone,noinsert" },
+                completion = { completeopt = "menu,menuone,noinsert" },
                 mapping = cmp.mapping.preset.cmdline({
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         vim.print(cmp.visible())

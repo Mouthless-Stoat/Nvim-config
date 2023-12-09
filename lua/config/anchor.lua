@@ -5,33 +5,45 @@ local anchors = {
         key = "c",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
         type = "open",
-        desc = "[c]ode folder",
+        desc = "[G]oto [c]ode folder",
     },
     {
         key = "m",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
         type = "file",
-        desc = "[m]agpie code",
+        desc = "[G]oto [m]agpie code",
     },
     {
         key = "d",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts",
         type = "file",
-        desc = "[d]yyes code",
+        desc = "[G]oto [d]yyes code",
     },
     {
         key = "v",
         path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
         type = "folder",
-        desc = "[v]im config folder",
+        desc = "[G]oto [v]im config folder",
     },
     {
         key = "n",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
         type = "folder",
-        desc = "school [n]ote folder",
+        desc = "[G]oto school [n]ote folder",
     },
-    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
+    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[G]oto [h]ome folder" },
+    {
+        key = "t",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop",
+        type = "open",
+        desc = "[G]oto [d]esktop folder",
+    },
+    {
+        key = "d",
+        path = "C:\\Users\\nphuy\\Downloads",
+        type = "open",
+        desc = "[G]oto [d]ownloads folder",
+    },
 }
 local function genAnchorCommand(anchor)
     local command = ""
@@ -40,7 +52,7 @@ local function genAnchorCommand(anchor)
     elseif anchor.type == "file" then
         command = "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>"
     elseif anchor.type == "open" then
-        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>e .<cr>"
+        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Oil .<cr>"
     end
     return command
 end

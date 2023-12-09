@@ -7,6 +7,7 @@ vim.g.mapleader = " " -- set the leader to a space
 
 -- unmap stuff
 utils.delKey("n", "Y")
+-- utils.setKey("n", "S", "<Nop>")
 
 -- remap default funtion
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
@@ -43,7 +44,7 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
-utils.setKey("n", "<C-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "<A-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
 utils.setKey("n", "<C-Tab>", "<C-^>", {})
 
 -- make a terminal toggle window
@@ -217,6 +218,3 @@ utils.setKey(
     "<cmd>lua vim.diagnostic.open_float()<cr>",
     { desc = "open floating [d]iagnostic window" }
 )
-
--- file keymap
-utils.setKey("n", "<Leader>fe", vim.cmd.Ex, { desc = "[f]ile [e]xplorer" })

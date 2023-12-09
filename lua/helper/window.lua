@@ -50,13 +50,20 @@ end
 
 function M.showWindow(name)
     local data = M.winId[name]
-    if data.toggle.type == "cmd" then
-        vim.cmd(data.toggle.splitCmd) -- open the window
-        vim.cmd.buffer(data.bufferId) -- reuse the buffer
-        data.windowId = vim.api.nvim_get_current_win() -- save the new window info
-        vim.cmd(data.toggle.afterCmd)
-    elseif data.toggle.type == "func" then
-        data.toggle.openFunc()
+
+    -- if the window does not exist make it else show it
+    if data.bufferId == -1 or data.windowId == -1 then
+        M.createWindow(name)
+    else
+        -- show the window
+        if data.toggle.type == "cmd" then
+            vim.cmd(data.toggle.splitCmd) -- open the window
+            vim.cmd.buffer(data.bufferId) -- reuse the buffer
+            data.windowId = vim.api.nvim_get_current_win() -- save the new window info
+            vim.cmd(data.toggle.afterCmd)
+        elseif data.toggle.type == "func" then
+            data.toggle.openFunc()
+        end
     end
 end
 
@@ -88,7 +95,6 @@ end
 
 function M.toggleWindow(name)
     local data = M.winId[name]
-
     if vim.fn.win_gotoid(data.windowId) == 0 then
         if vim.fn.bufexists(data.bufferId) == 0 then
             M.createWindow(name)
@@ -102,10 +108,7 @@ end
 
 function M.resetWindow(name)
     local data = M.winId[name]
-
-    if vim.fn.win_gotoid(data.windowId) == 0 then
-        M.showWindow(name)
-    end
+    M.showWindow(name)
     if data.reset.type == "cmd" then
         vim.cmd(data.reset.cmd)
     elseif data.reset.type == "func" then
