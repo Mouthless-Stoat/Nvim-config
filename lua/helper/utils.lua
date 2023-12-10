@@ -7,4 +7,7 @@ return {
     createCommand = vim.api.nvim_create_user_command,
     createAutocmd = vim.api.nvim_create_autocmd,
     createAugroup = vim.api.nvim_create_augroup,
+    feedkeys = function(feed)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(feed, true, false, true), "t", false)
+    end,
 }

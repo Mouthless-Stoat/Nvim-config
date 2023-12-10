@@ -5,11 +5,19 @@ return {
             ["<C-s>"] = false,
             ["<C-h>"] = false,
         },
+        buf_options = {
+            buflisted = true,
+            bufhidden = "",
+        },
+        skip_confirm_for_simple_edits = true,
+        view_options = {
+            show_hidden = true,
+        },
     },
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-        { "<leader>fe", "<cmd>Oil<cr>", desc = "[f]ile [e]xplorer" },
+        { "<leader>f", "<cmd>Oil<cr>", desc = "[f]ile [e]xplorer" },
     },
     cmd = {
         "Oil",

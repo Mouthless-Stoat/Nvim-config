@@ -9,7 +9,7 @@ return {
                 typescript = { "prettier" },
                 json = { "prettier" },
                 markdown = { "prettier" },
-                gdscript = { "gdtoolkit" },
+                rust = { "rustfmt" },
             },
         },
         lazy = true,

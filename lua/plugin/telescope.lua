@@ -45,6 +45,7 @@ return {
                 "node_modules\\",
                 "__pycache__\\",
                 ".git\\",
+                "target\\",
                 "%.zip",
                 "%.tar",
                 "%.gz",

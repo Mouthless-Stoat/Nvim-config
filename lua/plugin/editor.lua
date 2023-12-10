@@ -1,4 +1,5 @@
 local mode = require("helper.mode")
+local utils = require("helper.utils")
 return {
     {
         -- editor theme
@@ -43,6 +44,10 @@ return {
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
                     ["@parameter"] = { fg = "$red", fmt = "italic" }, -- param
+                    ["@type.qualifier.rust"] = { fg = "$purple", fmt = "italic" }, -- rust shit
+                    ["@lsp.type.namespace"] = { fg = "$orange", fmt = "italic" },
+                    ["@lsp.type.variable.rust"] = { fg = "$yellow" },
+                    ["@lsp.mod.mutable.rust"] = { fg = "$red" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
                     ColorColumn = { fg = "$red", bg = "$darkRed" },
@@ -402,11 +407,7 @@ return {
                             cwd,
                             icon = "",
                             on_click = function()
-                                vim.api.nvim_feedkeys(
-                                    vim.api.nvim_replace_termcodes("<Leader>sf", true, false, true),
-                                    "t",
-                                    false
-                                )
+                                utils.feedkeys("<leader>sf")
                             end,
                         },
                     },

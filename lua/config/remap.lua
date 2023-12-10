@@ -138,7 +138,7 @@ utils.setKey("n", "<S-Up>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>-", true, false, true), "t", false)
+        utils.feedkeys("<C-w>-")
     else
         float.resizeFloat(win, { direction = "up" })
     end
@@ -147,7 +147,7 @@ utils.setKey("n", "<S-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>+", true, false, true), "t", false)
+        utils.feedkeys("<C-w>+")
     else
         float.resizeFloat(win, { direction = "down" })
     end
@@ -156,7 +156,7 @@ utils.setKey("n", "<S-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>>", true, false, true), "t", false)
+        utils.feedkeys("<C-w>>")
     else
         float.resizeFloat(win, { direction = "left" })
     end
@@ -165,7 +165,7 @@ utils.setKey("n", "<S-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><", true, false, true), "t", false)
+        utils.feedkeys("<C-w><")
     else
         float.resizeFloat(win, { direction = "right" })
     end
@@ -175,7 +175,7 @@ utils.setKey("n", "<C-Up>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Up>", true, false, true), "t", false)
+        utils.feedkeys("<C-w><Up>")
     else
         float.moveFloat(win, "up")
     end
@@ -184,7 +184,7 @@ utils.setKey("n", "<C-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Down>", true, false, true), "t", false)
+        utils.feedkeys("<C-w><Down>")
     else
         float.moveFloat(win, "down")
     end
@@ -193,7 +193,7 @@ utils.setKey("n", "<C-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Left>", true, false, true), "t", false)
+        utils.feedkeys("<C-w><Left>")
     else
         float.moveFloat(win, "left")
     end
@@ -202,7 +202,7 @@ utils.setKey("n", "<C-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w><Right>", true, false, true), "t", false)
+        utils.feedkeys("<C-w><Right>")
     else
         float.moveFloat(win, "right")
     end
