@@ -1,7 +1,7 @@
 -- remap key for nvim. For plugin specific remap go to the plugin file
 local utils = require("helper.utils")
 local window = require("helper.window")
-local float = require("helper.float")
+local float = require("helper.floatie")
 
 vim.g.mapleader = " " -- set the leader to a space
 
@@ -44,8 +44,9 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
-utils.setKey("n", "<A-cr>", "i<cr><esc>", {}) -- set <s-cr> in normal mode to insert a newline
+utils.setKey("n", "<A-cr>", "i<cr><esc>", {}) -- set <A-cr> in normal mode to insert a newline
 utils.setKey("n", "<C-Tab>", "<C-^>", {})
+utils.setKey({ "n", "i" }, "+", '"+')
 
 -- make a terminal toggle window
 window.createWindowBind({

@@ -55,14 +55,16 @@ function M.showWindow(name)
     if data.bufferId == -1 or data.windowId == -1 then
         M.createWindow(name)
     else
-        -- show the window
-        if data.toggle.type == "cmd" then
-            vim.cmd(data.toggle.splitCmd) -- open the window
-            vim.cmd.buffer(data.bufferId) -- reuse the buffer
-            data.windowId = vim.api.nvim_get_current_win() -- save the new window info
-            vim.cmd(data.toggle.afterCmd)
-        elseif data.toggle.type == "func" then
-            data.toggle.openFunc()
+        if vim.fn.win_gotoid(data.windowId) == 0 then
+            -- show the window
+            if data.toggle.type == "cmd" then
+                vim.cmd(data.toggle.splitCmd) -- open the window
+                vim.cmd.buffer(data.bufferId) -- reuse the buffer
+                data.windowId = vim.api.nvim_get_current_win() -- save the new window info
+                vim.cmd(data.toggle.afterCmd)
+            elseif data.toggle.type == "func" then
+                data.toggle.openFunc()
+            end
         end
     end
 end

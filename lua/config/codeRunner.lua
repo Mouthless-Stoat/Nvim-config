@@ -27,5 +27,5 @@ utils.createCommand("RunCode", function()
         return
     end
     window.showWindow("codeOutput")
-    -- utils.feedkeys("i" .. cmd .. "<cr><esc>")
+    utils.feedkeys("i" .. cmd .. "<cr>")
 end, {})
