@@ -49,6 +49,7 @@ return {
                     ["@lsp.type.variable.rust"] = { fg = "$yellow" },
                     ["@lsp.mod.mutable.rust"] = { fg = "$red" },
                     -- uiua stuff
+                    ["@lsp.type.string.uiua"] = { fg = "$cyan", fmt = "underline" },
                     ["@lsp.type.noadic_function.uiua"] = { fg = "$red" },
                     ["@lsp.type.monadic_function.uiua"] = { fg = "$green" },
                     ["@lsp.type.dyadic_function.uiua"] = { fg = "$blue" },
@@ -407,7 +408,16 @@ return {
                 },
                 tabline = {
                     lualine_a = { { nvimVer, icon = "", separator = { right = "" } } },
-                    lualine_b = { { bufferCount, icon = "󰌨", separator = { right = "" } } },
+                    lualine_b = {
+                        {
+                            bufferCount,
+                            icon = "󰌨",
+                            separator = { right = "" },
+                            on_click = function()
+                                utils.feedkeys("<leader>sb")
+                            end,
+                        },
+                    },
                     lualine_c = {
                         {
                             cwd,
@@ -424,12 +434,18 @@ return {
                             function(text)
                                 return editorIsCramp() and vim.v.register or text
                             end,
+                            on_click = function()
+                                utils.feedkeys("<leader>sR")
+                            end,
                         },
                         {
                             '"Zoom: " .. vim.g.neovide_scale_factor',
                             icon = "󰍉",
                             function(text)
                                 return editorIsCramp() and vim.g.neovide_scale_factor or text
+                            end,
+                            on_click = function()
+                                utils.feedkeys("<leader>z")
                             end,
                         },
                     },
@@ -442,6 +458,9 @@ return {
                             end,
                             icon = "",
                             separator = { left = "" },
+                            on_click = function()
+                                utils.feedkeys("<leader>l")
+                            end,
                         },
                     },
                     lualine_z = {
@@ -457,7 +476,15 @@ return {
                     },
                 },
                 winbar = {
-                    lualine_x = { { altFile, icon = "" } },
+                    lualine_x = {
+                        {
+                            altFile,
+                            icon = "",
+                            on_click = function()
+                                utils.feedkeys("<C-Tab>")
+                            end,
+                        },
+                    },
                     lualine_y = { { winSize, icon = "󰗆" } },
                     lualine_z = { { winNum, icon = "󰻾" } },
                 },
