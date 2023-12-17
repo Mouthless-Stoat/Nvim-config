@@ -10,6 +10,14 @@ return {
                 json = { "prettier" },
                 markdown = { "prettier" },
                 rust = { "rustfmt" },
+                uiua = { "uiuafmt" },
+            },
+            formatters = {
+                uiuafmt = {
+                    command = "uiua",
+                    args = { "fmt", "$FILENAME" },
+                    stdin = false,
+                },
             },
         },
         lazy = true,

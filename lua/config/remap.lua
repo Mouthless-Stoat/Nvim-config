@@ -46,7 +46,7 @@ utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
 utils.setKey("n", "<A-cr>", "i<cr><esc>", {}) -- set <A-cr> in normal mode to insert a newline
 utils.setKey("n", "<C-Tab>", "<C-^>", {})
-utils.setKey({ "n", "i" }, "+", '"+')
+utils.setKey({ "n", "v" }, "+", '"+')
 
 -- make a terminal toggle window
 window.createWindowBind({

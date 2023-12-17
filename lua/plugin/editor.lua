@@ -48,6 +48,12 @@ return {
                     ["@lsp.type.namespace"] = { fg = "$orange", fmt = "italic" },
                     ["@lsp.type.variable.rust"] = { fg = "$yellow" },
                     ["@lsp.mod.mutable.rust"] = { fg = "$red" },
+                    -- uiua stuff
+                    ["@lsp.type.noadic_function.uiua"] = { fg = "$red" },
+                    ["@lsp.type.monadic_function.uiua"] = { fg = "$green" },
+                    ["@lsp.type.dyadic_function.uiua"] = { fg = "$blue" },
+                    ["@lsp.type.monadic_modifier.uiua"] = { fg = "$yellow" },
+                    ["@lsp.type.dyadic_modifier.uiua"] = { fg = "$purple" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
                     ColorColumn = { fg = "$red", bg = "$darkRed" },
