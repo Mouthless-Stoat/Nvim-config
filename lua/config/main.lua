@@ -4,6 +4,7 @@ require("config.autocmd")
 require("config.anchor")
 require("config.codeRunner")
 require("config.filetype")
+require("config.misc")
 
 -- these config so which-key work correctly
 vim.opt.timeout = true

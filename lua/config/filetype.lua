@@ -7,7 +7,6 @@ vim.filetype.add({
                         name = "uiua_lsp",
                         cmd = { "uiua", "lsp" },
                     })
-                    vim.bo.commentstring = "#%s"
                     -- function to help remap
                     local nmap = function(keys, func, desc, mode)
                         local modeToPut = { "n" }

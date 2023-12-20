@@ -48,6 +48,8 @@ config is just normal vim.api.nvim_open_win() opts with a few extra
         -- etc
     }
     titleFunc = function() end -- function to generate title
+    moveCount = 0 -- how much to move the window
+    shiftCount = 0 -- how much to shift/scale the window
 }
 --]]
 function M.createFloat(config)
@@ -67,6 +69,12 @@ function M.createFloat(config)
     if config.position == "center" then
         col = (container.width / 2) - (config.width / 2)
         row = (container.height / 2) - (config.height / 2)
+    elseif config.position == "bottomMid" then
+        col = (container.width / 2) - (config.width / 2)
+        row = container.height - config.height - 1
+    elseif config.position == "bottom" then
+        col = 0
+        row = container.height - config.height - 1
     end
 
     config.col = col
@@ -96,18 +104,28 @@ end
 function M.moveFloat(win, direction, amount)
     local config = M.floatData[win]
     -- calculate the amount base on which direction and moveCount
-    amount = (amount or config.moveCount or 1)
+    amount = vim.F.if_nil(amount, vim.F.if_nil(config.moveCount, 1))
         * (
             (direction == "up" or direction == "left") and -1
             or (direction == "down" or direction == "right") and 1
             or 0
         )
+    print(amount)
     -- helper function instead of typing ternary hell
     local function checkDir(ifX, ifY)
         return (direction == "left" or direction == "right") and ifX
             or (direction == "up" or direction == "down") and ifY
             or ""
     end
+    print(
+        math.clamp(
+            config[checkDir("col", "row")] + amount,
+            0,
+            config.container[checkDir("width", "height")] - config[checkDir("width", "height")]
+        ),
+        config[checkDir("col", "row")] + amount,
+        config.container[checkDir("width", "height")] - config[checkDir("width", "height")]
+    )
     config[checkDir("col", "row")] = math.clamp(
         config[checkDir("col", "row")] + amount,
         0,

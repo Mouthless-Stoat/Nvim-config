@@ -26,7 +26,7 @@ local anchors = {
         desc = "[G]oto [v]im config folder",
     },
     {
-        key = "n",
+        key = "s",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
         type = "folder",
         desc = "[G]oto school [n]ote folder",

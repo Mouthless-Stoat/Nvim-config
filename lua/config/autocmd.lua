@@ -18,7 +18,6 @@ utils.createAutocmd("BufEnter", {
         vim.bo.syntax = "markdown"
         vim.opt_local.wrap = true
         vim.opt_local.linebreak = true
-        require("nabla").enable_virt({ autogen = true })
     end,
 })
 
@@ -41,6 +40,16 @@ utils.createAutocmd("InsertLeave", {
             return
         end
         vim.cmd("TSBufEnable highlight")
+    end,
+})
+
+utils.createAutocmd("BufEnter", {
+    callback = function()
+        if vim.bo.filetype == "uiua" then
+            vim.opt.gfn = "Uiua386:h9:#h-none" -- uiua font
+        else
+            vim.opt.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
+        end
     end,
 })
 -- vim.api.nvim_create_autocmd("LspAttach", {
