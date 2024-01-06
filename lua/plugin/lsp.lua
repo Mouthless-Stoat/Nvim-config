@@ -26,7 +26,7 @@ return {
             },
         },
         config = function()
-            local on_attach = function(_, bufnr)
+            local on_attach = function(client, bufnr)
                 -- function to help remap
                 local nmap = function(keys, func, desc, mode)
                     local modeToPut = { "n" }
@@ -106,6 +106,7 @@ return {
                         on_attach = on_attach,
                         settings = servers[server_name],
                         filetypes = (servers[server_name] or {}).filetypes,
+                        inlay_hints = { enable = true },
                     }
                     if server_name == "lua_ls" then
                         setting["root_dir"] = function()

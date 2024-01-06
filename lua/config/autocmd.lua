@@ -43,15 +43,15 @@ utils.createAutocmd("InsertLeave", {
     end,
 })
 
-utils.createAutocmd("BufEnter", {
-    callback = function()
-        if vim.bo.filetype == "uiua" then
-            vim.opt.gfn = "Uiua386:h9:#h-none" -- uiua font
-        else
-            vim.opt.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
-        end
-    end,
-})
+-- utils.createAutocmd("BufEnter", {
+--     callback = function()
+--         if vim.bo.filetype == "uiua" then
+--             vim.opt.gfn = "Uiua386:h9:#h-none" -- uiua font
+--         else
+--             vim.opt.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
+--         end
+--     end,
+-- })
 -- vim.api.nvim_create_autocmd("LspAttach", {
 --     callback = function(args)
 --         local client = vim.lsp.get_client_by_id(args.data.client_id)

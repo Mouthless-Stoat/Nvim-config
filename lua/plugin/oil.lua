@@ -5,10 +5,6 @@ return {
             ["<C-s>"] = false,
             ["<C-h>"] = false,
         },
-        buf_options = {
-            buflisted = true,
-            bufhidden = "",
-        },
         skip_confirm_for_simple_edits = true,
         view_options = {
             show_hidden = true,

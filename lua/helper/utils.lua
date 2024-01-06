@@ -10,4 +10,7 @@ return {
     feedkeys = function(feed)
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(feed, true, false, true), "t", false)
     end,
+    listDir = function(dir)
+        return vim.split(vim.fn.glob(dir .. "/*"), "\n", { trimempty = true })
+    end,
 }

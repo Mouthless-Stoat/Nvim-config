@@ -21,6 +21,7 @@ M.winId = {}
         -- if type if "func" provide these option
         createFunc = function() end, -- function to create the toggle window
         openFunc = function() end, -- function to open the toggle window
+        afterFunc = function() end -- function to do after the entering the window
     },
 
     reset = { -- window reset option
@@ -55,16 +56,21 @@ function M.showWindow(name)
     if data.bufferId == -1 or data.windowId == -1 then
         M.createWindow(name)
     else
+        -- try going to the window
         if vim.fn.win_gotoid(data.windowId) == 0 then
             -- show the window
             if data.toggle.type == "cmd" then
                 vim.cmd(data.toggle.splitCmd) -- open the window
                 vim.cmd.buffer(data.bufferId) -- reuse the buffer
                 data.windowId = vim.api.nvim_get_current_win() -- save the new window info
-                vim.cmd(data.toggle.afterCmd)
             elseif data.toggle.type == "func" then
                 data.toggle.openFunc()
             end
+        end
+        if data.toggle.type == "cmd" then
+            vim.cmd(data.toggle.afterCmd)
+        elseif data.toggle.type == "func" then
+            data.toggle.afterCmd()
         end
     end
 end

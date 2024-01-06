@@ -41,12 +41,21 @@ vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent =
 vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- new remap
-
 utils.setKey({ "n", "i" }, "<C-s>", vim.cmd.w, {})
 
 utils.setKey("n", "<A-cr>", "i<cr><esc>", {}) -- set <A-cr> in normal mode to insert a newline
 utils.setKey("n", "<C-Tab>", "<C-^>", {})
 utils.setKey({ "n", "v" }, "+", '"+')
+-- very janky fix because sometime it doesn;t paste in terminal
+utils.setKey("t", "<c-v>", function()
+    utils.feedkeys(vim.fn.getreg("+"))
+end)
+
+-- code runner
+utils.setKey({ "n", "t" }, "<F5>", "<cmd>wa<cr><cmd>RunCode<cr>", {})
+utils.setKey("n", "<C-cr>", "<cmd>RunFile<cr>", {})
+
+utils.setKey("i", "<C-c>", "<esc><esc><esc>", {}) -- quick escape
 
 -- make a terminal toggle window
 window.createWindowBind({

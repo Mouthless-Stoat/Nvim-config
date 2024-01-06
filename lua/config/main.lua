@@ -62,7 +62,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
 -- terminal shit
-vim.opt.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
+vim.opt.gfn = "CaskaydiaCove Nerd Font Mono,Uiua386:h9:#h-none" --set font and size
 
 vim.opt.shell = "powershell"
 vim.opt.shellcmdflag = "-c"

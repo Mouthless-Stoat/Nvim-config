@@ -15,7 +15,7 @@ return {
                     bg3 = "#031b3d",
 
                     brown = "#85441c",
-                    pink = "#de52c0",
+                    pink = "#ff80d5",
                     darkPink = "#8c1974",
                     darkerPink = "#3b0c31",
 
@@ -42,8 +42,11 @@ return {
                     ["@lsp.type.variable"] = { fg = "$red" }, -- variable
                     ["@variable"] = { fg = "$red" },
                     ["@lsp.mod.readonly"] = { fg = "$yellow", fmt = "bold" },
+                    ["@lsp.typemod.function.readonly"] = { fg = "$green", fmt = "bold" },
                     ["@operator"] = { fg = "$cyan" },
                     ["@parameter"] = { fg = "$red", fmt = "italic" }, -- param
+                    ["@type.qualifier"] = { fg = "$pink", fmt = "bold" },
+                    -- rust
                     ["@type.qualifier.rust"] = { fg = "$purple", fmt = "italic" }, -- rust shit
                     ["@lsp.type.namespace"] = { fg = "$orange", fmt = "italic" },
                     ["@lsp.type.variable.rust"] = { fg = "$yellow" },
@@ -55,6 +58,17 @@ return {
                     ["@lsp.type.dyadic_function.uiua"] = { fg = "$blue" },
                     ["@lsp.type.monadic_modifier.uiua"] = { fg = "$yellow" },
                     ["@lsp.type.dyadic_modifier.uiua"] = { fg = "$purple" },
+                    -- markdown
+                    ["htmlBold"] = { fg = "$orange", fmt = "bold" },
+                    ["htmlH1"] = { fg = "$red", fmt = "bold" },
+                    ["htmlH2"] = { fg = "$red", fmt = "bold" },
+                    ["htmlH3"] = { fg = "$red", fmt = "bold" },
+                    ["htmlH4"] = { fg = "$red", fmt = "bold" },
+                    ["htmlH5"] = { fg = "$red", fmt = "bold" },
+                    ["htmlH6"] = { fg = "$red", fmt = "bold" },
+                    ["mkdHeading"] = { fg = "$red", fmt = "bold" },
+                    ["mkdLinkDefTarget"] = { fg = "$purple", fmt = "underline" },
+                    ["mkdURl"] = { fg = "$purple", fmt = "underline" },
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
                     ColorColumn = { fg = "$red", bg = "$darkRed" },
@@ -350,6 +364,7 @@ return {
             }
 
             require("lualine").setup({
+                extensions = { "fugitive" },
                 options = {
                     component_separators = { left = "\\", right = "/" },
                     section_separators = { left = "", right = "" },
@@ -575,7 +590,7 @@ return {
             local headerConfig = {
                 type = "text",
                 val = (
-                    math.random(5) == 1 and altHeader[math.random(#altHeader)]
+                    math.random(10) == 1 and altHeader[math.random(#altHeader)]
                     or {
                         [[     .          .                                                                               ]],
                         [[   ';;,.        ::'                                                                             ]],
@@ -844,5 +859,4 @@ return {
             })
         end,
     },
-    "winston0410/range-highlight.nvim",
 }

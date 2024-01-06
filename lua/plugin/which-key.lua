@@ -11,7 +11,7 @@ return {
             ["<Leader>f"] = { name = "[f]iles" },
             ["<Leader>w"] = { name = "[w]indow" },
             ["<Leader>t"] = { name = "[t]oggle window" },
-            ["<Leader>gh"] = { name = "[h]unk" },
+            ["<Leader>h"] = { name = "[h]op" },
         },
 
         icons = {
