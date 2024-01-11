@@ -47,7 +47,7 @@ return {
                     ["@parameter"] = { fg = "$red", fmt = "italic" }, -- param
                     ["@type.qualifier"] = { fg = "$pink", fmt = "bold" },
                     -- rust
-                    ["@type.qualifier.rust"] = { fg = "$purple", fmt = "italic" }, -- rust shit
+                    ["@type.qualifier.rust"] = { fg = "$purple", fmt = "italic" },
                     ["@lsp.type.namespace"] = { fg = "$orange", fmt = "italic" },
                     ["@lsp.type.variable.rust"] = { fg = "$yellow" },
                     ["@lsp.mod.mutable.rust"] = { fg = "$red" },
@@ -134,6 +134,8 @@ return {
                     ["GitSignsChangeDeleteNr"] = { fg = "$orange", fmt = "bold" },
                     ["GitSignsUntracked"] = { fg = "$purple", fmt = "bold" },
                     ["GitSignsUntrackedNr"] = { fg = "$purple", fmt = "bold" },
+                    -- gitsign commit color
+                    ["GitSignBlame"] = { bg = "$darkPink", fg = "$pink", fmt = "bold" },
 
                     -- auto complete menu color
                     ["CmpItemKindText"] = { fg = "$green" },
@@ -364,7 +366,6 @@ return {
             }
 
             require("lualine").setup({
-                extensions = { "fugitive" },
                 options = {
                     component_separators = { left = "\\", right = "/" },
                     section_separators = { left = "", right = "" },

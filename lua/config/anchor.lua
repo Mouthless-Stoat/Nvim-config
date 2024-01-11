@@ -5,44 +5,51 @@ local anchors = {
         key = "c",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
         type = "open",
-        desc = "[G]oto [c]ode folder",
+        desc = "[c]ode folder",
     },
     {
         key = "m",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
         type = "file",
-        desc = "[G]oto [m]agpie code",
+        desc = "[m]agpie code",
     },
     {
         key = "d",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts",
         type = "file",
-        desc = "[G]oto [d]yyes code",
+        desc = "[d]yyes code",
     },
     {
         key = "v",
         path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
         type = "folder",
-        desc = "[G]oto [v]im config folder",
+        desc = "[v]im config folder",
     },
     {
         key = "s",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
         type = "folder",
-        desc = "[G]oto school [n]ote folder",
+        desc = "school [n]ote folder",
     },
-    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[G]oto [h]ome folder" },
+    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
     {
         key = "t",
         path = "C:\\Users\\nphuy\\OneDrive\\Desktop",
         type = "open",
-        desc = "[G]oto [d]esktop folder",
+        desc = "[d]esktop folder",
     },
     {
         key = "d",
         path = "C:\\Users\\nphuy\\Downloads",
         type = "open",
-        desc = "[G]oto [d]ownloads folder",
+        desc = "[d]ownloads folder",
+    },
+    {
+        key = "x",
+        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\Javascript\\Xper\\src\\main.ts",
+        type = "file",
+        desc = "[x]per code",
+        post = "<cmd>cd ..<cr>",
     },
 }
 local function genAnchorCommand(anchor)
@@ -54,11 +61,12 @@ local function genAnchorCommand(anchor)
     elseif anchor.type == "open" then
         command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Oil .<cr>"
     end
+    command = command .. vim.F.if_nil(anchor.post, "")
     return command
 end
 for _, anchor in ipairs(anchors) do
     local command = genAnchorCommand(anchor)
-    utils.setKey("n", "<Leader>G" .. anchor.key, command, { desc = anchor.desc })
+    utils.setKey("n", "<Leader>G" .. anchor.key, command, { desc = "[G]oto " .. anchor.desc })
 end
 
 return {
