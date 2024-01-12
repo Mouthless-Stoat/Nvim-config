@@ -12,7 +12,7 @@ vim.opt.timeoutlen = 300
 
 -- show line number and set to relative
 vim.opt.number = true
-vim.opt.rnu = true
+vim.opt.relativenumber = true
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true

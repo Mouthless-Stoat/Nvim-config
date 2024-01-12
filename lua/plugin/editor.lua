@@ -69,9 +69,12 @@ return {
                     ["mkdHeading"] = { fg = "$red", fmt = "bold" },
                     ["mkdLinkDefTarget"] = { fg = "$purple", fmt = "underline" },
                     ["mkdURl"] = { fg = "$purple", fmt = "underline" },
+
+                    -- vim shit
                     MatchParen = { fg = "$none", bg = "$matchParen" },
                     winhl = { fg = "$orange", bg = "$yellow" },
-                    ColorColumn = { fg = "$red", bg = "$darkRed" },
+                    MsgArea = { fg = "$pink" },
+                    Substitute = { bg = "$purple" },
 
                     -- cursor color
                     ["nCursor"] = { bg = "$blue", fg = "$black" },
