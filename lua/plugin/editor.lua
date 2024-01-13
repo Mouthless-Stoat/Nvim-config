@@ -242,7 +242,7 @@ return {
                         vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.red, bold = true })
                     end
                 end,
-            }) -- format when save
+            })
         end,
     },
 

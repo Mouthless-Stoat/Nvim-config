@@ -32,7 +32,6 @@ return {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
         "lewis6991/gitsigns.nvim",
         opts = {
-            current_line_blame = true,
             current_line_blame_opts = {
                 virt_text_pos = "right_align",
                 delay = 1,
@@ -78,6 +77,12 @@ return {
                     "<Leader>ghr",
                     gitsign.reset_hunk,
                     { buffer = bufnr, desc = "[g]it [h]unk [r]eset" }
+                )
+                utils.setKey(
+                    "n",
+                    "<leader>gb",
+                    gitsign.toggle_current_line_blame,
+                    { buffer = bufnr, desc = "[g]it [b]lame toggle" }
                 )
             end,
         },

@@ -123,6 +123,20 @@ utils.setKey("n", "<Leader>ws", function()
     vim.cmd.startinsert()
 end, { desc = "new [w]indow [s]ticky note" })
 
+utils.setKey("n", "<Leader>wf", function()
+    float.createFloat({
+        relative = "editor",
+        position = "center",
+        title = "Floatie",
+        width = 20,
+        height = 10,
+        style = "minimal",
+        border = "single",
+        moveCount = 5,
+        shiftCount = 2,
+    })
+end, { desc = "new [w]indow [f]loat" })
+
 -- make new window
 utils.setKey("n", "<Leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
 utils.setKey("n", "<Leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
