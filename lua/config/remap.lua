@@ -5,10 +5,6 @@ local float = require("helper.floatie")
 
 vim.g.mapleader = " " -- set the leader to a space
 
--- unmap stuff
-utils.delKey("n", "Y")
--- utils.setKey("n", "S", "<Nop>")
-
 -- remap default funtion
 utils.setKey("t", "<esc>", "<C-\\><C-n>", {}) -- set <esc> in terminal mode to quit
 utils.setKey("n", "x", '"_x') -- put x content into void cus why?????
