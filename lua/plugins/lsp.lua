@@ -65,9 +65,9 @@ return {
                         runtime = { version = "LuaJIT" },
                         workspace = {
                             checkThirdParty = false,
-                            library = { vim.env.VIMRUNTIME }
-                        }
-                    }
+                            library = { vim.env.VIMRUNTIME },
+                        },
+                    },
                 },
                 tsserver = {},
                 ["rust_analyzer"] = {
@@ -279,6 +279,7 @@ return {
             {
                 "<leader>d",
                 function()
+                    vim.g.lspLines = not vim.g.lspLines
                     if vim.g.lspLines then
                         vim.diagnostic.config({
                             virtual_text = false,
@@ -290,11 +291,10 @@ return {
                             virtual_lines = false,
                         })
                     end
-                    vim.g.lspLines = not vim.g.lspLines
                     vim.o.statusline = vim.o.statusline
                 end,
                 desc = "Toggle lsp line [d]iagnostics",
             },
         },
-    }
+    },
 }

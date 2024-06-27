@@ -242,12 +242,16 @@ local function locPercent()
 end
 
 local function lsp()
-    local server = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-    local name = ""
-    if server == {} or server[1] == nil then
-        name = "n/a"
-    else
-        name = server[1].name
+    local servers = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+    if not servers then
+        return ""
+    end
+
+    local out = {}
+
+    for _, s in ipairs(servers) do
+        table.insert(out, secBasic("StatusBasicSep", "StatusLsp", " " .. s.name))
     end
 
     local _, color = devicons.get_icon_color_by_filetype(vim.o.filetype)
@@ -258,11 +262,7 @@ local function lsp()
         bold = true,
     })
 
-    return sec("StatusBasicSep", {
-        hl("StatusLsp"),
-        " ",
-        name,
-    })
+    return table.concat(out)
 end
 
 local function cwd()
@@ -287,36 +287,37 @@ local function cwd()
     return secBasic("StatusCwdSep", "StatusCwd", "cwd: " .. (#path >= 40 and "..." or "") .. path:sub(-80))
 end
 
-local function altFile()
-    local file = vim.fn.expand("#:t")
-    local icon, color = devicons.get_icon_color(file)
-
-    if icon then
-        icon = icon .. " "
-    else
-        icon = ""
-    end
-
-    color = color or colors.blue
-
-    utils.setHl("StatusAltFile", {
-        fg = color,
-        bg = colors.black3,
-    })
-
-    utils.setHl("StatusAltFileSep", {
-        fg = colors.black3,
-        bg = colors.black1,
-    })
-
-    local out = (" %s%s"):format(icon, file)
-
-    if #out == 1 then
-        out = " [no name]"
-    end
-
-    return secBasic("StatusAltFileSep", "StatusAltFile", "alt:" .. out)
-end
+-- fucntion for alt file
+-- local function altFile()
+--     local file = vim.fn.expand("#:t")
+--     local icon, color = devicons.get_icon_color(file)
+--
+--     if icon then
+--         icon = icon .. " "
+--     else
+--         icon = ""
+--     end
+--
+--     color = color or colors.blue
+--
+--     utils.setHl("StatusAltFile", {
+--         fg = color,
+--         bg = colors.black3,
+--     })
+--
+--     utils.setHl("StatusAltFileSep", {
+--         fg = colors.black3,
+--         bg = colors.black1,
+--     })
+--
+--     local out = (" %s%s"):format(icon, file)
+--
+--     if #out == 1 then
+--         out = " [no name]"
+--     end
+--
+--     return secBasic("StatusAltFileSep", "StatusAltFile", "alt:" .. out)
+-- end
 
 local function plugin()
     local stats = require("lazy").stats()
@@ -360,6 +361,19 @@ local function activeWin(active)
         or secBasic("StatusInactiveSep", "StatusInactive", "")
 end
 
+local function formatter()
+    local fmt = require("conform").list_formatters()
+    if not fmt then
+        return ""
+    end
+
+    local out = {}
+    for _, f in ipairs(fmt) do
+        table.insert(out, secBasic("StatusBasicSep", "StatusLsp", "󰉼 " .. f.name))
+    end
+    return table.concat(out)
+end
+
 function MkStatus()
     return table
         .concat({
@@ -392,6 +406,7 @@ function MkWinbar(active)
             (" "):rep(space), -- center sep
             fileName(),
             "%=",
+            formatter(),
             activeWin(active),
         }, " ")
         :gsub("^%s*(.-)%s*$", "%1")

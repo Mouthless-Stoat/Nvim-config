@@ -28,5 +28,5 @@ return {
     black2 = "#232323",
     black3 = "#2d2d2d",
 
-    gray = "#455574"
+    gray = "#455574",
 }
