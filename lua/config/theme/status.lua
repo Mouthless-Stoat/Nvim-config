@@ -409,7 +409,7 @@ function MkWinbar(active)
             formatter(),
             activeWin(active),
         }, " ")
-        :gsub("^%s*(.-)%s*$", "%1")
+        :gsub("^%s*(.-)%s*$", left:gsub(" ", ""):stLen() == 0 and "%0" or "%1")
 end
 
 vim.o.laststatus = 3
