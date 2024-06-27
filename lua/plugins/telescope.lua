@@ -1,4 +1,3 @@
-
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -23,6 +22,12 @@ return {
     cmd = "Telescope",
     opts = {
         defaults = {
+            mappings = {
+                i = {
+                    ["<c-q>"] = require("telescope.actions").smart_send_to_qflist
+                        + require("telescope.actions").open_qflist,
+                },
+            },
             scroll_strategy = "limit",
             layout_strategy = "horizontal",
             layout_config = {

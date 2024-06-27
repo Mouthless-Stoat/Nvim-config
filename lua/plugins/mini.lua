@@ -1,6 +1,11 @@
 return {
     {
         "echasnovski/mini.move",
-        opts = {}
+        opts = {},
+    },
+    {
+        "echasnovski/mini.pairs",
+        event = "InsertEnter *.*",
+        opts = {},
     },
 }

@@ -383,7 +383,11 @@ function MkStatus()
             "%=",
             lsplines(),
             plugin(),
-            secBasic("StatusZoomSep", "StatusZoom", ("󰍉 %s"):format(vim.g.neovide_scale_factor * 100) .. "%%"),
+            vim.g.neovide and secBasic(
+                "StatusZoomSep",
+                "StatusZoom",
+                ("󰍉 %s"):format(vim.g.neovide_scale_factor * 100) .. "%%"
+            ) or "",
             locPercent(),
             secBasic("StatusModeSep", "StatusMode", utils.evalStatus("%4.c:%-4.l")),
         }, " ")

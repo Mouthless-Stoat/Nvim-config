@@ -25,12 +25,18 @@ return {
     Special = { fg = colors.cyan },
     Delimiter = { fg = colors.gray },
 
+    -- treesitter
     ["@variable"] = { link = "Identifier" },
     ["@variable.member"] = { link = "Member" },
     ["@variable.builtin"] = { link = "Builtin" },
 
     ["@string.regex"] = { fg = colors.orange },
     ["@string.escape"] = { fg = colors.red },
+    ["@type.builtin"] = { link = "Type" },
 
-    ["@lsp.type.property"] = { link = "Member" }
+    -- Lsp semantics token
+    ["@lsp.type.property"] = { link = "Member" },
+
+    ["@lsp.type.struct"] = { link = "Constant" },
+    ["@lsp.type.enum"] = { link = "Constant" },
 }

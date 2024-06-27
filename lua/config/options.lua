@@ -35,7 +35,7 @@ vim.opt.listchars = { multispace = "·", tab = ">-" }
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
-        vim.highlight.on_yank({higroup = "Yank"})
+        vim.highlight.on_yank({ higroup = "Yank" })
     end,
     group = highlight_group,
     pattern = "*",
@@ -54,8 +54,3 @@ vim.opt.gfn = "CaskaydiaCove Nerd Font Mono:h9:#h-none" --set font and size
 
 vim.opt.shell = "powershell"
 vim.opt.shellcmdflag = "-c"
-
--- neovide setting
-if vim.g.neovide then
-    require("config.neovide")
-end
