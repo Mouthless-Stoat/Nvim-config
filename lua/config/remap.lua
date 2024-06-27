@@ -1,5 +1,6 @@
 -- remap key for nvim. For plugin specific remap go to the plugin file
 local utils = require("helper.utils")
+local window = require("helper.window")
 
 vim.g.mapleader = " " -- set the leader to a space
 
@@ -45,6 +46,37 @@ utils.setKey("t", "<c-v>", function()
     utils.feedkeys(vim.fn.getreg("+"))
 end)
 
+-- code runner
+utils.setKey({ "n", "t" }, "<F5>", "<cmd>wa<cr><cmd>RunCode<cr>", {})
+utils.setKey("n", "<C-cr>", "<cmd>RunFile<cr>", {})
+
+utils.setKey("i", "<C-c>", "<esc><esc><esc>", {}) -- quick escape
+
+-- make a terminal toggle window
+window.createWindowBind({
+    name = "terminal",
+    windowName = "Terminal",
+    toggle = {
+        key = "<C-`>",
+        mode = { "n", "t" },
+        description = "Toggle Terminal Window",
+        type = "cmd",
+        splitCmd = "bot sp",
+        cmd = "ter",
+        afterCmd = "start",
+    },
+    reset = {
+        key = "<Leader>tt",
+        mode = "n",
+        description = "[t]oggle [t]erminal reset",
+        type = "func",
+        func = function()
+            vim.cmd.startinsert()
+            vim.api.nvim_input('cd "' .. vim.fn.getcwd() .. '"<cr>')
+        end,
+    },
+})
+
 -- make new window
 utils.setKey("n", "<Leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
 utils.setKey("n", "<Leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
@@ -60,7 +92,6 @@ utils.setKey("n", "<C-Up>", function()
         float.moveFloat(win, "up")
     end
 end, { desc = "switch to up window" })
-
 utils.setKey("n", "<C-Down>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
@@ -70,7 +101,6 @@ utils.setKey("n", "<C-Down>", function()
         float.moveFloat(win, "down")
     end
 end, { desc = "switch to down window" })
-
 utils.setKey("n", "<C-Left>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
@@ -80,7 +110,6 @@ utils.setKey("n", "<C-Left>", function()
         float.moveFloat(win, "left")
     end
 end, { desc = "switch to left window" })
-
 utils.setKey("n", "<C-Right>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
@@ -94,4 +123,3 @@ end, { desc = "switch to right window" })
 -- common command
 utils.setKey("n", "<Leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<Leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-utils.setKey("n", "<Leader>a", "<cmd>Alpha<cr>", { desc = "[a]lpha dashboard" })
