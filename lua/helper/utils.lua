@@ -2,8 +2,12 @@ function math.clamp(val, min, max)
     return math.max(math.min(max, val), min)
 end
 
-function string.starts(str,start)
-   return string.sub(str,1,string.len(start)) == start
+function string.starts(str, start)
+    return string.sub(str, 1, string.len(start)) == start
+end
+
+function string.trim(str)
+    return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
 local function setHl(g, c)
@@ -25,7 +29,7 @@ return {
     feedkeys = function(feed)
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(feed, true, false, true), "t", false)
     end,
-    evalStatus = function (str)
+    evalStatus = function(str)
         return vim.api.nvim_eval_statusline(str, {}).str
-    end
+    end,
 }

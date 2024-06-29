@@ -150,12 +150,12 @@ local function fileName()
             ["[+]"] = colors.green,
             ["[-]"] = colors.red,
         })[modFlag]
-        utils.setHl("StatusFile", {
+        utils.setHl("StatusFileStatus", {
             bg = color,
             fg = colors.bg1,
         })
 
-        utils.setHl("StatusFileSep", {
+        utils.setHl("StatusFileStatusSep", {
             fg = color,
             bg = colors.bg1,
         })
@@ -167,7 +167,12 @@ local function fileName()
         out = " [no name] "
     end
 
-    return secBasic("StatusFileSep", "StatusFile", out)
+    return table
+        .concat({
+            secBasic("StatusFileSep", "StatusFile", out),
+            modFlag ~= "" and secBasic("StatusFileStatusSep", "StatusFileStatus", modFlag) or "",
+        }, " ")
+        :trim()
 end
 
 local function diagnostics()
@@ -198,7 +203,7 @@ local function diagnostics()
         out = out .. secBasic("StatusHintSep", "StatusHint", " " .. count.hint) .. " "
     end
 
-    out = out:gsub("^%s*(.-)%s*$", "%1")
+    out = out:trim()
 
     return out == "" and "" or out
 end
@@ -392,7 +397,7 @@ function MkStatus()
             secBasic("StatusModeSep", "StatusMode", utils.evalStatus("%4.c:%-4.l")),
         }, " ")
         :gsub("(%%%*)%s%s(%%#%w+#)", "%1 %2")
-        :gsub("^%s*(.-)%s*$", "%1") -- remove spaces from skipped module
+        :trim()
 end
 
 function MkWinbar(active)
