@@ -23,10 +23,10 @@ return {
 
     white = "#93a4c3",
 
-    black0 = "#101010",
-    black1 = "#1a1a1a",
-    black2 = "#232323",
-    black3 = "#2d2d2d",
+    bg0 = "#101010",
+    bg1 = "#1a1a1a",
+    bg2 = "#232323",
+    bg3 = "#2d2d2d",
 
     gray = "#455574",
 }

@@ -10,7 +10,7 @@ end
 
 -- now load the default nvim color
 utils.setHls({
-    Normal = { fg = colors.white, bg = colors.black0 },
+    Normal = { fg = colors.white, bg = colors.bg0 },
 
     -- Cursor color
     NCursor = { bg = colors.blue },
@@ -29,24 +29,24 @@ utils.setHls({
     Substitute = { fg = colors.lightPurple, bg = colors.darkPurple },
     Yank = { reverse = true },
 
-    Visual = { fg = colors.black0, bg = colors.lightPurple },
-    EndOfBuffer = { fg = colors.black0 },
+    Visual = { fg = colors.bg0, bg = colors.lightPurple },
+    EndOfBuffer = { fg = colors.bg0 },
 
-    LineNr = { fg = colors.gray, bg = colors.black0 },
-    CursorLineNr = { fg = colors.blue, bg = colors.black0 },
+    LineNr = { fg = colors.gray, bg = colors.bg0 },
+    CursorLineNr = { fg = colors.blue, bg = colors.bg0 },
 
     Directory = { fg = colors.blue },
 
-    DiffAdd = { fg = colors.green, bg = colors.black0, bold = true, italic = true },
-    DiffChange = { fg = colors.yellow, bg = colors.black0, bold = true, italic = true },
-    DiffDelete = { fg = colors.red, bg = colors.black0, bold = true, italic = true },
-    DiffText = { fg = colors.blue, bg = colors.black0, bold = true, italic = true },
+    DiffAdd = { fg = colors.green, bg = colors.bg0, bold = true, italic = true },
+    DiffChange = { fg = colors.yellow, bg = colors.bg0, bold = true, italic = true },
+    DiffDelete = { fg = colors.red, bg = colors.bg0, bold = true, italic = true },
+    DiffText = { fg = colors.blue, bg = colors.bg0, bold = true, italic = true },
 
-    WinSeparator = { fg = colors.blue, bg = colors.black1 },
+    WinSeparator = { fg = colors.blue, bg = colors.bg1 },
 
-    MatchParen = { fg = colors.black0, bg = colors.purple },
+    MatchParen = { fg = colors.bg0, bg = colors.purple },
 
-    MsgArea = { fg = colors.yellow, bg = colors.black0 },
+    MsgArea = { fg = colors.yellow, bg = colors.bg0 },
 
     SpellBad = { fg = colors.red },
     SpellCap = { fg = colors.blue },
@@ -74,7 +74,7 @@ utils.setHls({
 
 vim.o.guicursor = "n-o:block-NCursor,i:ver20-ICursor,v-ve:block-VCursor,c-ci-cr:ver25-CCursor,r:hor15-RCursor"
 
-vim.g.terminal_color_0 = colors.black
+vim.g.terminal_color_0 = colors.bg
 vim.g.terminal_color_1 = colors.red
 vim.g.terminal_color_2 = colors.green
 vim.g.terminal_color_3 = colors.yellow
