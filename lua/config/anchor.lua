@@ -21,7 +21,7 @@ local anchors = {
     },
     {
         key = "v",
-        path = "C:\\Users\\nphuy\\AppData\\Local\\nvim",
+        path = "D:\\config\\nvim",
         type = "folder",
         desc = "[v]im config folder",
     },
