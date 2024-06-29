@@ -167,7 +167,7 @@ local function fileName()
         out = " [no name] "
     end
 
-    return secBasic("StatusFileSep", "StatusFile", modFlag .. out .. modFlag)
+    return secBasic("StatusFileSep", "StatusFile", out)
 end
 
 local function diagnostics()
