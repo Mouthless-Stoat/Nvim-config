@@ -129,27 +129,34 @@ local function fileName()
 
     utils.setHl("StatusFile", {
         bg = color,
-        fg = colors.bg1,
+        fg = vim.bo.readonly and colors.red or colors.bg1,
         bold = true,
     })
 
     utils.setHl("StatusFileSep", {
         fg = color,
-        bg = colors.bg1,
+        bg = vim.bo.readonly and colors.red or colors.bg1,
     })
 
-    local modFlag = ""
-    if vim.bo.modified then
-        modFlag = "[+]"
-    elseif vim.bo.readonly then
-        modFlag = "[-]"
+    local out = (" %s%s "):format(icon, utils.evalStatus("%t"))
+
+    if #out == 2 then
+        out = " [no name] "
     end
 
-    if modFlag ~= "" then
-        color = ({
+    return secBasic("StatusFileSep", "StatusFile", out)
+end
+
+local function fileStatus()
+    local modflag = ""
+    if vim.bo.modified then
+        modflag = "[+]"
+    end
+
+    if modflag ~= "" then
+        local color = ({
             ["[+]"] = colors.green,
-            ["[-]"] = colors.red,
-        })[modFlag]
+        })[modflag]
         utils.setHl("StatusFileStatus", {
             bg = color,
             fg = colors.bg1,
@@ -161,18 +168,7 @@ local function fileName()
         })
     end
 
-    local out = (" %s%s "):format(icon, utils.evalStatus("%t"))
-
-    if #out == 2 then
-        out = " [no name] "
-    end
-
-    return table
-        .concat({
-            secBasic("StatusFileSep", "StatusFile", out),
-            modFlag ~= "" and secBasic("StatusFileStatusSep", "StatusFileStatus", modFlag) or "",
-        }, " ")
-        :trim()
+    return modflag ~= "" and secBasic("StatusFileStatusSep", "StatusFileStatus", modflag) or ""
 end
 
 local function diagnostics()
@@ -356,15 +352,15 @@ local function lsplines()
     return (vim.g.lspLines and secBasic("StatusLspLineSep", "StatusLspLine", "lsp lines") or "")
 end
 
-local function activeWin(active)
-    -- count the non floating window
-    -- and hide the indicator is there only 1 window
-    if #vim.fn.eval("filter(nvim_list_wins(), {k,v->nvim_win_get_config(v).relative == ''})") == 1 then
-        return ""
-    end
-    return active and secBasic("StatusActiveSep", "StatusActive", "")
-        or secBasic("StatusInactiveSep", "StatusInactive", "")
-end
+-- local function activeWin(active)
+--     -- count the non floating window
+--     -- and hide the indicator is there only 1 window
+--     if #vim.fn.eval("filter(nvim_list_wins(), {k,v->nvim_win_get_config(v).relative == ''})") == 1 then
+--         return ""
+--     end
+--     return active and secBasic("StatusActiveSep", "StatusActive", "")
+--         or secBasic("StatusInactiveSep", "StatusInactive", "")
+-- end
 
 local function formatter()
     local fmt = require("conform").list_formatters()
@@ -400,9 +396,8 @@ function MkStatus()
         :trim()
 end
 
-function MkWinbar(active)
+function MkWinbar(_)
     local left = table.concat({
-        activeWin(active),
         lsp(),
         diagnostics(),
     }, " ")
@@ -414,9 +409,9 @@ function MkWinbar(active)
             left,
             (" "):rep(space), -- center sep
             fileName(),
+            fileStatus(),
             "%=",
             formatter(),
-            activeWin(active),
         }, " ")
         :gsub("^%s*(.-)%s*$", left:gsub(" ", ""):stLen() == 0 and "%0" or "%1")
 end

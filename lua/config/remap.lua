@@ -78,12 +78,12 @@ window.createWindowBind({
 })
 
 -- make new window
-utils.setKey("n", "<Leader>w<Up>", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
-utils.setKey("n", "<Leader>w<Down>", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
-utils.setKey("n", "<Leader>w<Left>", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
-utils.setKey("n", "<Leader>w<Right>", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
+utils.setKey("n", "<Leader>wk", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
+utils.setKey("n", "<Leader>wj", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
+utils.setKey("n", "<Leader>wh", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
+utils.setKey("n", "<Leader>wl", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
 
-utils.setKey("n", "<C-Up>", function()
+utils.setKey("n", "<C-k>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -92,7 +92,8 @@ utils.setKey("n", "<C-Up>", function()
         float.moveFloat(win, "up")
     end
 end, { desc = "switch to up window" })
-utils.setKey("n", "<C-Down>", function()
+
+utils.setKey("n", "<C-j>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -101,7 +102,8 @@ utils.setKey("n", "<C-Down>", function()
         float.moveFloat(win, "down")
     end
 end, { desc = "switch to down window" })
-utils.setKey("n", "<C-Left>", function()
+
+utils.setKey("n", "<C-h>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -110,7 +112,8 @@ utils.setKey("n", "<C-Left>", function()
         float.moveFloat(win, "left")
     end
 end, { desc = "switch to left window" })
-utils.setKey("n", "<C-Right>", function()
+
+utils.setKey("n", "<C-l>", function()
     local config = vim.api.nvim_win_get_config(0)
     local win = vim.api.nvim_get_current_win()
     if config.relative == "" then
@@ -123,3 +126,4 @@ end, { desc = "switch to right window" })
 -- common command
 utils.setKey("n", "<Leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
 utils.setKey("n", "<Leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
+

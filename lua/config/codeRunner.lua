@@ -36,7 +36,7 @@ end
 -- })
 
 utils.createCommand("RunFile", function()
-    RunCode(vim.bo.filetype, vim.fn.expand("%:h"), vim.fn.expand("%:p"))
+    RunCode(vim.bo.filetype, vim.fn.expand("%:p:h"), vim.fn.expand("%:p"))
 end, {})
 
 utils.createCommand("RunCode", function()
