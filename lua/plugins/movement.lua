@@ -1,20 +1,17 @@
 return {
-    "mbbill/undotree",
-    keys = {
-        {
-            "<Leader>u",
-            function()
-                vim.cmd.UndotreeToggle()
-                vim.o.number = true
-                vim.o.relativenumber = true
-            end,
-            desc = "[u]ndo tree",
+    {
+        "smoka7/hop.nvim",
+        version = "*",
+        opts = {},
+        keys = {
+            {
+                "<leader>hw",
+                function()
+                    require("hop").hint_words()
+                end,
+                desc = "[h]op [w]ord",
+            },
         },
+        event = { "BufReadPost", "BufNewFile" },
     },
-    config = function()
-        vim.g.undotree_TreeVertShape = "│"
-        vim.g.undotree_DiffAutoOpen = 0
-        vim.g.undotree_SetFocusWhenToggle = 1
-        vim.g.undotree_DiffCommand = "FC"
-    end,
 }

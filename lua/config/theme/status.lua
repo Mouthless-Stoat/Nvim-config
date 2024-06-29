@@ -8,15 +8,15 @@ local devicons = require("nvim-web-devicons")
 -- empty group are simply there to remind that they exist
 -- put them all here is a bit cleaner
 utils.setHls({
-    StatusLine = { fg = colors.blue, bg = colors.black1 },
-    WinBar = { fg = colors.blue, bg = colors.black1 },
-    WinBarNC = { fg = colors.blue, bg = colors.black1 },
+    StatusLine = { fg = colors.blue, bg = colors.bg1 },
+    WinBar = { fg = colors.blue, bg = colors.bg1 },
+    WinBarNC = { fg = colors.blue, bg = colors.bg1 },
 
-    StatusBasic = { fg = colors.white, bg = colors.black3, bold = true },
-    StatusBasicSep = { bg = colors.black1, fg = colors.black3 },
+    StatusBasic = { fg = colors.white, bg = colors.bg3, bold = true },
+    StatusBasicSep = { bg = colors.bg1, fg = colors.bg3 },
 
-    StatusCwd = { fg = colors.black1, bg = colors.blue },
-    StatusCwdSep = { bg = colors.black1, fg = colors.blue },
+    StatusCwd = { fg = colors.bg1, bg = colors.blue },
+    StatusCwdSep = { bg = colors.bg1, fg = colors.blue },
 
     StatusMode = {},
     StatusModeSep = {},
@@ -24,26 +24,26 @@ utils.setHls({
     StatusFile = {},
     StatusFileStatus = {},
 
-    StatusError = { fg = colors.black1, bg = colors.red, bold = true },
-    StatusWarn = { fg = colors.black1, bg = colors.yellow, bold = true },
-    StatusInfo = { fg = colors.black1, bg = colors.blue, bold = true },
-    StatusHint = { fg = colors.black1, bg = colors.purple, bold = true },
+    StatusError = { fg = colors.bg1, bg = colors.red, bold = true },
+    StatusWarn = { fg = colors.bg1, bg = colors.yellow, bold = true },
+    StatusInfo = { fg = colors.bg1, bg = colors.blue, bold = true },
+    StatusHint = { fg = colors.bg1, bg = colors.purple, bold = true },
 
-    StatusErrorSep = { bg = colors.black1, fg = colors.red },
-    StatusWarnSep = { bg = colors.black1, fg = colors.yellow },
-    StatusInfoSep = { bg = colors.black1, fg = colors.blue },
-    StatusHintSep = { bg = colors.black1, fg = colors.purple },
+    StatusErrorSep = { bg = colors.bg1, fg = colors.red },
+    StatusWarnSep = { bg = colors.bg1, fg = colors.yellow },
+    StatusInfoSep = { bg = colors.bg1, fg = colors.blue },
+    StatusHintSep = { bg = colors.bg1, fg = colors.purple },
 
-    StatusChange = { fg = colors.black1, bg = colors.yellow, bold = true },
-    StatusRemove = { fg = colors.black1, bg = colors.red, bold = true },
-    StatusAdd = { fg = colors.black1, bg = colors.green, bold = true },
+    StatusChange = { fg = colors.bg1, bg = colors.yellow, bold = true },
+    StatusRemove = { fg = colors.bg1, bg = colors.red, bold = true },
+    StatusAdd = { fg = colors.bg1, bg = colors.green, bold = true },
 
-    StatusChangeSep = { bg = colors.black1, fg = colors.yellow },
-    StatusRemoveSep = { bg = colors.black1, fg = colors.red },
-    StatusAddSep = { bg = colors.black1, fg = colors.green },
+    StatusChangeSep = { bg = colors.bg1, fg = colors.yellow },
+    StatusRemoveSep = { bg = colors.bg1, fg = colors.red },
+    StatusAddSep = { bg = colors.bg1, fg = colors.green },
 
-    StatusZoom = { fg = colors.black1, bg = colors.yellow, bold = true },
-    StatusZoomSep = { bg = colors.black1, fg = colors.yellow },
+    StatusZoom = { fg = colors.bg1, bg = colors.yellow, bold = true },
+    StatusZoomSep = { bg = colors.bg1, fg = colors.yellow },
 
     StatusLsp = {},
     StatusLspSep = {},
@@ -51,20 +51,20 @@ utils.setHls({
     StatusPercent = {},
     StatusPercentSep = {},
 
-    StatusPlugin = { fg = colors.black1, bg = colors.purple, bold = true },
-    StatusPluginSep = { bg = colors.black1, fg = colors.purple },
+    StatusPlugin = { fg = colors.bg1, bg = colors.purple, bold = true },
+    StatusPluginSep = { bg = colors.bg1, fg = colors.purple },
 
-    StatusBranch = { fg = colors.black1, bg = colors.orange, bold = true },
-    StatusBranchSep = { bg = colors.black1, fg = colors.orange },
+    StatusBranch = { fg = colors.bg1, bg = colors.orange, bold = true },
+    StatusBranchSep = { bg = colors.bg1, fg = colors.orange },
 
-    StatusLspLine = { fg = colors.green, bg = colors.black3, bold = true },
-    StatusLspLineSep = { bg = colors.black1, fg = colors.black3, bold = true },
+    StatusLspLine = { fg = colors.green, bg = colors.bg3, bold = true },
+    StatusLspLineSep = { bg = colors.bg1, fg = colors.bg3, bold = true },
 
-    StatusActive = { fg = colors.black1, bg = colors.green, bold = true },
-    StatusActiveSep = { bg = colors.black1, fg = colors.green },
+    StatusActive = { fg = colors.bg1, bg = colors.green, bold = true },
+    StatusActiveSep = { bg = colors.bg1, fg = colors.green },
 
-    StatusInactive = { fg = colors.black1, bg = colors.red, bold = true },
-    StatusInactiveSep = { bg = colors.black1, fg = colors.red },
+    StatusInactive = { fg = colors.bg1, bg = colors.red, bold = true },
+    StatusInactiveSep = { bg = colors.bg1, fg = colors.red },
 })
 
 local function hl(g)
@@ -103,13 +103,13 @@ local function mode(len)
 
     utils.setHl("StatusMode", {
         bg = modeColor,
-        fg = colors.black1,
+        fg = colors.bg1,
         bold = true,
     })
 
     utils.setHl("StatusModeSep", {
         fg = modeColor,
-        bg = colors.black1,
+        bg = colors.bg1,
     })
 
     return secBasic("StatusModeSep", "StatusMode", m)
@@ -129,13 +129,13 @@ local function fileName()
 
     utils.setHl("StatusFile", {
         bg = color,
-        fg = colors.black1,
+        fg = colors.bg1,
         bold = true,
     })
 
     utils.setHl("StatusFileSep", {
         fg = color,
-        bg = colors.black1,
+        bg = colors.bg1,
     })
 
     local modFlag = ""
@@ -152,12 +152,12 @@ local function fileName()
         })[modFlag]
         utils.setHl("StatusFile", {
             bg = color,
-            fg = colors.black1,
+            fg = colors.bg1,
         })
 
         utils.setHl("StatusFileSep", {
             fg = color,
-            bg = colors.black1,
+            bg = colors.bg1,
         })
     end
 
@@ -216,13 +216,13 @@ local function locPercent()
     })[math.floor(percent / 17) + 1]
 
     utils.setHl("StatusPercent", {
-        fg = colors.black1,
+        fg = colors.bg1,
         bg = color,
         bold = true,
     })
 
     utils.setHl("StatusPercentSep", {
-        bg = colors.black1,
+        bg = colors.bg1,
         fg = color,
     })
 
@@ -258,7 +258,7 @@ local function lsp()
 
     utils.setHl("StatusLsp", {
         fg = color or colors.blue,
-        bg = colors.black3,
+        bg = colors.bg3,
         bold = true,
     })
 
@@ -278,8 +278,8 @@ local function cwd()
         if path:starts(p.path) then
             path = path:gsub(p.path, p.short)
 
-            utils.setHl("StatusCwd", { fg = colors.black1, bg = p.color, bold = true })
-            utils.setHl("StatusCwdSep", { bg = colors.black1, fg = p.color })
+            utils.setHl("StatusCwd", { fg = colors.bg1, bg = p.color, bold = true })
+            utils.setHl("StatusCwdSep", { bg = colors.bg1, fg = p.color })
             break
         end
     end
@@ -302,12 +302,12 @@ end
 --
 --     utils.setHl("StatusAltFile", {
 --         fg = color,
---         bg = colors.black3,
+--         bg = colors.bg3,
 --     })
 --
 --     utils.setHl("StatusAltFileSep", {
---         fg = colors.black3,
---         bg = colors.black1,
+--         fg = colors.bg3,
+--         bg = colors.bg1,
 --     })
 --
 --     local out = (" %s%s"):format(icon, file)
