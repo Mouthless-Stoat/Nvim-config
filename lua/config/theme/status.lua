@@ -145,10 +145,9 @@ local function fileName()
         bold = true,
     })
 
-    local out = (" %s%s "):format(
-        icon,
-        vim.bo.readonly and ("- %s -"):format(utils.evalStatus("%t")) or utils.evalStatus("%t")
-    )
+    local filename = vim.bo.filetype == "fugitive" and "git status" or utils.evalStatus("%t")
+
+    local out = (" %s%s "):format(icon, vim.bo.readonly and ("- %s -"):format(filename) or filename)
 
     if #out == 2 then
         out = " [no name] "
