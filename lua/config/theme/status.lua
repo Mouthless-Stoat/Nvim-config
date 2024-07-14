@@ -22,6 +22,11 @@ utils.setHls({
     StatusModeSep = {},
 
     StatusFile = {},
+    StatusFileSep = {},
+
+    StatusAltFile = {},
+    StatusAltFileSep = {},
+
     StatusFileStatus = {},
 
     StatusError = { fg = colors.bg1, bg = colors.red, bold = true },
@@ -60,11 +65,11 @@ utils.setHls({
     StatusLspLine = { fg = colors.green, bg = colors.bg3, bold = true },
     StatusLspLineSep = { bg = colors.bg1, fg = colors.bg3, bold = true },
 
-    StatusActive = { fg = colors.bg1, bg = colors.green, bold = true },
-    StatusActiveSep = { bg = colors.bg1, fg = colors.green },
-
-    StatusInactive = { fg = colors.bg1, bg = colors.red, bold = true },
-    StatusInactiveSep = { bg = colors.bg1, fg = colors.red },
+    -- StatusActive = { fg = colors.bg1, bg = colors.green, bold = true },
+    -- StatusActiveSep = { bg = colors.bg1, fg = colors.green },
+    --
+    -- StatusInactive = { fg = colors.bg1, bg = colors.red, bold = true },
+    -- StatusInactiveSep = { bg = colors.bg1, fg = colors.red },
 })
 
 local function hl(g)
@@ -99,6 +104,7 @@ local function mode(len)
         v = colors.purple,
         c = colors.yellow,
         r = colors.red,
+        t = colors.cyan,
     })[modes.whichMode()]
 
     utils.setHl("StatusMode", {
@@ -116,7 +122,7 @@ local function mode(len)
 end
 
 local function fileName()
-    local filetype = vim.o.filetype
+    local filetype = vim.bo.filetype
     local icon, color = devicons.get_icon_color_by_filetype(filetype)
 
     if icon then
@@ -128,17 +134,21 @@ local function fileName()
     color = color or colors.blue
 
     utils.setHl("StatusFile", {
-        bg = color,
-        fg = vim.bo.readonly and colors.red or colors.bg1,
+        bg = vim.bo.readonly and colors.red or color,
+        fg = colors.bg1,
         bold = true,
     })
 
     utils.setHl("StatusFileSep", {
-        fg = color,
-        bg = vim.bo.readonly and colors.red or colors.bg1,
+        fg = vim.bo.readonly and colors.red or color,
+        bg = colors.bg1,
+        bold = true,
     })
 
-    local out = (" %s%s "):format(icon, utils.evalStatus("%t"))
+    local out = (" %s%s "):format(
+        icon,
+        vim.bo.readonly and ("- %s -"):format(utils.evalStatus("%t")) or utils.evalStatus("%t")
+    )
 
     if #out == 2 then
         out = " [no name] "
@@ -289,36 +299,33 @@ local function cwd()
 end
 
 -- fucntion for alt file
--- local function altFile()
---     local file = vim.fn.expand("#:t")
---     local icon, color = devicons.get_icon_color(file)
---
---     if icon then
---         icon = icon .. " "
---     else
---         icon = ""
---     end
---
---     color = color or colors.blue
---
---     utils.setHl("StatusAltFile", {
---         fg = color,
---         bg = colors.bg3,
---     })
---
---     utils.setHl("StatusAltFileSep", {
---         fg = colors.bg3,
---         bg = colors.bg1,
---     })
---
---     local out = (" %s%s"):format(icon, file)
---
---     if #out == 1 then
---         out = " [no name]"
---     end
---
---     return secBasic("StatusAltFileSep", "StatusAltFile", "alt:" .. out)
--- end
+local function altFile()
+    local filename = vim.fn.expand("#t")
+    local icon, color = devicons.get_icon_colors(filename)
+
+    if icon then
+        icon = icon .. " "
+    else
+        icon = ""
+    end
+
+    color = color or colors.blue
+
+    utils.setHl("StatusAltFile", {
+        bg = color,
+        fg = vim.bo.readonly and colors.red or colors.bg1,
+        bold = true,
+    })
+
+    utils.setHl("StatusAltFileSep", {
+        fg = color,
+        bg = vim.bo.readonly and colors.red or colors.bg1,
+    })
+
+    local out = icon .. vim.fn.expand("#:t")
+
+    return out == "" and "" or secBasic("StatusAltFileSep", "StatusAltFile", ("alt: %s "):format(out))
+end
 
 local function plugin()
     local stats = require("lazy").stats()
@@ -411,6 +418,7 @@ function MkWinbar(_)
             fileName(),
             fileStatus(),
             "%=",
+            altFile(),
             formatter(),
         }, " ")
         :gsub("^%s*(.-)%s*$", left:gsub(" ", ""):stLen() == 0 and "%0" or "%1")

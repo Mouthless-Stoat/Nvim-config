@@ -3,7 +3,7 @@ local colors = require("config.theme.colors")
 
 -- load all other color
 
-local extra = { "syntax", "lazy", "telescope", "indent", "delimit", "hop" }
+local extra = { "syntax", "lazy", "telescope", "indent", "delimit", "hop", "fidget" }
 for _, m in ipairs(extra) do
     utils.setHls(require("config.theme." .. m))
 end
@@ -35,6 +35,13 @@ utils.setHls({
     LineNr = { fg = colors.gray, bg = colors.bg0 },
     CursorLineNr = { fg = colors.blue, bg = colors.bg0 },
 
+    ModeMsg = { fg = colors.green },
+
+    FloatBorder = { fg = colors.blue, bg = colors.bg1 },
+    FloatTitle = { fg = colors.green, bg = colors.bg1 },
+
+    NormalFloat = { fg = colors.purple, bg = colors.bg1 },
+
     Directory = { fg = colors.blue },
 
     DiffAdd = { fg = colors.green, bg = colors.bg0, bold = true, italic = true },
@@ -59,17 +66,27 @@ utils.setHls({
     DiagnosticHint = { fg = colors.purple },
     DiagnosticOk = { fg = colors.green },
 
-    DiagnosticUnderlineError = { sp = colors.red, underline = true },
-    DiagnosticUnderlineWarn = { sp = colors.yellow, underline = true },
-    DiagnosticUnderlineInfo = { sp = colors.blue, underline = true },
-    DiagnosticUnderlineHint = { sp = colors.purple, underline = true },
-    DiagnosticUnderlineOk = { sp = colors.green, underline = true },
+    DiagnosticUnderlineError = { fg = colors.red, underline = true },
+    DiagnosticUnderlineWarn = { fg = colors.yellow, underline = true },
+    DiagnosticUnderlineInfo = { fg = colors.blue, underline = true },
+    DiagnosticUnderlineHint = { fg = colors.purple, underline = true },
+    DiagnosticUnderlineOk = { fg = colors.green, underline = true },
 
     Changed = { fg = colors.yellow, bold = true },
     Added = { fg = colors.green, bold = true },
     Removed = { fg = colors.red, bold = true },
 
     DiagnosticDeprecated = {},
+})
+
+utils.setHls({
+    Green = { fg = colors.green, bold = true },
+    Yellow = { fg = colors.yellow, bold = true },
+    Orange = { fg = colors.orange, bold = true },
+    Red = { fg = colors.red, bold = true },
+    Blue = { fg = colors.blue, bold = true },
+    Cyan = { fg = colors.cyan, bold = true },
+    Purple = { fg = colors.purple, bold = true },
 })
 
 vim.o.guicursor = "n-o:block-NCursor,i:ver20-ICursor,v-ve:block-VCursor,c-ci-cr:ver25-CCursor,r:hor15-RCursor"

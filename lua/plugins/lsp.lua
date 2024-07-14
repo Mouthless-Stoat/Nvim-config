@@ -9,14 +9,31 @@ return {
 
             {
                 "j-hui/fidget.nvim",
-                tag = "legacy",
                 opts = {
-                    text = {
-                        done = "",
-                        spinner = "pipe",
+                    progress = {
+                        display = {
+                            render_limit = 100,
+                            done_icon = "",
+                            progress_icon = { "meter" },
+
+                            done_style = "FidgetDone",
+                            progress_style = "FidgetProgress",
+                            group_style = "FidgetGroup",
+                            icon_style = "FidgetIcon",
+                        },
                     },
-                    window = {
-                        blend = 0,
+
+                    notification = {
+                        view = {
+                            stack_upwards = false,
+                        },
+
+                        window = {
+                            border = "rounded",
+                            align = "top",
+                            x_padding = 1,
+                            y_padding = 1,
+                        },
                     },
                 },
             },
@@ -53,7 +70,7 @@ return {
 
                 -- See `:help K` for why this keymap
                 nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-                nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation", "i")
+                nmap("<C-S-k>", vim.lsp.buf.signature_help, "Signature Documentation", "i")
 
                 -- Lesser used LSP functionality
                 nmap("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")

@@ -20,7 +20,8 @@ require("lazy").setup({
         { import = "plugins" },
     },
     change_detection = {
-        enable = false
-    }
+        enable = false,
+    },
 })
+require("config.anchor")
 require("config.theme.status")

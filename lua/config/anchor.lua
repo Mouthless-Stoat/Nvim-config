@@ -2,74 +2,95 @@ local utils = require("helper.utils")
 
 local anchors = {
     {
-        key = "c",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code",
+        name = "Code Folder",
+        path = "D:\\OneDrive\\Desktop\\Code",
         type = "open",
-        desc = "[c]ode folder",
+        color = "Blue",
     },
     {
-        key = "m",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
+        name = "Magpie Source File",
+        path = "D:\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\IMFMagpie\\index.js",
         type = "file",
-        desc = "[m]agpie code",
+        color = "Yellow",
     },
     {
-        key = "d",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\DiscordBot\\discord.js\\Dyyes\\index.ts",
-        type = "file",
-        desc = "[d]yyes code",
-    },
-    {
-        key = "v",
+        name = "Nvim Config Folder",
         path = "D:\\config\\nvim",
         type = "folder",
-        desc = "[v]im config folder",
+        color = "Green",
     },
     {
-        key = "s",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\School Note",
+        name = "Magpie",
+        path = "D:\\OneDrive\\Desktop\\Code\\Rust\\magpie",
         type = "folder",
-        desc = "school [n]ote folder",
-    },
-    { key = "h", path = "C:\\Users\\nphuy", type = "open", desc = "[h]ome folder" },
-    {
-        key = "t",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop",
-        type = "open",
-        desc = "[d]esktop folder",
-    },
-    {
-        key = "d",
-        path = "C:\\Users\\nphuy\\Downloads",
-        type = "open",
-        desc = "[d]ownloads folder",
-    },
-    {
-        key = "x",
-        path = "C:\\Users\\nphuy\\OneDrive\\Desktop\\Code\\Javascript\\Xper\\src\\main.ts",
-        type = "file",
-        desc = "[x]per code",
-        post = "<cmd>cd ..<cr>",
+        color = "Orange",
     },
 }
-local function genAnchorCommand(anchor)
-    local command = ""
-    if anchor.type == "folder" then
-        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Telescope find_files<cr>"
-    elseif anchor.type == "file" then
-        command = "<cmd>e " .. anchor.path .. "<cr><cmd>Here<cr>"
-    elseif anchor.type == "open" then
-        command = "<cmd>cd " .. anchor.path .. "<cr><cmd>Oil .<cr>"
+
+local longestName = 0
+
+for _, a in ipairs(anchors) do
+    if #a.name > longestName then
+        longestName = #a.name
     end
-    command = command .. vim.F.if_nil(anchor.post, "")
-    return command
-end
-for _, anchor in ipairs(anchors) do
-    local command = genAnchorCommand(anchor)
-    utils.setKey("n", "<Leader>G" .. anchor.key, command, { desc = "[G]oto " .. anchor.desc })
 end
 
-return {
-    anchors = anchors,
-    genAnchorCommand = genAnchorCommand,
-}
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local conf = require("telescope.config").values
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local entry_display = require("telescope.pickers.entry_display")
+
+local displayer = entry_display.create({
+    separator = " | ",
+    items = {
+        { width = longestName },
+        { remaining = true },
+    },
+})
+
+local function anchor(opts)
+    opts = opts or {}
+    pickers
+        .new(opts, {
+            prompt_title = "Anchor",
+            finder = finders.new_table({
+                results = anchors,
+                entry_maker = function(entry)
+                    return {
+                        value = entry,
+                        display = function(e)
+                            return displayer({
+                                { e.value.name, e.value.color },
+                                { e.value.path, e.value.color },
+                            })
+                        end,
+                        ordinal = entry.name,
+                    }
+                end,
+            }),
+            sorter = conf.generic_sorter(opts),
+            attach_mappings = function(prompt_bufnr, _)
+                actions.select_default:replace(function()
+                    actions.close(prompt_bufnr)
+                    local a = action_state.get_selected_entry().value
+                    if a.type == "folder" then
+                        vim.cmd.cd(a.path)
+                        vim.cmd("Oil .")
+                        vim.cmd("Telescope find_files")
+                    elseif a.type == "file" then
+                        vim.cmd.e(a.path)
+                        vim.cmd("Here")
+                    elseif a.type == "open" then
+                        vim.cmd.cd(a.path)
+                        vim.cmd("Oil .")
+                    end
+                end)
+                return true
+            end,
+        })
+        :find()
+end
+
+utils.setKey("n", "<leader>sa", anchor, {})

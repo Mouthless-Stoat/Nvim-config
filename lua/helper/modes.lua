@@ -25,7 +25,7 @@ function M.whichMode()
         or M.isVisual() and "v"
         or M.isCommand() and "c"
         or M.isReplace() and "r"
-        or ""
+        or "t"
 end
 
 function M.formattedMode()
@@ -35,8 +35,8 @@ function M.formattedMode()
         v = "visual",
         c = "command",
         r = "replace",
+        t = "terminal",
     })[M.whichMode()]
 end
-
 
 return M

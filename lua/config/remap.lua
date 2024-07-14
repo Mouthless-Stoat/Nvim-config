@@ -78,10 +78,10 @@ window.createWindowBind({
 })
 
 -- make new window
-utils.setKey("n", "<Leader>wk", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
-utils.setKey("n", "<Leader>wj", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
-utils.setKey("n", "<Leader>wh", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
-utils.setKey("n", "<Leader>wl", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
+utils.setKey("n", "<Leader>k", "<cmd>top new<cr>", { desc = "make new [w]indow [up]" })
+utils.setKey("n", "<Leader>j", "<cmd>bot new<cr>", { desc = "make new [w]indow [down]" })
+utils.setKey("n", "<Leader>h", "<cmd>top vnew<cr>", { desc = "make new [w]indow [left]" })
+utils.setKey("n", "<Leader>l", "<cmd>bot vnew<cr>", { desc = "make new [w]indow [right]" })
 
 utils.setKey("n", "<C-k>", function()
     local config = vim.api.nvim_win_get_config(0)
@@ -122,8 +122,3 @@ utils.setKey("n", "<C-l>", function()
         float.moveFloat(win, "right")
     end
 end, { desc = "switch to right window" })
-
--- common command
-utils.setKey("n", "<Leader>l", "<cmd>Lazy<cr>", { desc = "[l]azy.nvim config" })
-utils.setKey("n", "<Leader>m", "<cmd>Mason<cr>", { desc = "[m]ason.nvim config" })
-
