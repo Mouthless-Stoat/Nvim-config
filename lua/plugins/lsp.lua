@@ -12,7 +12,7 @@ return {
                 opts = {
                     progress = {
                         display = {
-                            render_limit = 100,
+                            done_ttl = 3,
                             done_icon = "",
                             progress_icon = { "meter" },
 
@@ -24,13 +24,10 @@ return {
                     },
 
                     notification = {
-                        view = {
-                            stack_upwards = false,
-                        },
-
                         window = {
-                            border = "rounded",
-                            align = "top",
+                            winblend = 50,
+                            normal_hl = "FidgetNormal",
+                            border = "solid",
                             x_padding = 1,
                             y_padding = 1,
                         },
@@ -102,6 +99,9 @@ return {
                         },
                         procMacro = {
                             enable = true,
+                        },
+                        check = {
+                            command = "clippy",
                         },
                     },
                 },
