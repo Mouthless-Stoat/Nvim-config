@@ -40,7 +40,7 @@ utils.setHls({
     FloatBorder = { fg = colors.blue, bg = colors.bg1 },
     FloatTitle = { fg = colors.green, bg = colors.bg1 },
 
-    NormalFloat = { fg = colors.purple, bg = colors.bg1 },
+    NormalFloat = { fg = colors.white, bg = colors.bg1 },
 
     Directory = { fg = colors.blue },
 

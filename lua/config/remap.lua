@@ -50,7 +50,8 @@ end)
 utils.setKey({ "n", "t" }, "<F5>", "<cmd>wa<cr><cmd>RunCode<cr>", {})
 utils.setKey("n", "<C-cr>", "<cmd>RunFile<cr>", {})
 
-utils.setKey("i", "<C-c>", "<esc><esc><esc>", {}) -- quick escape
+utils.setKey({ "n" }, "H", "^", {})
+utils.setKey({ "n" }, "L", "$", {})
 
 -- make a terminal toggle window
 window.createWindowBind({
