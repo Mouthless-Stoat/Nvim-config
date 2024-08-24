@@ -15,8 +15,8 @@ utils.setHls({
     StatusBasic = { fg = colors.white, bg = colors.bg3, bold = true },
     StatusBasicSep = { bg = colors.bg1, fg = colors.bg3 },
 
-    StatusCwd = { fg = colors.bg1, bg = colors.blue },
-    StatusCwdSep = { bg = colors.bg1, fg = colors.blue },
+    StatusCwd = { fg = colors.bg1, bg = colors.blue, bold = true },
+    StatusCwdSep = { bg = colors.bg1, fg = colors.blue, bold = true },
 
     StatusMode = {},
     StatusModeSep = {},
@@ -299,7 +299,7 @@ end
 
 -- fucntion for alt file
 local function altFile()
-    local filename = vim.fn.expand("#t")
+    local filename = vim.fn.expand("#:t")
     local icon, color = devicons.get_icon_colors(filename)
 
     if icon then
@@ -311,14 +311,14 @@ local function altFile()
     color = color or colors.blue
 
     utils.setHl("StatusAltFile", {
-        bg = color,
-        fg = vim.bo.readonly and colors.red or colors.bg1,
+        bg = vim.bo.readonly and colors.red or color,
+        fg = colors.bg1,
         bold = true,
     })
 
     utils.setHl("StatusAltFileSep", {
-        fg = color,
-        bg = vim.bo.readonly and colors.red or colors.bg1,
+        fg = vim.bo.readonly and colors.red or color,
+        bg = colors.bg1,
     })
 
     local out = icon .. vim.fn.expand("#:t")

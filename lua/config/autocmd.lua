@@ -18,6 +18,7 @@ utils.createAutocmd("BufEnter", {
         vim.bo.syntax = "markdown"
         vim.opt_local.wrap = true
         vim.opt_local.linebreak = true
+        vim.opt_local.spell = true
     end,
 })
 

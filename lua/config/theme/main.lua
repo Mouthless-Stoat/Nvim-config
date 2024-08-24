@@ -3,7 +3,7 @@ local colors = require("config.theme.colors")
 
 -- load all other color
 
-local extra = { "syntax", "lazy", "telescope", "indent", "delimit", "hop", "fidget" }
+local extra = { "syntax", "lazy", "telescope", "indent", "delimit", "hop", "fidget", "markdown" }
 for _, m in ipairs(extra) do
     utils.setHls(require("config.theme." .. m))
 end
@@ -25,11 +25,14 @@ utils.setHls({
     Question = { fg = colors.green },
     QuickFixLine = { fg = colors.purple },
 
-    IncSearch = { fg = colors.darkYellow, bg = colors.yellow },
-    Substitute = { fg = colors.lightPurple, bg = colors.darkPurple },
+    IncSearch = { fg = colors.yellow, bg = colors.yellow:blendbg(0.6) },
+    Substitute = {
+        fg = colors.purple:blend(colors.pure_white, 0.6),
+        bg = colors.purple:blendbg(0.4),
+    },
     Yank = { reverse = true },
 
-    Visual = { fg = colors.bg0, bg = colors.lightPurple },
+    Visual = { fg = colors.bg0, bg = colors.purple },
     EndOfBuffer = { fg = colors.bg0 },
 
     LineNr = { fg = colors.gray, bg = colors.bg0 },

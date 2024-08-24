@@ -8,5 +8,5 @@ return {
             "ds",
             "V", -- V to work with selection surround
         },
-    }
+    },
 }

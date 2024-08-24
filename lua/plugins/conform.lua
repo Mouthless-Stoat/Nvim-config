@@ -12,6 +12,7 @@ return {
                 markdown = { "prettier" },
                 rust = { "rustfmt" },
                 yaml = { "prettier" },
+                toml = { "taplo" },
             },
             formatters = {},
         },

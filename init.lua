@@ -21,6 +21,7 @@ require("lazy").setup({
     },
     change_detection = {
         enable = false,
+        notify = false,
     },
 })
 require("config.anchor")

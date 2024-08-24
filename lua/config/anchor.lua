@@ -1,10 +1,14 @@
 local utils = require("helper.utils")
 
+-- Folder: Cd to the path and open the picker
+-- File: Open the file and cd parent
+-- Explore: Cd to the path and open the explorer
+
 local anchors = {
     {
         name = "Code Folder",
         path = "D:\\OneDrive\\Desktop\\Code",
-        type = "open",
+        type = "explore",
         color = "Blue",
     },
     {
@@ -24,6 +28,12 @@ local anchors = {
         path = "D:\\OneDrive\\Desktop\\Code\\Rust\\magpie",
         type = "folder",
         color = "Orange",
+    },
+    {
+        name = "IMF Sigils Book",
+        path = "D:\\OneDrive\\Desktop\\sigilBook",
+        type = "folder",
+        color = "Purple",
     },
 }
 
@@ -77,14 +87,13 @@ local function anchor(opts)
                     local a = action_state.get_selected_entry().value
                     if a.type == "folder" then
                         vim.cmd.cd(a.path)
-                        vim.cmd("Oil .")
                         vim.cmd("Telescope find_files")
                     elseif a.type == "file" then
                         vim.cmd.e(a.path)
                         vim.cmd("Here")
-                    elseif a.type == "open" then
+                    elseif a.type == "explore" then
                         vim.cmd.cd(a.path)
-                        vim.cmd("Oil .")
+                        utils.feedkeys("<leader>f")
                     end
                 end)
                 return true

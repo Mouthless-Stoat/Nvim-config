@@ -1,20 +1,31 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
-        version = "2.20.8",
+        main = "ibl",
         opts = {
-            max_indent_increase = 1,
-            char_blankline = "∙",
-            show_current_context = true,
-            char_highlight = "indent",
-            context_highlight_list = {
-                "Delimit1",
-                "Delimit2",
-                "Delimit3",
-                "Delimit4",
-                "Delimit5",
-                "Delimit6",
-                "Delimit7",
+            whitespace = {
+                remove_blankline_trail = true,
+                highlight = "IblWhitespaces",
+            },
+            indent = {
+                highlight = "Indent",
+            },
+            scope = {
+                enabled = true,
+                show_start = false,
+                show_end = false,
+                highlight = {
+                    "Delimit1",
+                    "Delimit2",
+                    "Delimit3",
+                    "Delimit4",
+                    "Delimit5",
+                    "Delimit6",
+                    "Delimit7",
+                },
+                exclude = {
+                    language = { "toml" },
+                },
             },
         },
         event = { "BufReadPost", "BufNewFile" },
