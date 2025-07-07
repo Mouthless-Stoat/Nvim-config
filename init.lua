@@ -25,4 +25,4 @@ require("lazy").setup({
     },
 })
 require("config.anchor")
-require("config.theme.status")
+require("config.theme.plugins.status")

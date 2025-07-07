@@ -13,8 +13,23 @@ return {
                 rust = { "rustfmt" },
                 yaml = { "prettier" },
                 toml = { "taplo" },
+                java = { "clang-format" },
+                uiua = { "uiuafmt" },
             },
-            formatters = {},
+            formatters = {
+                ["clang-format"] = {
+                    args = {
+                        "-assume-filename",
+                        "$FILENAME",
+                        "-style=file:D:\\config\\nvim\\clang-formatter.yaml",
+                    },
+                },
+                ["uiuafmt"] = {
+                    command = "uiua",
+                    args = { "fmt", "$FILENAME" },
+                    stdin = false,
+                },
+            },
         },
         config = function(_, opt)
             require("conform").setup(opt)

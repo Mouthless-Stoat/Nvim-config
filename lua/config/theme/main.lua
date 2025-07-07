@@ -2,10 +2,13 @@ local utils = require("helper.utils")
 local colors = require("config.theme.colors")
 
 -- load all other color
-
-local extra = { "syntax", "lazy", "telescope", "indent", "delimit", "hop", "fidget", "markdown" }
-for _, m in ipairs(extra) do
-    utils.setHls(require("config.theme." .. m))
+for _, m in ipairs(vim.split(vim.fn.glob(vim.fn.stdpath("config") .. "\\lua\\config\\theme\\plugins\\*.lua"), "\n")) do
+    local _, _, mod = m:find("plugins\\(.*).lua")
+    if mod == "status" then
+        goto continue
+    end
+    utils.setHls(require("config.theme.plugins." .. mod))
+    ::continue::
 end
 
 -- now load the default nvim color

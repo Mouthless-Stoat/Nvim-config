@@ -32,4 +32,7 @@ return {
     evalStatus = function(str)
         return vim.api.nvim_eval_statusline(str, {}).str
     end,
+    listDir = function(dir)
+        return vim.split(vim.fn.glob(dir .. "/*"), "\n", { trimempty = true })
+    end,
 }

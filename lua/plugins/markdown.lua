@@ -44,4 +44,6 @@ return {
             },
         },
     },
+
+    ft = "markdown",
 }

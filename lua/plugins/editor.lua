@@ -47,4 +47,8 @@ return {
         end,
         event = { "BufReadPost", "BufNewFile" },
     },
+    {
+        "lowitea/aw-watcher.nvim",
+        opts = {},
+    },
 }

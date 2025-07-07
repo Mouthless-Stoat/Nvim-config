@@ -1,4 +1,4 @@
-local module = { "options", "remap", "codeRunner", "autocmd", "command" }
+local module = { "options", "remap", "codeRunner", "autocmd", "command", "filetype" }
 for _, m in ipairs(module) do
     require("config." .. m)
 end

@@ -279,7 +279,7 @@ local function cwd()
     local shortern = {
         { path = "D:\\OneDrive\\Desktop\\Code", short = " code", color = colors.yellow },
         { path = "D:\\OneDrive\\Desktop", short = " desktop", color = colors.orange },
-        { path = "C:\\Users\\nphuy\\AppData\\Local\\nvim", short = " nvim", color = colors.green },
+        { path = "D:\\config\\nvim", short = " nvim", color = colors.green },
         { path = "C:\\Users\\nphuy", short = "home", color = colors.blue },
     }
 

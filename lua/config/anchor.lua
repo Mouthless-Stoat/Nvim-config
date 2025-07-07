@@ -1,8 +1,8 @@
 local utils = require("helper.utils")
 
--- Folder: Cd to the path and open the picker
--- File: Open the file and cd parent
--- Explore: Cd to the path and open the explorer
+-- folder: cd to the path and open the picker
+-- file: open the file and cd parent
+-- explore: cd to the path and open the explorer
 
 local anchors = {
     {
@@ -34,6 +34,36 @@ local anchors = {
         path = "D:\\OneDrive\\Desktop\\sigilBook",
         type = "folder",
         color = "Purple",
+    },
+    {
+        name = "Grimora",
+        path = "D:\\OneDrive\\Desktop\\Code\\Rust\\grimora",
+        type = "folder",
+        color = "Red",
+    },
+    {
+        name = "School",
+        path = "D:\\OneDrive\\Desktop\\Note",
+        type = "folder",
+        color = "Cyan",
+    },
+    {
+        name = "CAS Game",
+        path = "D:\\OneDrive\\Desktop\\Code\\Rust\\cas",
+        type = "folder",
+        color = "Blue",
+    },
+    {
+        name = "Comp Solution",
+        path = "D:\\OneDrive\\Desktop\\CompSolution",
+        type = "folder",
+        color = "Orange",
+    },
+    {
+        name = "Arson Bot",
+        path = "D:\\OneDrive\\Desktop\\Code\\Rust\\arson_bot",
+        type = "folder",
+        color = "Red",
     },
 }
 

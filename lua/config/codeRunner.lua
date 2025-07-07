@@ -5,14 +5,16 @@ local fileTypeConfig = {
     javascript = 'node "%f"',
     rust = 'cd "%p"<cr>cargo run',
     typescript = 'ts-node "%f"',
+    java = 'java "%f"',
+    uiua = 'uiua run "%f"',
 }
 
-function ProcessCmd(fileType, path, filePath)
+local function processCmd(fileType, path, filePath)
     return vim.F.if_nil(fileTypeConfig[fileType], ""):gsub("%%p", path):gsub("%%f", filePath)
 end
 
-function RunCode(fileType, path, filePath)
-    local cmd = ProcessCmd(fileType, path, filePath)
+local function runCode(fileType, path, filePath)
+    local cmd = processCmd(fileType, path, filePath)
     if cmd == "" then
         error("No comman define for " .. vim.bo.filetype .. " file type. Please define one in config")
         return
@@ -36,7 +38,7 @@ end
 -- })
 
 utils.createCommand("RunFile", function()
-    RunCode(vim.bo.filetype, vim.fn.expand("%:p:h"), vim.fn.expand("%:p"))
+    runCode(vim.bo.filetype, vim.fn.expand("%:p:h"), vim.fn.expand("%:p"))
 end, {})
 
 utils.createCommand("RunCode", function()
@@ -65,7 +67,7 @@ utils.createCommand("RunCode", function()
     end
 
     if not json.commands then
-        RunCode(json.type, vim.fn.getcwd(), json.file)
+        runCode(json.type, vim.fn.getcwd(), json.file)
     else
         local cmd = ""
         if type(json.commands) then

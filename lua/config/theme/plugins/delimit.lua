@@ -1,6 +1,5 @@
 local colors = require("config.theme.colors")
 
-
 return {
     Delimit1 = { fg = colors.red },
     Delimit2 = { fg = colors.orange },

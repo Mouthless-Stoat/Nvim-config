@@ -36,7 +36,16 @@ return {
 
     -- Lsp semantics token
     ["@lsp.type.property"] = { link = "Member" },
+    ["@lsp.type.modifier"] = { link = "Keyword" },
 
     ["@lsp.type.struct"] = { link = "Constant" },
     ["@lsp.type.enum"] = { link = "Constant" },
+
+    ["@lsp.type.uiua_string"] = { fg = colors.cyan },
+    ["@lsp.type.uiua_number"] = { fg = colors.orange },
+    ["@lsp.type.noadic_function.uiua"] = { fg = colors.red },
+    ["@lsp.type.monadic_function.uiua"] = { fg = colors.green },
+    ["@lsp.type.dyadic_function.uiua"] = { fg = colors.blue },
+    ["@lsp.type.monadic_modifier.uiua"] = { fg = colors.yellow },
+    ["@lsp.type.dyadic_modifier.uiua"] = { fg = colors.purple },
 }
